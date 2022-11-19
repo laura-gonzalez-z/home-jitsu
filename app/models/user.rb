@@ -24,6 +24,6 @@ class User < ApplicationRecord
   has_many :reviews, class_name: 'Review', foreign_key: 'user_id'
   has_many :requested_partners, class_name: 'Partner', foreign_key: 'requester_id'
   has_many :partners, class_name: 'Partner', foreign_key: 'requestee_id'
-  has_many :events, class_name: 'Event', foreign_key: 'host_id'
-  has_many :guests, class_name: 'Guest', foreign_key: 'guest_id'
+  has_many :hosted_events, class_name: 'Event', foreign_key: 'host_id'
+  has_many :events, class_name: 'Guest', foreign_key: 'guest_id'
 end
