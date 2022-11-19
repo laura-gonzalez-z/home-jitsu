@@ -22,4 +22,5 @@ class User < ApplicationRecord
 
   has_many :written_reviews, class_name: 'Review', foreign_key: 'writer_id'
   has_many :reviews, class_name: 'Review', foreign_key: 'user_id'
+  has_many :events, class_name: 'Event', foreign_key: 'host_id'
 end
