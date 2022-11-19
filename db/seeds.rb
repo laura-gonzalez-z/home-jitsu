@@ -10,7 +10,7 @@ p "Destroying all your users..."
 User.destroy_all
 p "Creating new users..."
 
-User.create!(
+ricky = User.create!(
   email: "ricky.tran@gmail.com",
   password: "123456",
   first_name: "Ricky",
@@ -20,10 +20,11 @@ User.create!(
   address: "418 Claremont",
   gender: "Male",
   description: "Martial Arts Prodigy",
+  years_of_experience: 0,
   belt: "None"
 )
 
-User.create!(
+laura = User.create!(
   email: "laura.gonzalez@gmail.com",
   password: "123456",
   first_name: "Laura",
@@ -37,7 +38,7 @@ User.create!(
   description: "BJJ expert that will strangle you"
 )
 
-User.create!(
+touhami = User.create!(
   email: "touhami.abi@gmail.com",
   password: "123456",
   first_name: "Touhami",
@@ -47,10 +48,11 @@ User.create!(
   address: "5160 Gatineau",
   gender: "Male",
   description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
+  years_of_experience: 0,
   belt: "None"
 )
 
-User.create!(
+jonatan = User.create!(
   email: "jonathan.troupe@gmail.com",
   password: "123456",
   first_name: "Jonathan",
