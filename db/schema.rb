@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_204651) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
 
-=======
 ActiveRecord::Schema[7.0].define(version: 2022_11_19_210428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +27,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_210428) do
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 
->>>>>>> master
   create_table "partners", force: :cascade do |t|
     t.bigint "requester_id"
     t.bigint "requestee_id"
@@ -75,5 +69,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_210428) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end
