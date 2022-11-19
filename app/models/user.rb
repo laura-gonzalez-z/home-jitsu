@@ -10,10 +10,12 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :weight, presence: true
   validates :weight, length: { in: 2..4 }
+  validates :weight, comparison: { greater_than: 0 }
   validates :height, presence: true
   validates :height, length: { in: 2..4 }
+  validates :height, comparison: { greater_than: 0 }
   validates :belt, inclusion: { in: BELTS }
-  validates :years_of_experience, length: { in: 1..3 }
+  validates :years_of_experience, comparison: { greater_than: 0 }
   validates :address, presence: true
   validates :gender, presence: true
   validates :gender, inclusion: { in: GENDERS }
