@@ -15,8 +15,11 @@ class User < ApplicationRecord
   validates :height, length: { in: 2..4 }
   validates :height, comparison: { greater_than: 0 }
   validates :belt, inclusion: { in: BELTS }
-  validates :years_of_experience, comparison: { greater_than: 0 }
+  validates :years_of_experience, comparison: { greater_than_or_equal_to: 0 }
   validates :address, presence: true
   validates :gender, presence: true
   validates :gender, inclusion: { in: GENDERS }
+
+  has_many :written_reviews, class_name: 'Review', foreign_key: 'writer_id'
+  has_many :reviews, class_name: 'Review', foreign_key: 'user_id'
 end
