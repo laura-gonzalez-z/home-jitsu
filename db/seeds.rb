@@ -84,10 +84,3 @@ ADDRESS.each do |address|
 end
 
 p "Users created successfully."
-
-Review.create!(
-  content: "Good opponent,very skilled",
-  writer_id: ricky.id,
-  user_id: laura.id,
-  rating: 5
-)
