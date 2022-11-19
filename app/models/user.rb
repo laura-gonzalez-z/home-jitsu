@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  BELTS = ["White", "Blue", "Purple", "Brown", "Black"].freeze
+  BELTS = ["White", "Blue", "Purple", "Brown", "Black", "None"].freeze
   GENDERS = ["Male", "Female", "Other"].freeze
 
   devise :database_authenticatable, :registerable,
