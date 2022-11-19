@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_200441) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_204651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "partners", force: :cascade do |t|
+    t.bigint "requester_id"
+    t.bigint "requestee_id"
+    t.string "status", default: "pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requestee_id"], name: "index_partners_on_requestee_id"
+    t.index ["requester_id"], name: "index_partners_on_requester_id"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.string "content"
