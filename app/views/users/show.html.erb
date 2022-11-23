@@ -1,0 +1,20 @@
+<div>
+  <h1>You're connected to the user show page!</h1>
+  <h3>Meet <%=@user.first_name%></h3>
+  <% if @user.gender == "Male" %>
+    <% pronoun = "He" %>
+    <% himher = "him" %>
+  <% else %>
+    <% pronoun = "She" %>
+    <% himher = "her" %>
+    <%  %>
+  <% end %>
+  <p><%=pronoun%> is <%=@user.height%>cm tall.</p>
+  <p><%=pronoun%> weighs <%=@user.weight%>kg.</p>
+  <% if @user.belt =! "None" %>
+    <p><%=pronoun%> is a <%=@user.belt%> belt with <%=@user.years_of_experience%> years of experience!</p>
+  <% else %>
+    <p><%=pronoun%> is new to BJJ!</p>
+  <% end %>
+  <p>Here's a fun fact about <%=himher%>: <%= @user.description %></p>
+</div>
