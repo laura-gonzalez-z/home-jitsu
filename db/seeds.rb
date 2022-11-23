@@ -38,8 +38,8 @@ laura = User.create!(
   description: "BJJ expert that will strangle you"
 )
 
-touhami = User.create!(
-  email: "touhami.abi@gmail.com",
+tsunami = User.create!(
+  email: "tsunami.abi@gmail.com",
   password: "123456",
   first_name: "Touhami",
   last_name: "Abi",
@@ -85,13 +85,50 @@ end
 
 p "Users created successfully."
 
-10.times do
+p "Clearing out events"
+Event.destroy_all
+p "Creating new events"
+
+5.times do
   Event.create!(
     date: DateTime.now,
     status: "Open",
     host: jonathan,
-    description: "This is gonna be a banger",
-    title: "Let's go!",
+    description: Faker::Quote.matz,
+    title: Faker::Games::DnD.city,
+    photo: "Probably not needed placeholder"
+  )
+end
+
+5.times do
+  Event.create!(
+    date: DateTime.now,
+    status: "Open",
+    host: ricky,
+    description: Faker::Quote.matz,
+    title: Faker::Games::DnD.city,
+    photo: "Probably not needed placeholder"
+  )
+end
+
+5.times do
+  Event.create!(
+    date: DateTime.now,
+    status: "Open",
+    host: laura,
+    description: Faker::Quote.matz,
+    title: Faker::Games::DnD.city,
+    photo: "Probably not needed placeholder"
+  )
+end
+
+5.times do
+  Event.create!(
+    date: DateTime.now,
+    status: "Open",
+    host: tsunami,
+    description: Faker::Quote.matz,
+    title: Faker::Games::DnD.city,
     photo: "Probably not needed placeholder"
   )
 end
