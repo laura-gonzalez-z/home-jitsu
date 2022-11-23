@@ -1,0 +1,5 @@
+<h2><%= @message %></h2>
+
+<%= simple_form_for(@user, url: edit_user_path(@user), data: {turbo: false}) do |field| %>
+  <%= render partial: 'shared/form', locals: { field: field } %>
+<% end %>

@@ -1,0 +1,46 @@
+<div class="form-inputs">
+
+  <%= field.input :first_name,
+              required: true,
+              autofocus: true,
+              input_html: { autocomplete: "first_name" }%>
+  <%= field.input :last_name,
+              required: true,
+              autofocus: true,
+              input_html: { autocomplete: "last_name" }%>
+  <%= field.input :address,
+              required: true,
+              input_html: { autocomplete: "address" } %>
+  <%= field.input :gender, collection: User::GENDERS,
+              required: true,
+              input_html: { autocomplete: "gender" } %>
+  <%= field.input :weight,
+              required: true,
+              input_html: { autocomplete: "weight" } %>
+  <%= field.input :height,
+              required: true,
+              input_html: { autocomplete: "height" } %>
+  <%= field.input :belt, collection: User::BELTS,
+              required: false,
+              input_html: { autocomplete: "belt" } %>
+  <%= field.input :years_of_experience,
+              required: false,
+              input_html: { autocomplete: "years_of_experience" } %>
+  <%= field.input :description,
+              required: false,
+              input_html: { autocomplete: "description" } %>
+  <%= field.input :email,
+              required: true,
+              autofocus: true,
+              input_html: { autocomplete: "email" }%>
+  <%= field.input :password,
+              required: true,
+              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+              input_html: { autocomplete: "new-password" } %>
+  <%= field.input :password_confirmation,
+              required: true,
+              input_html: { autocomplete: "new-password" } %>
+</div>
+<div class="form-actions">
+  <%= field.button :submit, @message %>
+</div>
