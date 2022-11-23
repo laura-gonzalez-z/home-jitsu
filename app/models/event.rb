@@ -6,8 +6,7 @@ class Event < ApplicationRecord
   has_many :guests
 
   validates :date, presence: true
-  validates :status, inclusion: { in: STATUS }
-  validates :host, presence: true
+  validates :status, inclusion: { in: STATUS }, presence: true
   validates :title, presence: true
   validates :description, presence: true
 end
