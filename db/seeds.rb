@@ -52,7 +52,7 @@ touhami = User.create!(
   belt: "None"
 )
 
-jonatan = User.create!(
+jonathan = User.create!(
   email: "jonathan.troupe@gmail.com",
   password: "123456",
   first_name: "Jonathan",
@@ -84,3 +84,16 @@ ADDRESS.each do |address|
 end
 
 p "Users created successfully."
+
+10.times do
+  Event.create!(
+    date: DateTime.now,
+    status: "Open",
+    host: jonathan,
+    description: "This is gonna be a banger",
+    title: "Let's go!",
+    photo: "Probably not needed placeholder"
+  )
+end
+
+p "Created events"
