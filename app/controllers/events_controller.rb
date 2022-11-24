@@ -15,6 +15,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     authorize @event
     @event.host = current_user
+    @event.status = "Open"
     if @event.save
       redirect_to events_path
     else
@@ -29,6 +30,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:date, :title, :description, :status)
+    params.require(:event).permit(:date, :title, :description)
   end
 end
