@@ -7,7 +7,6 @@ class Event < ApplicationRecord
 
   validates :date, presence: true
   validates :status, inclusion: { in: STATUS }
-  validates :host, presence: true
   validates :title, presence: true
   validates :description, presence: true
 end
