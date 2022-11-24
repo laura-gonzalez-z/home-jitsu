@@ -92,7 +92,7 @@ p "Creating new events"
 5.times do
   Event.create!(
     date: DateTime.now,
-    status: ["Open", "Closed"].sample,
+    status: Event::STATUS.sample,
     host: jonathan,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -103,7 +103,7 @@ end
 5.times do
   Event.create!(
     date: DateTime.now,
-    status: ["Open", "Closed"].sample,
+    status: Event::STATUS.sample,
     host: ricky,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -114,7 +114,7 @@ end
 5.times do
   Event.create!(
     date: DateTime.now,
-    status: ["Open", "Closed"].sample,
+    status: Event::STATUS.sample,
     host: laura,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -125,7 +125,7 @@ end
 5.times do
   Event.create!(
     date: DateTime.now,
-    status: ["Open", "Closed"].sample,
+    status: Event::STATUS.sample,
     host: tsunami,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,

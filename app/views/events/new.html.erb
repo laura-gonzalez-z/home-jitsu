@@ -1,6 +1,6 @@
 <%= simple_form_for(@event) do |f| %>
   <%= f.input :date, as: :date, html5: true %>
-  <%= f.input :status, collection: ["Open", "Closed"] %>
+  <%= f.input :status, collection: Event::STATUS %>
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.submit %>
