@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_213002) do
 
   create_table "events", force: :cascade do |t|
     t.date "date"
-    t.string "status"
+    t.string "status", default: "open"
     t.bigint "host_id"
     t.string "description"
     t.string "title"
