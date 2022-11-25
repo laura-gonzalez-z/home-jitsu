@@ -11,6 +11,10 @@ class EventPolicy < ApplicationPolicy
     true
   end
 
+  def destroy?
+    record.host_id == user.id
+  end
+
   class Scope < Scope
     def resolve
       scope.all
