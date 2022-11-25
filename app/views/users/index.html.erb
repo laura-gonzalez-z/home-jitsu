@@ -1,6 +1,6 @@
 <h1>You're connected to the user index page! Here are the users:</h1>
 <ul>
   <% @users.each do |user| %>
-    <li><%= user.first_name %> <%= user.last_name %></li>
+    <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
   <% end %>
 </ul>
