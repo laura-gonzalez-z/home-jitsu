@@ -1,4 +1,5 @@
 class PartnersController < ApplicationController
+  before_action :set_partner, only: %i[destroy]
 
   def create
     @partner = Partner.new(partner_params)
@@ -7,7 +8,19 @@ class PartnersController < ApplicationController
     redirect_to users_path
   end
 
+  def destroy
+    authorize @partner
+    @partner.destroy
+    redirect_to users_path
+  end
+
   private
+
+  def set_partner
+    @other_user = User.find(params[:id])
+    @partner = Partner.find_by(requestee: @other_user, requester: current_user) ||
+               Partner.find_by(requester: @other_user, requestee: current_user)
+  end
 
   def partner_params
     params.permit(:requestee_id, :requester_id)
