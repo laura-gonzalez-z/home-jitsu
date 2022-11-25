@@ -98,6 +98,11 @@ p "Creating new events"
     title: Faker::Games::DnD.city,
     photo: "Probably not needed placeholder"
   )
+  Guest.create!(
+    event_id: Event.last.id,
+    guest_id: [laura.id, tsunami.id, ricky.id].sample,
+    status: Guest::STATUS.sample
+  )
 end
 
 5.times do
@@ -108,6 +113,11 @@ end
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
     photo: "Probably not needed placeholder"
+  )
+  Guest.create!(
+    event_id: Event.last.id,
+    guest_id: [laura.id, tsunami.id, jonathan.id].sample,
+    status: Guest::STATUS.sample
   )
 end
 
@@ -120,6 +130,11 @@ end
     title: Faker::Games::DnD.city,
     photo: "Probably not needed placeholder"
   )
+  Guest.create!(
+    event_id: Event.last.id,
+    guest_id: [jonathan.id, tsunami.id, ricky.id].sample,
+    status: Guest::STATUS.sample
+  )
 end
 
 5.times do
@@ -131,6 +146,11 @@ end
     title: Faker::Games::DnD.city,
     photo: "Probably not needed placeholder"
   )
+  Guest.create!(
+    event_id: Event.last.id,
+    guest_id: [laura.id, jonathan.id, ricky.id].sample,
+    status: Guest::STATUS.sample
+  )
 end
 
-p "Created events"
+p "Created events and guests attached"
