@@ -10,8 +10,6 @@ class PartnersController < ApplicationController
   private
 
   def partner_params
-    puts :requestee_id
-    puts :requester_id
     params.permit(:requestee_id, :requester_id)
   end
 end
