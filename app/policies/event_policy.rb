@@ -7,6 +7,14 @@ class EventPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    record.host_id == user.id
+  end
+
+  def update?
+    record.host_id == user.id
+  end
+
   def create?
     true
   end
