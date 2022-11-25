@@ -1,6 +1,5 @@
 class Review < ApplicationRecord
-  belongs_to :user, class_name: 'User'
-  belongs_to :writer, class_name: 'User'
+  has_many :users
 
   validates :content, presence: true
   validates :rating, presence: true
