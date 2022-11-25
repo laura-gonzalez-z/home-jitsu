@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_user, only: %i[create]
-  before_action :set_event, only: %i[destroy]
+  before_action :set_event, only: %i[edit update destroy]
 
   def index
     @event = policy_scope(Event)
@@ -17,12 +17,6 @@ class EventsController < ApplicationController
     authorize @event
   end
 
-  def destroy
-    authorize @event
-    @event.destroy
-    redirect_to events_path
-  end
-
   def create
     @event = Event.new(event_params)
     authorize @event
@@ -33,6 +27,25 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    authorize @event
+  end
+
+  def update
+    authorize @event
+    if @event.update(event_params)
+      redirect_to event_path(@event)
+    else
+      render :new, :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize @event
+    @event.destroy
+    redirect_to events_path
   end
 
   private
