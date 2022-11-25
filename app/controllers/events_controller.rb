@@ -1,9 +1,14 @@
 class EventsController < ApplicationController
-  before_action :set_user
+  before_action :set_usern, only: %i[create]
 
   def index
     @event = policy_scope(Event)
     @events = Event.all
+  end
+
+  def show
+    @event = Event.find(params[:id])
+    authorize @event
   end
 
   def new
