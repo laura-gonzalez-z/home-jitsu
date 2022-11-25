@@ -11,9 +11,25 @@ class EventsController < ApplicationController
     authorize @event
   end
 
+  def create
+    @event = Event.new(event_params)
+    authorize @event
+    @event.host = current_user
+    @event.status = "Open"
+    if @event.save
+      redirect_to events_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_user
     @user = current_user
+  end
+
+  def event_params
+    params.require(:event).permit(:date, :title, :description)
   end
 end
