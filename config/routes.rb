@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   }
   resources :users
   resources :events
+  resources :partners
   root to: "pages#home"
 end
