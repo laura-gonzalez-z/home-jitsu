@@ -6,5 +6,4 @@ class Guest < ApplicationRecord
   validates :event_id, presence: true
   validates :guest_id, presence: true
   validates :status, inclusion: { in: STATUS }
-
 end
