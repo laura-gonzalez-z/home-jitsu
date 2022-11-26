@@ -4,5 +4,7 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 <%= render "shared/event", event: @event %>
-<div class="container py-4"><%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary" %></div>
-<div class="container py-4"><%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %></div>
+<% if @event.host_id == current_user.id %>
+  <div class="container py-4"><%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary" %></div>
+  <div class="container py-4"><%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %></div>
+<% end %>
