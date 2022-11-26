@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :partners, class_name: 'Partner', foreign_key: 'requestee_id'
   has_many :hosted_events, class_name: 'Event', foreign_key: 'host_id'
   has_many :events, class_name: 'Guest', foreign_key: 'guest_id'
+<<<<<<< HEAD
 
   def partnerships
     requested_partners + partners
@@ -37,4 +38,7 @@ class User < ApplicationRecord
       other_user
     end
   end
+=======
+  has_many :messages
+>>>>>>> master
 end

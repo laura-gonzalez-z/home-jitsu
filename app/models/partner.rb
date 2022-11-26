@@ -11,4 +11,9 @@ class Partner < ApplicationRecord
   def users
     [requester, requestee]
   end
+
+  def exists?
+    Partner.find(requester_id: current_user.id, requestee_id: @user.id) ||
+      Partner.find(requestee_id: current_user.id, requester_id: @user.id)
+  end
 end
