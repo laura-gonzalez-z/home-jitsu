@@ -40,6 +40,9 @@
   <%= field.input :password_confirmation,
               required: true,
               input_html: { autocomplete: "new-password" } %>
+  <%= field.input :photo, as: :file,
+              required: false,
+              input_html: { autocomplete: "upload an avatar"} %>
 </div>
 <div class="form-actions">
   <%= field.button :submit, @message %>

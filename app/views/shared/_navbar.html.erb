@@ -4,7 +4,11 @@
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <div class="d-flex align-items-center" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-            <%= image_tag "avatar.svg", alt: "user", width: 30 %>
+              <% if current_user.photo.key %>
+                <%= cl_image_tag current_user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
+              <% else %>
+                <i class="fa-solid fa-circle-user fa-2xl"></i>
+              <% end %>
           </div>
         </li>
       </ul>
