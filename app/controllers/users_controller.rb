@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+    set_partner
   end
 
   def edit
@@ -24,6 +25,12 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_partner
+    set_user
+    @partner = Partner.find_by(requestee_id: @user.id, requester_id: current_user.id) ||
+               Partner.find_by(requester_id: @user.id, requestee_id: current_user.id)
   end
 
   def user_params
