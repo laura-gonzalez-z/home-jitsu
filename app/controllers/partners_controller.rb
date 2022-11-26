@@ -1,6 +1,10 @@
 class PartnersController < ApplicationController
   before_action :set_partner, only: %i[accept reject destroy]
 
+  def index
+    @partners = policy_scope(Partner)
+  end
+
   def create
     @partner = Partner.new(partner_params)
     authorize @partner
