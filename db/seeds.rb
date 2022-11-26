@@ -102,7 +102,6 @@ p "Creating new events, guests, partner requests and reviews"
     host: jonathan,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
-    photo: "Probably not needed placeholder"
   )
   Guest.create!(
     event_id: Event.last.id,
@@ -133,7 +132,6 @@ end
     host: ricky,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
-    photo: "Probably not needed placeholder"
   )
   Guest.create!(
     event_id: Event.last.id,
@@ -164,7 +162,6 @@ end
     host: laura,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
-    photo: "Probably not needed placeholder"
   )
   Guest.create!(
     event_id: Event.last.id,
@@ -195,7 +192,6 @@ end
     host: tsunami,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
-    photo: "Probably not needed placeholder"
   )
   Guest.create!(
     event_id: Event.last.id,

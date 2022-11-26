@@ -1,0 +1,12 @@
+<div class="form-inputs">
+  <%= simple_form_for([@user, @review]) do |f| %>
+    <%= f.input :content,
+              required: true,
+              autofocus: true,
+              input_html: { autocomplete: "Let us know what you think of #{@user.first_name}" }%>
+    <%= f.input :rating,
+              required: true,
+              input_html: { autocomplete: "Leave them a rating from 1-5" }%>
+    <%= f.submit %>
+  <% end %>
+</div>
