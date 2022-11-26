@@ -31,10 +31,10 @@ class User < ApplicationRecord
     requested_partners + partners
   end
 
-  def my_partners
-    partnerships.map do |partnership|
-      # partnership is an array of two users
-      pp partnership.users
+  def friends
+    partnerships.map do |p|
+      other_user = p.users.find { |u| u.id != id }
+      other_user
     end
   end
 end
