@@ -86,11 +86,12 @@ end
 
 p "Users created successfully."
 
-p "Clearing out events, guests and reviews"
+p "Clearing out events, guests, partner requests and reviews"
 Event.destroy_all
 Guest.destroy_all
 Review.destroy_all
-p "Creating new events, guests and reviews"
+Partner.destroy_all
+p "Creating new events, guests, partner requests and reviews"
 
 
 5.times do
@@ -113,6 +114,14 @@ p "Creating new events, guests and reviews"
     user_id: jonathan.id,
     writer_id: [laura.id, tsunami.id, ricky.id].sample,
     rating: 4
+  )
+  Partner.create!(
+    requestee_id: jonathan.id,
+    requester_id: Users.all.ids.sample
+  )
+  Partner.create!(
+    requester_id: jonathan.id,
+    requestee_id: Users.all.ids.sample
   )
 end
 
@@ -137,6 +146,14 @@ end
     writer_id: [laura.id, tsunami.id, jonathan.id].sample,
     rating: 5
   )
+  Partner.create!(
+    requestee_id: ricky.id,
+    requester_id: Users.all.ids.sample
+  )
+  Partner.create!(
+    requester_id: ricky.id,
+    requestee_id: Users.all.ids.sample
+  )
 end
 
 5.times do
@@ -160,6 +177,14 @@ end
     writer_id: [ricky.id, tsunami.id, jonathan.id].sample,
     rating: 5
   )
+  Partner.create!(
+    requestee_id: laura.id,
+    requester_id: Users.all.ids.sample
+  )
+  Partner.create!(
+    requester_id: laura.id,
+    requestee_id: Users.all.ids.sample
+  )
 end
 
 5.times do
@@ -182,6 +207,14 @@ end
     user_id: tsunami.id,
     writer_id: [laura.id, ricky.id, jonathan.id].sample,
     rating: 5
+  )
+  Partner.create!(
+    requestee_id: tsunami.id,
+    requester_id: Users.all.ids.sample
+  )
+  Partner.create!(
+    requester_id: tsunami.id,
+    requestee_id: Users.all.ids.sample
   )
 end
 
