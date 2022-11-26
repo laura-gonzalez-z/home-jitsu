@@ -40,9 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_180734) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-ActiveRecord::Schema[7.0].define(version: 2022_11_26_161450) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  end
 
   create_table "chatrooms", force: :cascade do |t|
     t.string "name"
@@ -59,6 +57,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_161450) do
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 
