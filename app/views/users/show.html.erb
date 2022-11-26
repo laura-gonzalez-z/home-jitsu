@@ -2,9 +2,12 @@
   <h1>You're connected to the user show page!</h1>
   <% if @partner.nil? %>
     <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
-  <% else %>
-    <%= @partner.status %>
-    <%= link_to "Not my partner anymore!", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+  <% elsif @partner.status == "pending" && @partner.requestee_id == current_user.id%>
+    <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "text-decoration-none"}   %> | <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "text-decoration-none"}  %>
+  <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
+      <%= link_to "Cancel Request", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+  <% elsif @partner.status == "approved" %>
+      <%= link_to "Not my partner anymore.", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
   <% end %>
   <h3>Meet <%=@user.first_name%></h3>
   <% if @user.gender == "Male" %>
