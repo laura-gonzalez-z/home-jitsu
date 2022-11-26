@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   resources :partners
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
   root to: "pages#home"
+  get "my_messages", to: "chatrooms#my_messages"
 end

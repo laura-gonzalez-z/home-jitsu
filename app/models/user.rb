@@ -24,4 +24,5 @@ class User < ApplicationRecord
   has_many :partners
   has_many :hosted_events, class_name: 'Event', foreign_key: 'host_id'
   has_many :events, class_name: 'Guest', foreign_key: 'guest_id'
+  has_many :messages
 end
