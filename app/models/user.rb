@@ -35,7 +35,6 @@ class User < ApplicationRecord
     partnerships.map do |partnership|
       # partnership is an array of two users
       pp partnership.users
-      partnership.users.where(id != @user.id)
     end
   end
 end
