@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_user, only: %i[create]
+  before_action :set_user, only: %i[create my_events]
   before_action :set_event, only: %i[edit update destroy show]
 
   def index
@@ -21,6 +21,11 @@ class EventsController < ApplicationController
         lng: @event.longitude
       }
     ]
+  end
+
+  def my_events
+    authorize @user
+    @events = Event.select { |event| event.host_id == current_user.id }
   end
 
   def new
