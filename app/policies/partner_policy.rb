@@ -7,6 +7,14 @@ class PartnerPolicy < ApplicationPolicy
     true
   end
 
+  def accept?
+    record.requestee_id == user.id
+  end
+
+  def reject?
+    record.requestee_id == user.id
+  end
+
   class Scope < Scope
     def resolve
       scope.all

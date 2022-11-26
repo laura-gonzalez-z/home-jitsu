@@ -1,5 +1,5 @@
 class PartnersController < ApplicationController
-  before_action :set_partner, only: %i[destroy]
+  before_action :set_partner, only: %i[accept reject destroy]
 
   def create
     @partner = Partner.new(partner_params)
@@ -12,6 +12,18 @@ class PartnersController < ApplicationController
     authorize @partner
     @partner.destroy
     redirect_to users_path
+  end
+
+  def accept
+    authorize @partner
+    @partner.update(status: "accepted")
+    redirect_to user_path(:requestee_id)
+  end
+
+  def reject
+    authorize @partner
+    @partner.update(status: "rejected")
+    redirect_to user_path(:requestee_id)
   end
 
   private
