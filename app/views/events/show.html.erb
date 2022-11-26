@@ -5,6 +5,7 @@
 
 <%= render "shared/event", event: @event %>
 <h3>Guest list: </h3>
+<% @join = true %>
 <% @guests.each do |guest| %>
   <% user = User.find(guest.guest_id) %>
   <% if user.id == current_user.id %>
