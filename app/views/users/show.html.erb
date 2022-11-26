@@ -6,7 +6,7 @@
     <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "text-decoration-none"}   %> | <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "text-decoration-none"}  %>
   <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
       <%= link_to "Cancel Request", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
-  <% elsif @partner.status == "approved" %>
+  <% elsif @partner.status == "accepted" %>
       <%= link_to "Not my partner anymore.", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
   <% end %>
   <h3>Meet <%=@user.first_name%></h3>
