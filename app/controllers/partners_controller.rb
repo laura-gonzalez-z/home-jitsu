@@ -11,7 +11,7 @@ class PartnersController < ApplicationController
   def destroy
     authorize @partner
     @partner.destroy
-    redirect_to users_path
+    redirect_to user_path(:requestee_id)
   end
 
   def accept
