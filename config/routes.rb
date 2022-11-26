@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  resources :users
+  resources :users do
+    resources :reviews
+  end
   resources :events
   resources :partners
   resources :chatrooms, only: :show do
