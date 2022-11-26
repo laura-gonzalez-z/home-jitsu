@@ -117,11 +117,11 @@ p "Creating new events, guests, partner requests and reviews"
   )
   Partner.create!(
     requestee_id: jonathan.id,
-    requester_id: Users.all.ids.sample
+    requester_id: User.all.ids.sample
   )
   Partner.create!(
     requester_id: jonathan.id,
-    requestee_id: Users.all.ids.sample
+    requestee_id: User.all.ids.sample
   )
 end
 
@@ -148,11 +148,11 @@ end
   )
   Partner.create!(
     requestee_id: ricky.id,
-    requester_id: Users.all.ids.sample
+    requester_id: User.all.ids.sample
   )
   Partner.create!(
     requester_id: ricky.id,
-    requestee_id: Users.all.ids.sample
+    requestee_id: User.all.ids.sample
   )
 end
 
@@ -179,11 +179,11 @@ end
   )
   Partner.create!(
     requestee_id: laura.id,
-    requester_id: Users.all.ids.sample
+    requester_id: User.all.ids.sample
   )
   Partner.create!(
     requester_id: laura.id,
-    requestee_id: Users.all.ids.sample
+    requestee_id: User.all.ids.sample
   )
 end
 
@@ -210,11 +210,11 @@ end
   )
   Partner.create!(
     requestee_id: tsunami.id,
-    requester_id: Users.all.ids.sample
+    requester_id: User.all.ids.sample
   )
   Partner.create!(
     requester_id: tsunami.id,
-    requestee_id: Users.all.ids.sample
+    requestee_id: User.all.ids.sample
   )
 end
 
