@@ -1,5 +1,6 @@
 <div>
-  <h1>You're connected to the user show page!</h1> <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post}  %>
+  <h1>You're connected to the user show page!</h1>
+  <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post} %>
   <%= link_to "Not my partner anymore!", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %>
   <h3>Meet <%=@user.first_name%></h3>
   <% if @user.gender == "Male" %>
@@ -18,5 +19,4 @@
     <p><%=pronoun%> is new to BJJ!</p>
   <% end %>
   <p>Here's a fun fact about <%=himher%>: <%= @user.description %></p>
-  <%= @user.partners %>
 </div>
