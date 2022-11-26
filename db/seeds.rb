@@ -218,4 +218,4 @@ end
   )
 end
 
-p "Created events, guests and reviews for each user attached"
+p "Created events, guests, partner requests and reviews for each user attached"
