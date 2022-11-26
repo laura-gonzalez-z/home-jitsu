@@ -40,7 +40,7 @@ laura = User.create!(
 )
 
 tsunami = User.create!(
-  email: "tsunami.abri@gmail.com",
+  email: "tsunami.abi@gmail.com",
   password: "123456",
   first_name: "Touhami",
   last_name: "Abi",
