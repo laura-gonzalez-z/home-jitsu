@@ -7,7 +7,7 @@
               <% if current_user.photo.key %>
                 <%= cl_image_tag current_user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
               <% else %>
-                <i class="fa-solid fa-circle-user fa-2xl"></i>
+                <%= image_tag "avatar.svg", alt: "user", width: 30 %>
               <% end %>
           </div>
         </li>
