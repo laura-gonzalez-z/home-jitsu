@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def my_events?
+    true
+  end
+
   def edit?
     record == user
   end
