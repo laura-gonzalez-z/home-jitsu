@@ -5,7 +5,7 @@ class PartnersController < ApplicationController
     @partner = Partner.new(partner_params)
     authorize @partner
     @partner.save
-    redirect_to users_path
+    redirect_to user_path(:requestee_id)
   end
 
   def destroy
@@ -18,8 +18,8 @@ class PartnersController < ApplicationController
 
   def set_partner
     @other_user = User.find(params[:id])
-    @partner = Partner.find_by(requestee: @other_user, requester: current_user) ||
-               Partner.find_by(requester: @other_user, requestee: current_user)
+    @partner = Partner.find_by(requestee_id: @other_user.id, requester_id: current_user.id) ||
+               Partner.find_by(requester_id: @other_user.id, requestee_id: current_user.id)
   end
 
   def partner_params

@@ -2,7 +2,7 @@
 <ul>
   <% @users.each do |user| %>
     <% if user != current_user %>
-      <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
+      <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user), class: "text-decoration-none"%></li>
     <% end %>
   <% end %>
 </ul>
