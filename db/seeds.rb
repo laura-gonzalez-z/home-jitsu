@@ -10,6 +10,7 @@ p "Destroying all your users..."
 User.destroy_all
 p "Creating new users..."
 
+
 ricky = User.create!(
   email: "ricky.tran@gmail.com",
   password: "123456",
@@ -85,9 +86,12 @@ end
 
 p "Users created successfully."
 
-p "Clearing out events"
+p "Clearing out events, guests and reviews"
 Event.destroy_all
-p "Creating new events"
+Guest.destroy_all
+Review.destroy_all
+p "Creating new events, guests and reviews"
+
 
 5.times do
   Event.create!(
@@ -103,6 +107,12 @@ p "Creating new events"
     event_id: Event.last.id,
     guest_id: [laura.id, tsunami.id, ricky.id].sample,
     status: Guest::STATUS.sample
+  )
+  Review.create!(
+    content: Faker::TvShows::AquaTeenHungerForce.quote,
+    user_id: jonathan.id,
+    writer_id: [laura.id, tsunami.id, ricky.id].sample,
+    rating: 4
   )
 end
 
@@ -121,6 +131,12 @@ end
     guest_id: [laura.id, tsunami.id, jonathan.id].sample,
     status: Guest::STATUS.sample
   )
+  Review.create!(
+    content: Faker::TvShows::AquaTeenHungerForce.quote,
+    user_id: ricky.id,
+    writer_id: [laura.id, tsunami.id, jonathan.id].sample,
+    rating: 5
+  )
 end
 
 5.times do
@@ -137,6 +153,12 @@ end
     event_id: Event.last.id,
     guest_id: [jonathan.id, tsunami.id, ricky.id].sample,
     status: Guest::STATUS.sample
+  )
+  Review.create!(
+    content: Faker::TvShows::AquaTeenHungerForce.quote,
+    user_id: laura.id,
+    writer_id: [ricky.id, tsunami.id, jonathan.id].sample,
+    rating: 5
   )
 end
 
@@ -155,6 +177,12 @@ end
     guest_id: [laura.id, jonathan.id, ricky.id].sample,
     status: Guest::STATUS.sample
   )
+  Review.create!(
+    content: Faker::TvShows::AquaTeenHungerForce.quote,
+    user_id: tsunami.id,
+    writer_id: [laura.id, ricky.id, jonathan.id].sample,
+    rating: 5
+  )
 end
 
-p "Created events and guests attached"
+p "Created events, guests and reviews for each user attached"

@@ -20,8 +20,22 @@ class User < ApplicationRecord
   validates :gender, presence: true
   validates :gender, inclusion: { in: GENDERS }
 
-  has_many :reviews
-  has_many :partners
+  has_many :written_reviews, class_name: 'Review', foreign_key: 'writer_id'
+  has_many :reviews, class_name: 'Review', foreign_key: 'user_id'
+  has_many :requested_partners, class_name: 'Partner', foreign_key: 'requester_id'
+  has_many :partners, class_name: 'Partner', foreign_key: 'requestee_id'
   has_many :hosted_events, class_name: 'Event', foreign_key: 'host_id'
   has_many :events, class_name: 'Guest', foreign_key: 'guest_id'
+
+  def partnerships
+    requested_partners + partners
+  end
+
+  def friends
+    partnerships.map do |p|
+      other_user = p.users.find { |u| u.id != id }
+      other_user
+    end
+  end
+  has_many :messages
 end
