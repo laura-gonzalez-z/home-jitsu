@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :events
 
+  resources :guests, only: :create
+
   resources :partners
   resources :chatrooms, only: :show do
     resources :messages, only: :create

@@ -15,6 +15,7 @@ class EventsController < ApplicationController
 
   def show
     authorize @event
+    @guests = Guest.select { |guest| guest.event_id == @event.id }
     @markers = [
       {
         lat: @event.latitude,
