@@ -39,7 +39,7 @@ laura = User.create!(
 )
 
 tsunami = User.create!(
-  email: "tsunami.abi@gmail.com",
+  email: "tsunami.abri@gmail.com",
   password: "123456",
   first_name: "Touhami",
   last_name: "Abi",
@@ -70,7 +70,7 @@ ADDRESS.each do |address|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   User.create!(
-    address:,
+    address: address,
     belt: User::BELTS.sample,
     first_name:,
     last_name:,
@@ -91,6 +91,7 @@ p "Creating new events"
 
 5.times do
   Event.create!(
+    address: ADDRESS.sample,
     date: DateTime.now,
     status: Event::STATUS.sample,
     host: jonathan,
@@ -107,6 +108,7 @@ end
 
 5.times do
   Event.create!(
+    address: ADDRESS.sample,
     date: DateTime.now,
     status: Event::STATUS.sample,
     host: ricky,
@@ -123,6 +125,7 @@ end
 
 5.times do
   Event.create!(
+    address: ADDRESS.sample,
     date: DateTime.now,
     status: Event::STATUS.sample,
     host: laura,
@@ -139,6 +142,7 @@ end
 
 5.times do
   Event.create!(
+    address: ADDRESS.sample,
     date: DateTime.now,
     status: Event::STATUS.sample,
     host: tsunami,
