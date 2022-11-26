@@ -1,7 +1,7 @@
 <div>
   <h1>You're connected to the user show page!</h1>
   <% if @partner.nil? %>
-    <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post}  %>
+    <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
   <% else %>
     <%= @partner.status %>
     <%= link_to "Not my partner anymore!", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
