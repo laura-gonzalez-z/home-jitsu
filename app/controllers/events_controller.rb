@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_user, only: %i[create]
-  before_action :set_event, only: %i[edit update destroy]
+  before_action :set_event, only: %i[edit update destroy show]
 
   def index
     @event = policy_scope(Event)
@@ -14,8 +14,13 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
     authorize @event
+    @markers = [
+      {
+        lat: @event.latitude,
+        lng: @event.longitude
+      }
+    ]
   end
 
   def new
