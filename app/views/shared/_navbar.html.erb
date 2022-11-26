@@ -1,36 +1,45 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+  <div class="container">
+    <% if user_signed_in? %>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <div class="d-flex align-items-center" data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+            <%= image_tag "avatar.svg", alt: "user", width: 30 %>
+          </div>
+        </li>
+      </ul>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <%= link_to "/", class: "navbar-brand mx-auto" do %>
+      <%= image_tag "home-jitsu.svg", alt: "Home-Jitsu" %>
+      <span class="text-primary">Home</span><span class="text-secondary">-</span>Jitsu
+    <% end %>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+    <% if user_signed_in? %>
+      <div class="dropdown search ms-auto">
+        <div class="dropdown-toggle d-flex align-items-center" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag "icons/search.svg", alt: "user", width: 20 %>
+        </div>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <%= link_to "Search for partners", "#", class: "dropdown-item py-2" %>
+          <%= link_to "Search for events", "#", class: "dropdown-item py-2" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
+<% if user_signed_in? %>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="offcanvasMenuLabel"><%= current_user.first_name %> <%= current_user.last_name %></h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="h-100">
+      <div class="list-group list-group-flush h-100">
+        <%= link_to "My profile", "#", class: "list-group-item list-group-item-action py-3" %>
+        <%= link_to "Edit account", edit_user_registration_path, class: "list-group-item list-group-item-action py-3" %>
+        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "list-group-item list-group-item-action mt-auto border-top py-3" %>
+      </div>
+    </div>
+  </div>
+<% end %>

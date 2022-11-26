@@ -1,0 +1,16 @@
+body {
+  padding-bottom: 50px;
+}
+.footer {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 14px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 10;
+  border-top: 1px solid $light-grey;
+}

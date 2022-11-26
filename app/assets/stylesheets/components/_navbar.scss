@@ -1,12 +1,28 @@
+body {
+  padding-top: 50px;
+}
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  height: 50px;
+  padding: 10px 0;
+  align-items: center;
+  border-bottom: 1px solid $light-grey;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
 }
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-lewagon .navbar-brand {
+  margin: 0 10px;
+  padding: 0;
+  max-height: 30px;
+  font-weight: 500;
 }
-
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 46px;
+}
+.dropdown.search .dropdown-toggle:after {
+  display: none;
 }
