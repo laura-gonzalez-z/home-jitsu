@@ -7,6 +7,10 @@ class PartnerPolicy < ApplicationPolicy
     true
   end
 
+  def index?
+    true
+  end
+
   def accept?
     record.requestee_id == user.id
   end

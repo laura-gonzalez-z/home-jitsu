@@ -33,10 +33,11 @@ class User < ApplicationRecord
   end
 
   def friends
-    partnerships.map do |p|
+    list = partnerships.map do |p|
       other_user = p.users.find { |u| u.id != id }
       other_user
     end
+    list.compact.uniq
   end
   has_many :messages
 end
