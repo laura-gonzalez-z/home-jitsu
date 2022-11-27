@@ -2,6 +2,11 @@ class ChatroomPolicy < ApplicationPolicy
   def show?
     record.name.include? "_#{user.id}_"
   end
+
+  def create?
+    true
+  end
+
   def my_messages?
     true
   end

@@ -4,7 +4,20 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 <%= render "shared/event", event: @event %>
+<h3>Guest list: </h3>
+<% @join = true %>
+<% @guests.each do |guest| %>
+  <% user = User.find(guest.guest_id) %>
+  <% if user.id == current_user.id %>
+    <% @join = false %>
+  <% end %>
+  <p><%= "#{user.first_name} #{user.last_name}" %></p>
+<% end %>
+
 <% if @event.host_id == current_user.id %>
   <div class="container py-4"><%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary" %></div>
   <div class="container py-4"><%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %></div>
+<% end %>
+<% if @join %>
+  <div class="container py-4"><%= button_to "Join event", {:controller => "guests", :action => "create", :guest_id => current_user.id, :event_id => @event.id} , {:method=>:post, class: "btn btn-primary"} %></div>
 <% end %>
