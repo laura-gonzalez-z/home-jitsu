@@ -28,4 +28,5 @@
   <p>Here's a fun fact about <%=himher%>: <%= @user.description %></p>
   <p><%= link_to "See their reviews", user_reviews_path(@user), class: "btn btn-primary" %></p>
   <p><%= link_to "Leave them a review", new_user_review_path(@user), class: "btn btn-primary" %></p>
+  <%= link_to "Back", users_path, class: "btn btn-secondary" %>
 </div>
