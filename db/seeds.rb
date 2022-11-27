@@ -98,7 +98,7 @@ p "Creating new events, guests, partner requests and reviews"
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "open",
     host: jonathan,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -128,7 +128,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "open",
     host: ricky,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -158,7 +158,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "open",
     host: laura,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -188,7 +188,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "open",
     host: tsunami,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
