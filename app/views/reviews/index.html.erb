@@ -1,8 +1,9 @@
 <div class="container py-4"></div>
-<% @reviews.each do |review| %>
-  <% user = User.find(review.writer_id) %>
-  <p>Written by: <%= "#{user.first_name} #{user.last_name}" %></p>
-  <p><%= review.content %></p>
-  <p>Rating: <%= review.rating %></p>
-  <hr>
-<% end %>
+  <% @reviews.each do |review| %>
+    <% user = User.find(review.writer_id) %>
+    <p>Written by: <%= "#{user.first_name} #{user.last_name}" %></p>
+    <p><%= review.content %></p>
+    <p>Rating: <%= review.rating %></p>
+    <hr>
+  <% end %>
+  <%= link_to "Back", user_path(@user),class: "btn btn-secondary" %>
