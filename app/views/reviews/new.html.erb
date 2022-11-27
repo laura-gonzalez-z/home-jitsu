@@ -1,6 +1,8 @@
+<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
 <div class="form-inputs">
   <%= simple_form_for([@user, @review]) do |f| %>
     <%= f.input :content,
+              as: :text,
               required: true,
               autofocus: true,
               input_html: { autocomplete: "Let us know what you think of #{@user.first_name}" }%>

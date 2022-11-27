@@ -1,11 +1,11 @@
 class ReviewsController < ApplicationController
-  before_action :set_user, only: %i[new create]
+  before_action :set_user, only: %i[index new create]
 
   def index
     @users = User.all
     @review = policy_scope(Review)
     @reviews_all = Review.all
-    @reviews = @reviews_all.select { |review| review.user_id == params[:user_id].to_i }
+    @reviews = @reviews_all.select { |review| review.user_id == @user.id.to_i }
   end
 
   def new

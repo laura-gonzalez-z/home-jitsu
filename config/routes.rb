@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :guests, only: :create
 
   resources :partners
-  resources :chatrooms, only: :show do
+  resources :chatrooms, only: %i[show create] do
     resources :messages, only: :create
   end
 

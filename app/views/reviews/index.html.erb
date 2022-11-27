@@ -1,8 +1,13 @@
-<div class="container py-4"></div>
+<h1><%= "#{@user.first_name} #{@user.last_name}’s reviews" %></h1>
 <% @reviews.each do |review| %>
   <% user = User.find(review.writer_id) %>
   <p>Written by: <%= "#{user.first_name} #{user.last_name}" %></p>
   <p><%= review.content %></p>
   <p>Rating: <%= review.rating %></p>
   <hr>
+<% end %>
+<% @user.friends.select do |user| %>
+  <% if user.id == current_user.id %>
+    <%= link_to "Add review", new_user_review_path(@user), class: "btn btn-primary d-block" %>
+  <% end %>
 <% end %>
