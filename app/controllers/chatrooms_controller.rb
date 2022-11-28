@@ -14,7 +14,7 @@ class ChatroomsController < ApplicationController
 
   def my_messages
     # TODO
-    @chatrooms = Chatroom.all
+    @chatrooms = Chatroom.where("name LIKE '%_#{current_user.id}_%'")
     authorize @chatrooms
   end
 

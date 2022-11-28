@@ -1,1 +1,8 @@
-<p>This will load my messages</p>
+<h1>Messages</h1>
+<div class="component-container">
+  <% @chatrooms.each do |chat| %>
+    <div class="chat-box">
+      <%= chat.name %>
+    </div>
+  <% end %>
+</div>
