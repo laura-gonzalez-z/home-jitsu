@@ -1,35 +1,6 @@
 <h1>Messages</h1>
 <div class="component-container">
   <% @chatrooms.each do |chat| %>
-    <%
-    #Find the last message
-    last_message = chat.messages.last
-    if last_message
-    %>
-      <%= link_to chatroom_path(chat), :action => 'go', class: "card-box bg-white" do %>
-        <div class="d-flex message-grid">
-          <%
-          #Find the other user
-          chat_ids = chat.name.scan(/\d+/).map(&:to_i) - [current_user.id]
-          other_user = User.find(chat_ids[0])
-          %>
-          <% if other_user.photo.key %>
-            <%= cl_image_tag other_user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
-          <% else %>
-            <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar" %>
-          <% end %>
-          <div class="flex-grow-1">
-            <p class="m-0"><strong><%= other_user.first_name %> <%= other_user.last_name %></strong></p>
-            <small>
-              <% if last_message.user == current_user %>You:<% end %>
-              <%= last_message.content %>
-            </small>
-          </div>
-          <div>
-            <small class="text-nowrap"><%= last_message.created_at.strftime("%b %e") %></small>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render "chat", chat: chat %>
   <% end %>
 </div>
