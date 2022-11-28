@@ -13,4 +13,50 @@ body {
   bottom: 0;
   z-index: 10;
   border-top: 1px solid $light-grey;
+  a {
+    text-indent: -9999px;
+    font-size: 0;
+    width: 22px;
+    height: 22px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    &.home {
+      background-image: asset-url("icons/home.svg");
+    }
+    &.partners {
+      background-image: asset-url("icons/users.svg");
+    }
+    &.events {
+      background-image: asset-url("icons/calendar.svg");
+    }
+    &.messages {
+      background-image: asset-url("icons/message.svg");
+    }
+    &.messages.new {
+      background-image: asset-url("icons/message-new.svg");
+    }
+    &.notifications {
+      background-image: asset-url("icons/bell.svg");
+    }
+    &.notifications.new {
+      background-image: asset-url("icons/bell-new.svg");
+    }
+  }
+}
+body.pages .footer a.home {
+  background-image: asset-url("icons/home-active.svg");
+}
+body.partners .footer a.partners,
+body.users .footer a.partners,
+body.reviews .footer a.partners {
+  background-image: asset-url("icons/users-active.svg");
+}
+body.events .footer a.events {
+  background-image: asset-url("icons/calendar-active.svg");
+}
+body.chatrooms .footer a.messages {
+  background-image: asset-url("icons/message-active.svg");
+}
+body.notifications .footer a.notifications {
+  background-image: asset-url("icons/bell-active.svg");
 }
