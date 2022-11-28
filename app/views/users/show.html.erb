@@ -31,4 +31,24 @@
       <%= link_to "Add review", new_user_review_path(@user), class: "btn btn-primary" %>
     <% end %>
   <% end %>
+  <h3>Meet <%=@user.first_name%></h3>
+  <% if @user.gender == "Male" %>
+    <% pronoun = "He" %>
+    <% himher = "him" %>
+  <% else %>
+    <% pronoun = "She" %>
+    <% himher = "her" %>
+    <%  %>
+  <% end %>
+  <p><%=pronoun%> is <%=@user.height%>cm tall.</p>
+  <p><%=pronoun%> weighs <%=@user.weight%>kg.</p>
+  <% if @user.belt =! "None" %>
+    <p><%=pronoun%> is a <%=@user.belt%> belt with <%=@user.years_of_experience%> years of experience!</p>
+  <% else %>
+    <p><%=pronoun%> is new to BJJ!</p>
+  <% end %>
+  <p>Here's a fun fact about <%=himher%>: <%= @user.description %></p>
+  <p><%= link_to "See their reviews", user_reviews_path(@user), class: "btn btn-primary" %></p>
+  <p><%= link_to "Leave them a review", new_user_review_path(@user), class: "btn btn-primary" %></p>
+  <%= link_to "Back", users_path, class: "btn btn-secondary" %>
 </div>
