@@ -5,7 +5,9 @@ ADDRESS = ["2054 Claremont", "4300 de Maisonneuve", "5120 Earnscliffe", "2121 St
            "5015 Clanranald", "4454 Coolbrook", "5881 Monkland", "2250 Guy", "1680 Lincoln",
            "6565 Kildare", "5755 Sir Walter Scott", "7460 Kingsley", "7461 Kingsley", "6950 Fielding",
            "5501 Adalbert", "625 Milton", "3474 Hutchison", "3655 Papineau", "1111 Mistral", "1101 Rachel E"].freeze
-
+p "Destroying chatrooms and messages"
+Message.destroy_all
+Chatroom.destroy_all
 p "Destroying all your users..."
 User.destroy_all
 p "Creating new users..."
@@ -30,8 +32,8 @@ laura = User.create!(
   password: "123456",
   first_name: "Laura",
   last_name: "Gonzalez",
-  weight: 40,
-  height: 168,
+  weight: 55,
+  height: 164,
   address: "5333 Casgrain",
   gender: "Female",
   belt: "Purple",
@@ -44,7 +46,7 @@ tsunami = User.create!(
   password: "123456",
   first_name: "Touhami",
   last_name: "Abi",
-  weight: 60,
+  weight: 70,
   height: 175,
   address: "5160 Gatineau",
   gender: "Male",
@@ -58,12 +60,12 @@ jonathan = User.create!(
   password: "123456",
   first_name: "Jonathan",
   last_name: "Troupe",
-  weight: 52,
+  weight: 62,
   height: 180,
   address: "4875 Dufferin",
   gender: "Male",
   belt: "Black",
-  years_of_experience: 40,
+  years_of_experience: 10,
   description: "The only way you'll make it out is in a body bag."
 )
 
@@ -98,7 +100,7 @@ p "Creating new events, guests, partner requests and reviews"
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "Open",
     host: jonathan,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -128,7 +130,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "Open",
     host: ricky,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -158,7 +160,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "Open",
     host: laura,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -188,7 +190,7 @@ end
   Event.create!(
     address: ADDRESS.sample,
     date: DateTime.now,
-    status: Event::STATUS.sample,
+    status: "Open",
     host: tsunami,
     description: Faker::Quote.matz,
     title: Faker::Games::DnD.city,
@@ -215,3 +217,62 @@ end
 end
 
 p "Created events, guests, partner requests and reviews for each user attached"
+
+p "Creating real chatrooms and messages"
+
+chat1 = Chatroom.create!(name: "private_#{ricky.id}_#{laura.id}_")
+chat2 = Chatroom.create!(name: "private_#{ricky.id}_#{tsunami.id}_")
+chat3 = Chatroom.create!(name: "private_#{ricky.id}_#{jonathan.id}_")
+chat4 = Chatroom.create!(name: "private_#{laura.id}_#{tsunami.id}_")
+chat5 = Chatroom.create!(name: "private_#{laura.id}_#{jonathan.id}_")
+chat6 = Chatroom.create!(name: "private_#{tsunami.id}_#{jonathan.id}_")
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat1.id,
+    user_id: [ricky.id, laura.id].sample
+  )
+end
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat2.id,
+    user_id: [ricky.id, tsunami.id].sample
+  )
+end
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat3.id,
+    user_id: [ricky.id, jonathan.id].sample
+  )
+end
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat4.id,
+    user_id: [laura.id, tsunami.id].sample
+  )
+end
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat5.id,
+    user_id: [laura.id, jonathan.id].sample
+  )
+end
+
+5.times do
+  Message.create!(
+    content: Faker::Movies::StarWars.quote,
+    chatroom_id: chat6.id,
+    user_id: [tsunami.id, jonathan.id].sample
+  )
+end
+
+p "Created real chatrooms and messages"

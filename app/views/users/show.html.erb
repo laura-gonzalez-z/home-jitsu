@@ -1,13 +1,35 @@
 <div>
-  <h1>You're connected to the user show page!</h1>
-  <% if @partner.nil? %>
-    <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
-  <% elsif @partner.status == "pending" && @partner.requestee_id == current_user.id%>
-    <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "text-decoration-none"}   %> | <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "text-decoration-none"}  %>
-  <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
+  <h2><%=@user.first_name%> <%=@user.last_name%></h2>
+  <p>Height: <%=@user.height%>cm</p>
+  <p>Weight: <%=@user.weight%>kg</p>
+  <p>Gender: <%=@user.gender%></p>
+  <% if @user.belt != "None" %>
+    <p>a <%=@user.belt%> belt with <%=@user.years_of_experience%> years of experience!</p>
+  <% else %>
+    <p>Years of experience: New to BJJ</p>
+  <% end %>
+
+  <p><%= link_to "See reviews", user_reviews_path(@user), class: "text-primary" %></p>
+
+  <p><%= @user.description %></p>
+
+  <% unless @user.id == current_user.id %>
+    <% if @single_chatroom %>
+      <%= link_to "Message", chatroom_path(@single_chatroom), class: "btn btn-primary" %>
+    <% else %>
+      <%= button_to 'Message', {:controller => "chatrooms", :action => "create", :name => @chatroom_name} , {:method=>:post, class: "btn btn-primary"}  %>
+    <% end %>
+    <% if @partner.nil? %>
+      <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
+    <% elsif @partner.status == "pending" && @partner.requestee_id == current_user.id%>
+      <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "btn btn-secondary"}  %>
+      <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "btn btn-primary"} %>
+    <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
       <%= link_to "Cancel Request", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
-  <% elsif @partner.status == "accepted" %>
-      <%= link_to "Not my partner anymore.", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+    <% elsif @partner.status == "accepted" %>
+      <%= link_to "Remove partner", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+      <%= link_to "Add review", new_user_review_path(@user), class: "btn btn-primary" %>
+    <% end %>
   <% end %>
   <h3>Meet <%=@user.first_name%></h3>
   <% if @user.gender == "Male" %>
