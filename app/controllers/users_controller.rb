@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   def show
     authorize @user
     set_partner
+    @chatroom_name = get_name(@user, current_user)
+    @single_chatroom = Chatroom.where(name: @chatroom_name).first
   end
 
   def edit
@@ -36,5 +38,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :weight, :height, :belt,
                                  :years_of_experience, :address, :description, :gender, :photo)
+  end
+
+  def get_name(user1, user2)
+    user = [user1.id, user2.id].sort
+    "private_#{user[0]}_#{user[1]}_"
   end
 end

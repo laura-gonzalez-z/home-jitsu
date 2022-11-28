@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     @users = User.all
     @review = policy_scope(Review)
     @reviews_all = Review.all
-    @reviews = @reviews_all.select { |review| review.user_id == params[:user_id].to_i }
+    @reviews = @reviews_all.select { |review| review.user_id == @user.id.to_i }
   end
 
   def new
