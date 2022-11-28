@@ -14,7 +14,7 @@ class ChatroomsController < ApplicationController
 
   def my_messages
     # TODO
-    @chatrooms = Chatroom.where("name LIKE ?", "%_#{current_user.id}_%")
+    @chatrooms = Chatroom.where("name LIKE ?", "%_#{current_user.id}_%").includes(:messages).order('messages.created_at DESC')
     authorize @chatrooms
   end
 

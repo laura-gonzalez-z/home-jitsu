@@ -18,20 +18,7 @@ h3, p {
 }
 small, .small {
   color: $dark-blue;
+  display: block;
   font-size: 12px;
   line-height: 16px;
-}
-.component-container {
-  margin: 0 -15px;
-}
-.form-box {
-  padding: 20px 15px;
-  margin-bottom: 10px;
-}
-.card-box {
-  color: inherit;
-  display: block;
-  padding: 15px;
-  margin-bottom: 10px;
-  text-decoration: none;
 }
