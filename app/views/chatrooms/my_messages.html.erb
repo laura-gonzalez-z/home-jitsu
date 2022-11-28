@@ -1,8 +1,8 @@
 <h1>Messages</h1>
 <div class="component-container">
   <% @chatrooms.each do |chat| %>
-    <div class="chat-box">
-      <%= chat.name %>
-    </div>
+    <%= link_to chatroom_path(chat), :action => 'go', class: "card-box bg-white" do %>
+      <%= chat.name  %>
+    <% end %>
   <% end %>
 </div>
