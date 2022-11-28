@@ -41,7 +41,7 @@
     <div class="h-100">
       <div class="list-group list-group-flush h-100">
         <%= link_to "My profile", user_path(current_user), class: "list-group-item list-group-item-action py-3" %>
-        <%= link_to "Edit account", edit_user_path(current_user), class: "list-group-item list-group-item-action py-3" %>
+        <%= link_to "Edit account", edit_user_registration_path, class: "list-group-item list-group-item-action py-3" %>
         <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "list-group-item list-group-item-action mt-auto border-top py-3" %>
       </div>
     </div>
