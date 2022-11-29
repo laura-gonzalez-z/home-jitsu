@@ -40,6 +40,9 @@
         <%= f.input :years_of_experience,
                     required: false,
                     input_html: { autocomplete: "years_of_experience" } %>
+        <%= f.input :training_style, collection: User::TRAINING_STYLES,
+                    required: true,
+                    input_html: { autocomplete: "training_style" } %>
         <%= f.input :description,
                     required: false,
                     input_html: { autocomplete: "description" } %>

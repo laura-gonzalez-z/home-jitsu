@@ -1,35 +1,58 @@
 <%= link_to "Back", users_path, class: "btn btn-secondary" %>
-<div>
-  <h2><%=@user.first_name%> <%=@user.last_name%></h2>
-  <p>Height: <%=@user.height%>cm</p>
-  <p>Weight: <%=@user.weight%>kg</p>
-  <p>Gender: <%=@user.gender%></p>
-  <% if @user.belt != "None" %>
-    <p>a <%=@user.belt%> belt with <%=@user.years_of_experience%> years of experience!</p>
-  <% else %>
-    <p>Years of experience: New to BJJ</p>
-  <% end %>
-
-  <p><%= link_to "See reviews", user_reviews_path(@user), class: "text-primary" %></p>
-
-  <p><%= @user.description %></p>
-
-  <% unless @user.id == current_user.id %>
-    <% if @single_chatroom %>
-      <%= link_to "Message", chatroom_path(@single_chatroom), class: "btn btn-primary" %>
+<div class="form-box mb-0">
+  <div class="text-center">
+    <% if @user.photo.key %>
+      <%= cl_image_tag @user.photo.key, crop: :thumb, class: "rounded-circle avatar-large" %>
     <% else %>
-      <%= button_to 'Message', {:controller => "chatrooms", :action => "create", :name => @chatroom_name} , {:method=>:post, class: "btn btn-primary"}  %>
+      <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar-large" %>
     <% end %>
-    <% if @partner.nil? %>
-      <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
-    <% elsif @partner.status == "pending" && @partner.requestee_id == current_user.id%>
-      <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "btn btn-secondary"}  %>
-      <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "btn btn-primary"} %>
-    <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
-      <%= link_to "Cancel Request", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
-    <% elsif @partner.status == "accepted" %>
-      <%= link_to "Remove partner", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
-      <%= link_to "Add review", new_user_review_path(@user), class: "btn btn-primary" %>
+  </div>
+</div>
+<div class="component-container">
+  <div class="form-box bg-white">
+    <div class="d-flex justify-content-between mb-3">
+      <h2 class="m-0"><%=@user.first_name%> <%=@user.last_name%></h2>
+      <div class="rating">
+        STARS<br>
+        <%= link_to  user_reviews_path(@user), class: "text-primary" do %>
+          <%= pluralize( @user.reviews.count, 'review' ) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="user-info">
+      <% if @user.belt != "None" %>
+        <p><strong>Belt:</strong> <%=@user.belt%></p>
+      <% end %>
+      <% if @user.years_of_experience > 0 %>
+        <p><strong>Yrs of exp.:</strong> <%=@user.years_of_experience%></p>
+      <% else %>
+        <p><strong>Yrs of exp.:</strong> I'm new</p>
+      <% end %>
+      <p><strong>Weight:</strong> <%=@user.weight%>kg</p>
+      <p><strong>Height:</strong> <%=@user.height%>cm</p>
+      <p><strong>Gender:</strong> <%=@user.gender%></p>
+      <p><strong>Style:</strong> <%=@user.training_style%></p>
+    </div>
+
+    <p class="text-secondary mt-3"><%= @user.description %></p>
+
+    <% unless @user.id == current_user.id %>
+      <% if @single_chatroom %>
+        <%= link_to "Message", chatroom_path(@single_chatroom), class: "btn btn-primary" %>
+      <% else %>
+        <%= button_to 'Message', {:controller => "chatrooms", :action => "create", :name => @chatroom_name} , {:method=>:post, class: "btn btn-primary"}  %>
+      <% end %>
+      <% if @partner.nil? %>
+        <%= button_to 'Add Partner', {:controller => "partners", :action => "create", :requester_id => current_user.id, :requestee_id=> @user.id} , {:method=>:post, class: "btn btn-primary"}  %>
+      <% elsif @partner.status == "pending" && @partner.requestee_id == current_user.id%>
+        <%= button_to "Reject",  {:controller => "partners", :action => "reject", :requestee_id => current_user.id, :requester_id=> @user.id  },  {:method=>:patch, class: "btn btn-secondary"}  %>
+        <%= button_to "Accept",  {:controller => "partners", :action => "accept", :requestee_id => current_user.id, :requester_id=> @user.id },  {:method=>:patch, class: "btn btn-primary"} %>
+      <% elsif @partner.status == "pending" && @partner.requester_id == current_user.id%>
+        <%= link_to "Cancel Request", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+      <% elsif @partner.status == "accepted" %>
+        <%= link_to "Remove partner", partner_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+        <%= link_to "Add review", new_user_review_path(@user), class: "btn btn-primary" %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
