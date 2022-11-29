@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   BELTS = ["White", "Blue", "Purple", "Brown", "Black", "None"].freeze
   GENDERS = ["Male", "Female", "Other"].freeze
+  TRAINING_STYLES = ["Gi", "No-gi", "Both"].freeze
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -19,6 +20,8 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :gender, presence: true
   validates :gender, inclusion: { in: GENDERS }
+  validates :training_style, presence: true
+  validates :training_style, inclusion: { in: TRAINING_STYLES }
 
   has_many :written_reviews, class_name: 'Review', foreign_key: 'writer_id'
   has_many :reviews, class_name: 'Review', foreign_key: 'user_id'

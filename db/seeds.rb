@@ -24,7 +24,8 @@ ricky = User.create!(
   gender: "Male",
   description: "Martial Arts Prodigy",
   years_of_experience: 0,
-  belt: "None"
+  belt: "None",
+  training_style: "No-gi"
 )
 
 laura = User.create!(
@@ -38,7 +39,8 @@ laura = User.create!(
   gender: "Female",
   belt: "Purple",
   years_of_experience: 6,
-  description: "BJJ expert that will strangle you"
+  description: "BJJ expert that will strangle you",
+  training_style: "Both"
 )
 
 tsunami = User.create!(
@@ -52,7 +54,8 @@ tsunami = User.create!(
   gender: "Male",
   description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
   years_of_experience: 0,
-  belt: "None"
+  belt: "None",
+  training_style: "Gi"
 )
 
 jonathan = User.create!(
@@ -66,7 +69,8 @@ jonathan = User.create!(
   gender: "Male",
   belt: "Black",
   years_of_experience: 10,
-  description: "The only way you'll make it out is in a body bag."
+  description: "The only way you'll make it out is in a body bag.",
+  training_style: "Both"
 )
 
 ADDRESS.each do |address|
@@ -81,6 +85,7 @@ ADDRESS.each do |address|
     height: (100..250).to_a.sample,
     gender: User::GENDERS.sample,
     years_of_experience: (0..20).to_a.sample,
+    training_style: User::TRAINING_STYLES.sample,
     email: "#{first_name}.#{last_name}@gmail.com",
     password: "123456"
   )

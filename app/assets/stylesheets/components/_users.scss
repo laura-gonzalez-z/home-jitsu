@@ -1,0 +1,8 @@
+.user-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  p {
+    color: $dark-blue;
+    margin-bottom: 10px;
+  }
+}
