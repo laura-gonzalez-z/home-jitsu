@@ -1,0 +1,25 @@
+.component-container {
+  margin: 0 -15px;
+  .flex-grow-1 {
+    max-width: 100%;
+    overflow: hidden;
+    small {
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.form-box {
+  padding: 20px 15px;
+  margin-bottom: 10px;
+}
+.card-box {
+  color: inherit;
+  display: block;
+  padding: 15px;
+  margin-bottom: 10px;
+  text-decoration: none;
+
+}
