@@ -1,0 +1,23 @@
+.rating {
+  text-align: center;
+  text-decoration: none;
+  a {
+    font-weight: bold;
+  }
+}
+.stars-container {
+  font-size: 14px;
+  position: relative;
+  > div {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .stars-inactive {
+    color: $light-grey;
+  }
+  .stars-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

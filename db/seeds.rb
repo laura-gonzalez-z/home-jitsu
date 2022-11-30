@@ -1,4 +1,5 @@
 require "faker"
+require "open-uri"
 
 ADDRESS = ["2054 Claremont", "4300 de Maisonneuve", "5120 Earnscliffe", "2121 St-Mathieu",
            "2255 St-Mathieu", "2125 St-Marc", "7205 d'Iberville", "2100 St-Marc", "5051 Clanranald",
@@ -12,8 +13,7 @@ p "Destroying all your users..."
 User.destroy_all
 p "Creating new users..."
 
-
-ricky = User.create!(
+ricky = User.new(
   email: "ricky.tran@gmail.com",
   password: "123456",
   first_name: "Ricky",
@@ -27,8 +27,11 @@ ricky = User.create!(
   belt: "None",
   training_style: "No-gi"
 )
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/ricky_fbqus7.jpg")
+ricky.photo.attach(io: file, filename: "jon.png", content_type: "image/png")
+ricky.save
 
-laura = User.create!(
+laura = User.new(
   email: "laura.gonzalez@gmail.com",
   password: "123456",
   first_name: "Laura",
@@ -42,8 +45,11 @@ laura = User.create!(
   description: "BJJ expert that will strangle you",
   training_style: "Both"
 )
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766489/laura-gonzalez_eggbxn.jpg")
+laura.photo.attach(io: file, filename: "jon.png", content_type: "image/png")
+laura.save
 
-tsunami = User.create!(
+tsunami = User.new(
   email: "tsunami.abi@gmail.com",
   password: "123456",
   first_name: "Touhami",
@@ -57,8 +63,11 @@ tsunami = User.create!(
   belt: "None",
   training_style: "Gi"
 )
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766492/touhami_fkztx4.jpg")
+tsunami.photo.attach(io: file, filename: "jon.png", content_type: "image/png")
+tsunami.save
 
-jonathan = User.create!(
+jonathan = User.new(
   email: "jonathan.troupe@gmail.com",
   password: "123456",
   first_name: "Jonathan",
@@ -72,6 +81,9 @@ jonathan = User.create!(
   description: "The only way you'll make it out is in a body bag.",
   training_style: "Both"
 )
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766489/jon_uvwasx.jpg")
+jonathan.photo.attach(io: file, filename: "jon.png", content_type: "image/png")
+jonathan.save
 
 ADDRESS.each do |address|
   first_name = Faker::Name.first_name
@@ -100,16 +112,24 @@ Review.destroy_all
 Partner.destroy_all
 p "Creating new events, guests, partner requests and reviews"
 
+park1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/park1_bxndwu.jpg"
+park2 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/park2_b7fgrz.jpg"
+gym1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/gym1_prtutu.jpg"
+dojo1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/dojo1_q7f5xv.jpg"
+
+event_photos = [park1, park2, gym1, dojo1]
 
 5.times do
-  Event.create!(
+  event = Event.new(
     address: ADDRESS.sample,
     date: DateTime.now,
     status: "Open",
     host: jonathan,
     description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city,
+    title: Faker::Games::DnD.city
   )
+  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
+  event.save
   Guest.create!(
     event_id: Event.last.id,
     guest_id: [laura.id, tsunami.id, ricky.id].sample,
@@ -132,14 +152,16 @@ p "Creating new events, guests, partner requests and reviews"
 end
 
 5.times do
-  Event.create!(
+  event = Event.new(
     address: ADDRESS.sample,
     date: DateTime.now,
     status: "Open",
     host: ricky,
     description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city,
+    title: Faker::Games::DnD.city
   )
+  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
+  event.save
   Guest.create!(
     event_id: Event.last.id,
     guest_id: [laura.id, tsunami.id, jonathan.id].sample,
@@ -162,14 +184,16 @@ end
 end
 
 5.times do
-  Event.create!(
+  event = Event.new(
     address: ADDRESS.sample,
     date: DateTime.now,
     status: "Open",
     host: laura,
     description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city,
+    title: Faker::Games::DnD.city
   )
+  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
+  event.save
   Guest.create!(
     event_id: Event.last.id,
     guest_id: [jonathan.id, tsunami.id, ricky.id].sample,
@@ -192,14 +216,16 @@ end
 end
 
 5.times do
-  Event.create!(
+  event = Event.new(
     address: ADDRESS.sample,
     date: DateTime.now,
     status: "Open",
     host: tsunami,
     description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city,
+    title: Faker::Games::DnD.city
   )
+  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
+  event.save
   Guest.create!(
     event_id: Event.last.id,
     guest_id: [laura.id, jonathan.id, ricky.id].sample,
