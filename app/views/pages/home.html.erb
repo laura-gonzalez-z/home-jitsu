@@ -1,7 +1,33 @@
 <% if user_signed_in? %>
-  <h1><%= link_to "Users", users_path, class: "btn btn-primary" %></h1>
-  <h1><%= link_to "Events", events_path, class: "btn btn-primary" %></h1>
+  <div class="component-container">
+    <div class="banner" style="background-image: linear-gradient(rgba(54,77,94,0.5),rgba(54,77,94,0.5)), url(<%= asset_path "jiu-jitsu-bg.jpg" %>);">
+      <h1 class="mb-3">Welcome back, Laura!</h1>
+      <div class="d-flex ">
+        <% unless @average_rating.empty? %>
+          <%= render "shared/stars", average_rating: @average_rating %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-box">
+      <div class="row">
+        <div class="col">
+          <%= link_to "Find a partner", users_path, class: "btn btn-primary d-block w-100" %>
+        </div>
+        <div class="col">
+          <%= link_to "Find an event", events_path, class: "btn btn-primary d-block w-100" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% else %>
   <p><%= link_to "Login", new_user_session_path, class: "btn btn-primary" %></p>
   <p><%= link_to "Sign Up",new_user_registration_path, class: "btn btn-primary" %></p>
 <% end %>
+<h2>Top partners</h2>
+<div class="component-container">
+  users logic
+</div>
+<h2>Upcoming events</h2>
+<div class="component-container">
+  events logic
+</div>
