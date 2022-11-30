@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   def show
     authorize @user
     set_partner
-    @average_rating = []
     @chatroom_name = get_name(@user, current_user)
     @single_chatroom = Chatroom.where(name: @chatroom_name).first
     if @user.reviews.exists?

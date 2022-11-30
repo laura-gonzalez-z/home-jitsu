@@ -3,8 +3,9 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in?
-      @average_rating = []
-      @average_rating = current_user.reviews.average(:rating).round(2) if current_user.reviews.exists?
+      if current_user.reviews.exists?
+        @average_rating = current_user.reviews.average(:rating).round(2)
+      end
     else
 
     end
