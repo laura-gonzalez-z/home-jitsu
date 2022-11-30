@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     set_partner
     @chatroom_name = get_name(@user, current_user)
     @single_chatroom = Chatroom.where(name: @chatroom_name).first
+    @average_rating = @user.reviews.average(:rating).round(2)
   end
 
   def edit
