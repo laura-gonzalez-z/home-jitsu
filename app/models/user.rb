@@ -43,5 +43,4 @@ class User < ApplicationRecord
     list.compact.uniq
   end
   has_many :messages
-  has_many :notifications, as: :recipient, dependent: :destroy
 end
