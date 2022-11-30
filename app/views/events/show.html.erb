@@ -8,10 +8,11 @@
 <% @join = true %>
 <% @guests.each do |guest| %>
   <% user = User.find(guest.guest_id) %>
+  <p><%= "#{user.first_name} #{user.last_name}" %></p>
   <% if user.id == current_user.id %>
     <% @join = false %>
+    <%= link_to "Decided not to show?", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary" %>
   <% end %>
-  <p><%= "#{user.first_name} #{user.last_name}" %></p>
 <% end %>
 
 <% if @event.host_id == current_user.id %>
