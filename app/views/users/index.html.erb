@@ -1,8 +1,18 @@
-<h1>You're connected to the user index page! Here are the users:</h1>
-<ul>
+<div class="component-container">
+  <div class="form-box bg-light-grey">
+    <%# TODO: Logic for search and advanced search %>
+    <%= form_with url: users_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control search-icon",
+        placeholder: "Find by name"
+      %>
+      <a href="#" class="purple-circle-button"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
+    <% end %>
+  </div>
   <% @users.each do |user| %>
     <% if user != current_user %>
-      <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user), class: "text-decoration-none"%></li>
+      <%= render "shared/user", user: user %>
     <% end %>
   <% end %>
-</ul>
+</div>

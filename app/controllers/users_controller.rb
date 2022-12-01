@@ -2,13 +2,17 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
 
   def index
-    @users = policy_scope(User)
+    if params[:query].present?
+      sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
+      @users = policy_scope(User).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @users = policy_scope(User)
+    end
   end
 
   def show
     authorize @user
     set_partner
-    @average_rating = []
     @chatroom_name = get_name(@user, current_user)
     @single_chatroom = Chatroom.where(name: @chatroom_name).first
     if @user.reviews.exists?

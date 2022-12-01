@@ -6,7 +6,7 @@
           <p><strong>Description: </strong><%= event.description %></p>
           <p><strong>Status: <%= event.status %></strong></p>
           <% if event.photo.key %>
-            <%= cl_image_tag event.photo.key, crop: :thumb %>
+            <%= cl_image_tag event.photo.key, crop: :thumb, class: "img-fluid" %>
           <% end %>
         </div>
       </div>
