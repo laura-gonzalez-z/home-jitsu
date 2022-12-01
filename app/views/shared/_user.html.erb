@@ -16,8 +16,15 @@
       </small>
     </div>
     <div>
-      rating<br>
-      <small>distance</small>
+      <% if user.reviews.exists? %>
+        <%= render "shared/stars", average_rating: user.reviews.average(:rating).round(2) %>
+      <% end %>
+      <% if user_signed_in? %>
+        <small class="text-end">
+          <%# TODO %>
+          <%= rand(1..10) %> Km
+        </small>
+      <% end %>
     </div>
   </div>
 <% end %>

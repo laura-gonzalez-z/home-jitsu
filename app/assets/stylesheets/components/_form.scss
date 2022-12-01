@@ -1,6 +1,35 @@
 legend ~ div.form-check:first-of-type {
   clear: left;
 }
+form.d-flex {
+  position: relative;
+}
 form.button_to {
   display: inline-block;
+}
+.form-control {
+  border: 1px solid $light-grey;
+  line-height: 20px;
+  padding: 9px 10px;
+}
+.form-control.search-icon {
+  padding-left: 30px;
+  background-image: asset-url('icons/search.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 15px;
+}
+.purple-circle-button {
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 10;
+  padding: 5px;
+  background: $light-purple;
+  border-radius: 15px;
+  line-height: 20px;
+}
+.bg-light-grey {
+  background: $light-grey;
 }

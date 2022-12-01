@@ -1,6 +1,6 @@
-<h1>Your partners</h1>
-<ul>
+<h1>My partners</h1>
+<div class="component-container">
   <% current_user.friends.each do |friend| %>
-    <li><%= link_to "#{friend.first_name} #{friend.last_name}", user_path(friend), class: "text-decoration-none"%></li>
+    <%= render "shared/user", user: friend %>
   <% end %>
-</ul>
+</div>

@@ -31,7 +31,9 @@
 <h2>Top partners</h2>
 <div class="component-container">
   <% @users.each do |user| %>
-    <%= render "shared/user", user: user %>
+    <% if user != current_user %>
+      <%= render "shared/user", user: user %>
+    <% end %>
   <% end %>
 </div>
 <h2>Upcoming events</h2>
