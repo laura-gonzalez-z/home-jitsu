@@ -38,5 +38,7 @@
 </div>
 <h2>Upcoming events</h2>
 <div class="component-container">
-  events logic
+  <% @sorted[0].each do |event| %>
+    <%= render "shared/event", event: event %>
+  <% end %>
 </div>

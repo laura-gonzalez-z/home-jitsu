@@ -1,7 +1,9 @@
 <%= simple_form_for(@event) do |f| %>
   <%= f.input :date, as: :date, html5: true %>
   <%= f.input :title %>
+  <%= f.input :address %>
   <%= f.input :description %>
   <%= f.input :status, collection: Event::STATUS %>
+  <%= f.input :photo, as: :file %>
   <%= f.submit %>
 <% end %>

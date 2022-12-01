@@ -31,3 +31,9 @@
   line-height: 20px;
   border: none;
 }
+.card-grid {
+  gap: 15px;
+  .text-end {
+    margin-top: 2px;
+  }
+}

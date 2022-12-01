@@ -1,5 +1,6 @@
 .avatar {
   width: 40px;
+  min-width: 40px;
   border-radius: 50%;
   height: 40px;
   object-fit: cover;
@@ -12,6 +13,7 @@
 }
 .avatar-bordered {
   width: 40px;
+  min-width: 40px;
   border-radius: 50%;
   height: 40px;
   object-fit: cover;
@@ -28,5 +30,6 @@
 }
 .navbar img.avatar {
   width: 30px;
+  min-width: 30px;
   height: 30px;
 }

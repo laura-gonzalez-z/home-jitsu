@@ -4,7 +4,7 @@ last_message = chat.messages.first
 if last_message
 %>
   <%= link_to chatroom_path(chat), :action => 'go', class: "card-box bg-white" do %>
-    <div class="d-flex message-grid">
+    <div class="d-flex card-grid">
       <%
       #Find the other user
       chat_ids = chat.name.scan(/\d+/).map(&:to_i) - [current_user.id]
