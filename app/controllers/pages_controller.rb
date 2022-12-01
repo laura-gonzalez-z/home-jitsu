@@ -6,8 +6,15 @@ class PagesController < ApplicationController
       if current_user.reviews.exists?
         @average_rating = current_user.reviews.average(:rating).round(2)
       end
+      @users = User.joins(:reviews)
+      .group('users.id')
+      .order('avg(reviews.rating) desc')
+      .limit(4)
     else
-
+      @users = User.joins(:reviews)
+      .group('users.id')
+      .order('avg(reviews.rating) desc')
+      .limit(2)
     end
   end
 end

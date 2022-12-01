@@ -20,12 +20,19 @@
     </div>
   </div>
 <% else %>
-  <p><%= link_to "Login", new_user_session_path, class: "btn btn-primary" %></p>
-  <p><%= link_to "Sign Up",new_user_registration_path, class: "btn btn-primary" %></p>
+  <div class="component-container">
+    <div class="banner" style="background-image: linear-gradient(rgba(54,77,94,0.8),rgba(54,77,94,0.9)), url(<%= asset_path "jiu-jitsu-bg.jpg" %>);">
+      <h1 class="mb-2">Find a partner and start rolling!</h1>
+      <p class="mb-3 small">Connect with Brazilian Jiu-Jitsu practitioners near you.</p>
+      <%= link_to "Get started", new_user_session_path, class: "btn btn-primary d-inline-block" %>
+    </div>
+  </div>
 <% end %>
 <h2>Top partners</h2>
 <div class="component-container">
-  users logic
+  <% @users.each do |user| %>
+    <%= render "shared/user", user: user %>
+  <% end %>
 </div>
 <h2>Upcoming events</h2>
 <div class="component-container">
