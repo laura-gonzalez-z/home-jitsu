@@ -16,5 +16,8 @@ class PagesController < ApplicationController
       .order('avg(reviews.rating) desc')
       .limit(2)
     end
+    @events = Event.all
+    upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
+    @sorted = [[*upcoming], [*past.reverse]]
   end
 end

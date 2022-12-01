@@ -1,14 +1,23 @@
-<div class="container py-4">
-    <div class="">
-      <div class="">
-        <div>
-          <p><strong>Title:</strong><%= event.title %></p>
-          <p><strong>Description: </strong><%= event.description %></p>
-          <p><strong>Status: <%= event.status %></strong></p>
-          <% if event.photo.key %>
-            <%= cl_image_tag event.photo.key, crop: :thumb, class: "img-fluid" %>
-          <% end %>
-        </div>
+<%= link_to event_path(event), :action => 'go', class: "card-box bg-white" do %>
+  <div class="d-flex flex-column event-grid">
+    <div class="d-flex card-grid justify-content-between">
+      <div>
+        <div class="date"><small><%= event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
+        <p class="m-0"><strong><%= event.title %></strong></p>
+      </div>
+      <div>
+        <% if event.photo.key %>
+          <%= cl_image_tag event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
+        <% end %>
       </div>
     </div>
-</div>
+    <div class="address">
+      <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= event.address %></small>
+    </div>
+    <% if event.guests.count > 0 %>
+      <div class="attendees">
+        <small class="text-primary"><%= event.guests.count %> attendees</small>
+      </div>
+    <% end %>
+  </div>
+<% end %>

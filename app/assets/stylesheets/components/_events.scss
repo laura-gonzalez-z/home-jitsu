@@ -1,0 +1,36 @@
+.event-grid {
+  gap: 10;
+  .address, .attendees {
+    padding-top: 10px;
+  }
+  .card-grid {
+    .img-event {
+      width: 125px;
+      height: 50px;
+      object-fit: cover;
+    }
+    .date {
+      margin-bottom: 10px;
+      margin-left: -15px;
+      padding: 2px 15px;
+      background: $main-purple;
+      border-radius: 0 4px 4px 0;
+      display: inline-block;
+      small {
+        color: $white;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.past-events {
+  .attendees, .img-event {
+    display: none;
+  }
+  .card-grid .date {
+    background: $deep-purple;
+  }
+}
+.mapboxgl-map {
+  margin-bottom: 10px;
+}

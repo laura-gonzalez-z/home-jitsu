@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
   def index
     @event = policy_scope(Event)
+    # TODO: Just filter upcoming events
     @events = Event.all
     @markers = @events.geocoded.map do |event|
       {
@@ -29,6 +30,8 @@ class EventsController < ApplicationController
   def my_events
     authorize @user
     @events = Event.select { |event| event.host_id == current_user.id }
+    upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
+    @sorted = [[*upcoming], [*past.reverse]]
   end
 
   def new
@@ -78,6 +81,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:date, :title, :description, :photo)
+    params.require(:event).permit(:date, :title, :address, :description, :photo)
   end
 end
