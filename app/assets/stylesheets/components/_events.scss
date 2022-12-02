@@ -34,3 +34,22 @@
 .mapboxgl-map {
   margin-bottom: 10px;
 }
+.event-detail {
+  .banner {
+    position: relative;
+    padding-top: 60px;
+  }
+  .date {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    padding: 2px 15px;
+    background: $main-purple;
+    border-radius: 4px 0 0 4px;
+    display: inline-block;
+    small {
+      color: $white;
+      text-transform: uppercase;
+    }
+  }
+}
