@@ -1,5 +1,5 @@
 <%= simple_form_for(@event) do |f| %>
-  <%= f.input :date, as: :date, html5: true %>
+  <%= f.input :date, as: :datetime, html5: true %>
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :status, collection: Event::STATUS %>
