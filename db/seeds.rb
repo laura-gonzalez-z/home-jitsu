@@ -100,7 +100,7 @@ jimbo = User.new(
   address: "4875 Clearview",
   gender: "Male",
   belt: "Blue",
-  years_of_experience: 10,
+  years_of_experience: 4,
   description: "I love BJJ, want to share my knowledge and learn new things!",
   training_style: "Both"
 )
@@ -207,6 +207,64 @@ file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669941600/T
 tiffany.photo.attach(io: file, filename: "jim.png", content_type: "image/png")
 tiffany.save
 
+justin = User.new(
+  email: "justin.smith@gmail.com",
+  password: "123456",
+  first_name: "Justin",
+  last_name: "Thyme",
+  weight: 75,
+  height: 192,
+  address: ADDRESS.sample,
+  gender: "Male",
+  belt: "Black",
+  years_of_experience: 15,
+  description: "I lost my hair because of a prank but it made me into a strong BJJ practitioner because your hands will
+                slip on my head and I can use it as a tool to escape any submission.",
+  training_style: "Both"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669944330/Justin_Thime_p8jzw1.png")
+justin.photo.attach(io: file, filename: "justin.png", content_type: "image/png")
+justin.save
+
+harry = User.new(
+  email: "harry.smith@gmail.com",
+  password: "123456",
+  first_name: "Harry",
+  last_name: "Sacht",
+  weight: 78,
+  height: 185,
+  address: ADDRESS.sample,
+  gender: "Male",
+  belt: "Brown",
+  years_of_experience: 6,
+  description: "Keep an eye on my shoulders, not my hands.",
+  training_style: "Both"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669944330/Harry_Sacht_ml0qbg.png")
+harry.photo.attach(io: file, filename: "harry.png", content_type: "image/png")
+harry.save
+
+letty = User.new(
+  email: "letty.smith@gmail.com",
+  password: "123456",
+  first_name: "Letty",
+  last_name: "Toretto",
+  weight: 68,
+  height: 152,
+  address: ADDRESS.sample,
+  gender: "Female",
+  belt: "Blue",
+  years_of_experience: 3,
+  description: "I've taken down 10 people in a row, and you're next.",
+  training_style: "Both"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669944330/Letty_Toretto_vfcbya.png")
+letty.photo.attach(io: file, filename: "letty.png", content_type: "image/png")
+letty.save
+
 p "Users created successfully."
 p "Clearing out events, guests, partner requests and reviews"
 Event.destroy_all
@@ -278,9 +336,30 @@ Review.create!(
   rating: 2
 )
 
+Review.create!(
+  content: REVIEW_CONTENT.sample,
+  user_id: justin.id,
+  writer_id: ricky.id,
+  rating: 2
+)
+
+Review.create!(
+  content: REVIEW_CONTENT.sample,
+  user_id: harry.id,
+  writer_id: ricky.id,
+  rating: 2
+)
+
+Review.create!(
+  content: REVIEW_CONTENT.sample,
+  user_id: letty.id,
+  writer_id: ricky.id,
+  rating: 2
+)
+
 event1 = Event.new(
   address: "5160 Gatineau",
-  date: DateTime.now,
+  date: "Sun, 28 Dec 2022 20:00:00.000000000 EST -05:00",
   status: "Open",
   host: tsunami,
   description: "Bring your mat, I destroyed mine with the power of my suplex.",
@@ -293,7 +372,7 @@ event1.save
 
 event2 = Event.new(
   address: ricky.address,
-  date: DateTime.now,
+  date: "Sun, 18 Dec 2022 16:00:00.000000000 EST -05:00",
   status: "Open",
   host: ricky,
   description: "Let's wrestle like it's the 70's baby!",
