@@ -35,12 +35,7 @@ class User < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   def distance_to(geolocation)
-    d = Geocoder::Calculations.distance_between(geolocation, [latitude, longitude])
-    pp geolocation
-    pp latitude
-    pp longitude
-    pp d
-    return d
+    Geocoder::Calculations.distance_between(geolocation, [latitude, longitude], options = {})
   end
 
   def partnerships

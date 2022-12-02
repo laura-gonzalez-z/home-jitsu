@@ -3,7 +3,7 @@
   <% @users.each do |user| %>
     <% if user != current_user %>
       <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user), class: "text-decoration-none"%></li>
-      <li><%="#{user.distance_to([current_user.latitude, current_user.longitude])}" %></li>
+      <%= "#{user.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km
     <% end %>
   <% end %>
 </ul>
