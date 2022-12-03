@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
         @chatroom,
         render_to_string(partial: "message", locals: {message: @message})
       )
+      notify_recipient
       head :ok
     else
       render "chatrooms/show", status: :unprocessable_entity
@@ -20,5 +21,15 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content)
+  end
+
+  def notify_recipient
+    users_in_room = @message.joined_users
+    users_in_room.each do |user|
+      next if user.eql?(@message.user_id)
+
+      notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom)
+      notification.deliver_later(user)
+    end
   end
 end
