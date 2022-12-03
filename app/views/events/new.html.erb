@@ -1,8 +1,9 @@
 <%= simple_form_for(@event) do |f| %>
-  <%= f.input :date, as: :datetime, html5: true %>
-  <%= f.input :title %>
+  <p>Date </p>
+  <%= f.date_field :date, as: :datetime, html5: true, min: DateTime.now %>
+  <%= f.input :title, required: false %>
   <%= f.input :address %>
-  <%= f.input :description %>
-  <%= f.input :photo, as: :file %>
+  <%= f.input :description, required: false %>
+  <%= f.input :photo, as: :file, label: "Photo (optional)" %>
   <%= f.submit %>
 <% end %>
