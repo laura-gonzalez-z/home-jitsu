@@ -13,7 +13,7 @@
     <div class="d-flex justify-content-between mb-3">
       <h2 class="m-0"><%=@user.first_name%> <%=@user.last_name%></h2>
       <div class="rating">
-        <% unless @average_rating.empty? %>
+        <% if @user.reviews.exists? %>
           <%= render "shared/stars", average_rating: @average_rating %>
         <% end %>
         <%= link_to  user_reviews_path(@user), class: "text-primary" do %>
@@ -41,6 +41,7 @@
           Gi / No-gi
         <% end %>
       </p>
+      <%# TODO: Add distance %>
     </div>
 
     <p class="text-secondary mt-3"><%= @user.description %></p>

@@ -1,5 +1,17 @@
-<div class="container py-4"><%= link_to "Add an event", new_event_path, class: "btn btn-primary" %></div>
-<% @events.each do |event| %>
-  <%= render "shared/event", event: event %>
-  <div class="container py-4"><%= link_to "Check out this event", event_path(event), class: "btn btn-primary" %></div>
+<%= link_to "Create an event", new_event_path, class: "btn btn-primary d-block my-3" %>
+<% if !@sorted[0].empty? %>
+  <h2>Active events</h2>
+  <div class="component-container">
+    <% @sorted[0].each do |event| %>
+      <%= render "shared/event", event: event %>
+    <% end %>
+  </div>
+<% end %>
+<% if !@sorted[1].empty? %>
+  <h2>Past events</h2>
+  <div class="component-container past-events">
+    <% @sorted[1].each do |event| %>
+      <%= render "shared/event", event: event %>
+    <% end %>
+  </div>
 <% end %>

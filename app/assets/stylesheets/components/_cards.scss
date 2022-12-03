@@ -23,3 +23,17 @@
   text-decoration: none;
 
 }
+.button-block {
+  gap: 10px;
+}
+.btn.d-block, .btn.d-inline-block {
+  padding: 10px 15px;
+  line-height: 20px;
+  border: none;
+}
+.card-grid {
+  gap: 15px;
+  .text-end {
+    margin-top: 2px;
+  }
+}
