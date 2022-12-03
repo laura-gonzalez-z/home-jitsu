@@ -18,7 +18,7 @@ def get_mtl_addresses_from_json(quantity = nil, format = 'string')
   end
 end
 
-ADDRESS = get_mtl_addresses_from_json(100)
+ADDRESS = get_mtl_addresses_from_json(50)
 pp ADDRESS.first
 
 
@@ -76,7 +76,7 @@ tsunami = User.new(
   last_name: "Abi",
   weight: 70,
   height: 175,
-  address: "5160 Gatineau",
+  address: "5333 Casgrain",
   gender: "Male",
   description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
   years_of_experience: 0,
