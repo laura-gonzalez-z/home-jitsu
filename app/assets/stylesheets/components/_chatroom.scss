@@ -9,17 +9,25 @@
     background: $white;
     height: 100%;
     margin: 0 -15px;
-    padding: 20px 15px;
+    padding: 20px 15px 10px;
     overflow: scroll;
   }
 
-  #new_message {
+  .add-message {
     background: $light-grey;
     margin: 0 -15px;
     padding: 10px 15px;
-
-    .form-group {
-      margin-bottom: 0;
+    .form-group, .message_content {
+      margin-bottom: 0!important;
+    }
+    .purple-circle-button {
+      border: none;
+      text-indent: -99999px;
+      width: 30px;
+      background-image: asset-url('icons/send.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px;
     }
   }
 }
