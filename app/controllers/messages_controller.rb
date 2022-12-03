@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     if @message.save
       ChatroomChannel.broadcast_to(
         @chatroom,
-        render_to_string(partial: "message", locals: {message: @message})
+        render_to_string(partial: "message", locals: { message: @message })
       )
       notify_recipient
       head :ok
@@ -26,10 +26,11 @@ class MessagesController < ApplicationController
   def notify_recipient
     users_in_room = @message.joined_users
     users_in_room.each do |user|
-      next if user.eql?(@message.user_id)
+      next if user.eql?(current_user)
 
       notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom)
-      notification.deliver_later(user)
+      pp notification
+      notification.deliver(user)
     end
   end
 end

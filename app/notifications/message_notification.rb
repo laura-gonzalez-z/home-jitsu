@@ -6,6 +6,7 @@
 class MessageNotification < Noticed::Base
   # Add your delivery methods
   #
+  deliver_by :database
   deliver_by :action_cable, channel: ChatroomChannel, stream: :custom_stream, format: :action_cable_data
   def custom_stream
     "user_#{recipient.id}"
