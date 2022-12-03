@@ -1,7 +1,9 @@
 class ChatroomsController < ApplicationController
   def show
     @chatroom = Chatroom.find(params[:id])
+    @messages = @chatroom.messages.order('messages.created_at asc')
     @message = Message.new
+    set_notifications_to_read
     authorize @chatroom
   end
 
@@ -21,5 +23,10 @@ class ChatroomsController < ApplicationController
 
   def chatroom_params
     params.permit(:name)
+  end
+
+  def set_notifications_to_read
+    notifications = @chatroom.notifications_as_chatroom.where(recipient: current_user).unread
+    notifications.update_all(read_at: Time.zone.now)
   end
 end

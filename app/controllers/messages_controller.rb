@@ -8,8 +8,9 @@ class MessagesController < ApplicationController
     if @message.save
       ChatroomChannel.broadcast_to(
         @chatroom,
-        render_to_string(partial: "message", locals: {message: @message})
+        render_to_string(partial: "message", locals: { message: @message })
       )
+      notify_recipient
       head :ok
     else
       render "chatrooms/show", status: :unprocessable_entity
@@ -20,5 +21,16 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content)
+  end
+
+  def notify_recipient
+    users_in_room = @message.joined_users
+    users_in_room.each do |user|
+      next if user.eql?(current_user)
+
+      notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom)
+      pp notification
+      notification.deliver(user)
+    end
   end
 end

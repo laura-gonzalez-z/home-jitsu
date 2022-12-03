@@ -68,13 +68,13 @@
   <% end %>
 
   <% if @event.host_id == current_user.id %>
-    <div class="d-flex button-block mt-3">
+    <div class="d-flex button-block my-3">
       <%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary d-block w-100" %>
       <%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary d-block w-100" %>
     </div>
   <% else %>
     <% if @join %>
-      <%= button_to "Join event", {:controller => "guests", :action => "create", :guest_id => current_user.id, :event_id => @event.id} , {:method=>:post, class: "btn btn-primary d-block w-100"} %>
+      <%= button_to "Join event", {:controller => "guests", :action => "create", :guest_id => current_user.id, :event_id => @event.id} , {:method=>:post, class: "btn btn-primary d-block w-100 my-3"} %>
     <% end %>
   <% end %>
 </div>
