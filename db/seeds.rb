@@ -61,7 +61,7 @@ tsunami = User.new(
   last_name: "Abi",
   weight: 70,
   height: 175,
-  address: "5160 Gatineau",
+  address: "5333 Casgrain",
   gender: "Male",
   description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
   years_of_experience: 0,
@@ -266,19 +266,9 @@ letty.photo.attach(io: file, filename: "letty.png", content_type: "image/png")
 letty.save
 
 p "Users created successfully."
-p "Clearing out events, guests, partner requests and reviews"
-Event.destroy_all
-Guest.destroy_all
+
+p "Clearing out reviews"
 Review.destroy_all
-Partner.destroy_all
-p "Creating new events, guests, partner requests and reviews"
-
-park1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/park1_bxndwu.jpg"
-park2 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/park2_b7fgrz.jpg"
-gym1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/gym1_prtutu.jpg"
-dojo1 = "https://res.cloudinary.com/dr82gggzf/image/upload/v1669766488/dojo1_q7f5xv.jpg"
-
-event_photos = [park1, park2, gym1, dojo1]
 
 Review.create!(
   content: "He is a great partner, very patient, I really felt like he wanted me to improve my game. Also... Great tips on kimuras!",
@@ -357,6 +347,12 @@ Review.create!(
   rating: 2
 )
 
+p "Created reviews"
+
+p "Clearing out events with attached guests too"
+Event.destroy_all
+Guest.destroy_all
+
 event1 = Event.new(
   address: "5160 Gatineau",
   date: "Sun, 28 Dec 2022 20:00:00.000000000 EST -05:00",
@@ -369,6 +365,12 @@ event1 = Event.new(
 file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669942865/Le_wargon_bootcamp_z2nuyf.png")
 event1.photo.attach(io: file, filename: "event1.png", content_type: "image/png")
 event1.save
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [jimbo.id, jonathan.id, ricky.id].sample,
+  status: Guest::STATUS.sample
+)
 
 event2 = Event.new(
   address: ricky.address,
@@ -383,28 +385,94 @@ file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669943298/D
 event2.photo.attach(io: file, filename: "event2.png", content_type: "image/png")
 event2.save
 
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [jimbo.id, tsunami.id, jonathan.id].sample,
+  status: Guest::STATUS.sample
+)
+
+event3 = Event.new(
+  address: jonathan.address,
+  date: "Sun, 25 Dec 2022 10:00:00.000000000 EST -05:00",
+  status: "Open",
+  host: jonathan,
+  description: "No time to lose, let's gooooo!",
+  title: "High octane training."
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670102565/event3_octagon_zmeias.png")
+event3.photo.attach(io: file, filename: "event3.png", content_type: "image/png")
+event3.save
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [tsunami.id, jimbo.id, ricky.id].sample,
+  status: Guest::STATUS.sample
+)
+
+event4 = Event.new(
+  address: jimbo.address,
+  date: "Tue, 3 Jan 2023 18:00:00.000000000 EST -05:00",
+  status: "Open",
+  host: jimbo,
+  description: "You'll never forget this, and you'll never mention it.",
+  title: "Underground spar experience"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670102563/event5_fight_club_kcigya.png")
+event4.photo.attach(io: file, filename: "event4.png", content_type: "image/png")
+event4.save
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [claire.id, hugh.id, kaylee.id].sample,
+  status: Guest::STATUS.sample
+)
+
+event5 = Event.new(
+  address: hugh.address,
+  date: "Sun, 1 Jan 2023 00:00:00.000000000 EST -05:00",
+  status: "Open",
+  host: hugh,
+  description: "Let's ring in the new years the right way.",
+  title: "New years!"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670102563/event4_dojo_aatbsm.png")
+event5.photo.attach(io: file, filename: "event5.png", content_type: "image/png")
+event5.save
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [claire.id, hugh.id, tiffany.id].sample,
+  status: Guest::STATUS.sample
+)
+
+event6 = Event.new(
+  address: kaylee.address,
+  date: "Wed, 15 Feb 2023 18:00:00.000000000 EST -05:00",
+  status: "Open",
+  host: kaylee,
+  description: "Doens't get more plain then this one",
+  title: "Let's practice"
+)
+
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670102563/event6_studio_aopjok.png")
+event6.photo.attach(io: file, filename: "event6.png", content_type: "image/png")
+event6.save
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: [claire.id, hugh.id, kaylee.id].sample,
+  status: Guest::STATUS.sample
+)
+
+p "Created events with 1 semi-random guest each"
+
+p "Destroying partner lists"
+Partner.destroy_all
+
 2.times do
-  event = Event.new(
-    address: ADDRESS.sample,
-    date: DateTime.now,
-    status: "Open",
-    host: jonathan,
-    description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city
-  )
-  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
-  event.save
-  Guest.create!(
-    event_id: Event.last.id,
-    guest_id: [laura.id, tsunami.id, ricky.id].sample,
-    status: Guest::STATUS.sample
-  )
-  Review.create!(
-    content: Faker::TvShows::AquaTeenHungerForce.quote,
-    user_id: jonathan.id,
-    writer_id: [laura.id, tsunami.id, ricky.id].sample,
-    rating: 4
-  )
   Partner.create!(
     requestee_id: jonathan.id,
     requester_id: User.all.ids.sample
@@ -416,27 +484,6 @@ event2.save
 end
 
 2.times do
-  event = Event.new(
-    address: ADDRESS.sample,
-    date: DateTime.now,
-    status: "Open",
-    host: ricky,
-    description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city
-  )
-  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
-  event.save
-  Guest.create!(
-    event_id: Event.last.id,
-    guest_id: [laura.id, tsunami.id, jonathan.id].sample,
-    status: Guest::STATUS.sample
-  )
-  Review.create!(
-    content: Faker::TvShows::AquaTeenHungerForce.quote,
-    user_id: ricky.id,
-    writer_id: [laura.id, tsunami.id, jonathan.id].sample,
-    rating: 4
-  )
   Partner.create!(
     requestee_id: ricky.id,
     requester_id: User.all.ids.sample
@@ -448,27 +495,6 @@ end
 end
 
 2.times do
-  event = Event.new(
-    address: ADDRESS.sample,
-    date: DateTime.now,
-    status: "Open",
-    host: laura,
-    description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city
-  )
-  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
-  event.save
-  Guest.create!(
-    event_id: Event.last.id,
-    guest_id: [jonathan.id, tsunami.id, ricky.id].sample,
-    status: Guest::STATUS.sample
-  )
-  Review.create!(
-    content: Faker::TvShows::AquaTeenHungerForce.quote,
-    user_id: laura.id,
-    writer_id: [ricky.id, tsunami.id, jonathan.id].sample,
-    rating: 4
-  )
   Partner.create!(
     requestee_id: laura.id,
     requester_id: User.all.ids.sample
@@ -480,27 +506,6 @@ end
 end
 
 2.times do
-  event = Event.new(
-    address: ADDRESS.sample,
-    date: DateTime.now,
-    status: "Open",
-    host: tsunami,
-    description: Faker::Quote.matz,
-    title: Faker::Games::DnD.city
-  )
-  event.photo.attach(io: URI.open(event_photos.sample), filename: "PhotoFor#{event.title}.png", content_type: "image/png")
-  event.save
-  Guest.create!(
-    event_id: Event.last.id,
-    guest_id: [laura.id, jonathan.id, ricky.id].sample,
-    status: Guest::STATUS.sample
-  )
-  Review.create!(
-    content: Faker::TvShows::AquaTeenHungerForce.quote,
-    user_id: tsunami.id,
-    writer_id: [laura.id, ricky.id, jonathan.id].sample,
-    rating: 4
-  )
   Partner.create!(
     requestee_id: tsunami.id,
     requester_id: User.all.ids.sample
@@ -511,7 +516,7 @@ end
   )
 end
 
-p "Created events, guests, partner requests and reviews for each user attached"
+p "Created partner lists for the four team members"
 
 p "Creating real chatrooms and messages"
 
