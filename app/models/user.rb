@@ -31,6 +31,13 @@ class User < ApplicationRecord
   has_many :events, class_name: 'Guest', foreign_key: 'guest_id'
   has_one_attached :photo
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
+  def distance_to(geolocation)
+    Geocoder::Calculations.distance_between(geolocation, [latitude, longitude])
+  end
+
   def partnerships
     requested_partners + partners
   end
