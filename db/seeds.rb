@@ -18,10 +18,6 @@ def get_mtl_addresses_from_json(quantity = nil, format = 'string')
   end
 end
 
-ADDRESS = get_mtl_addresses_from_json(50)
-pp ADDRESS.first
-
-
 REVIEW_CONTENT = ["Amazing person, very nice and gentle", "Great partner to learn from, patient but ruthless",
                   "Cannot ask for a better partner", "S.A.V.A.G.E.", "Showed up late but very good partner",
                   "Learned new techniques and some BJJ etiquette, very informative partner"].freeze
