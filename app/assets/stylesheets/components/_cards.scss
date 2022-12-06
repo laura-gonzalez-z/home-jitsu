@@ -36,4 +36,12 @@
   .text-end {
     margin-top: 2px;
   }
+  .purple-circle {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: $main-purple;
+    border-radius: 50%;
+    margin: 8px 0 0 auto;
+  }
 }
