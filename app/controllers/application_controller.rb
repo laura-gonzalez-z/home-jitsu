@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name weight height belt years_of_experience address description gender photo training_style])
   end
 
+  def set_notifications
+    notifications = Notification.where(recipient: current_user)
+    @unread = notifications.unread
+    @read = notifications.read
+  end
+
   private
 
   def skip_pundit?

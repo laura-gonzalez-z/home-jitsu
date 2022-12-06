@@ -24,6 +24,7 @@ if last_message
       </div>
       <div>
         <small class="text-nowrap"><%= last_message.created_at.strftime("%b %e") %></small>
+        <%= "You have a new message!" unless chat.notifications_as_chatroom.where(recipient: current_user, read_at: nil).empty? %>
       </div>
     </div>
   <% end %>
