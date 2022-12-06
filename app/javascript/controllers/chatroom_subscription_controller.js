@@ -4,7 +4,7 @@ import { createConsumer } from "@rails/actioncable"
 // Connects to data-controller="chatroom-subscription"
 export default class extends Controller {
   static values = { chatroomId: Number, currentUserId: Number }
-  static targets = ["messages"]
+  static targets = ["messages", "input"]
 
   connect() {
     this.channel = createConsumer().subscriptions.create(
@@ -15,6 +15,9 @@ export default class extends Controller {
     this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight);
   }
   resetForm(event) {
+    if (this.inputTarget.value) {
+      this.inputTarget.classList.remove("is-invalid");
+    };
     event.target.reset()
   }
   disconnect() {
@@ -42,8 +45,6 @@ export default class extends Controller {
 
     // Creating the whole message from the `data.message` String
     const messageElement = this.#buildMessageElement(currentUserIsSender, data.message)
-
-    console.log(this.messagesTarget);
 
     // Inserting the `message` in the DOM
     this.messagesTarget.insertAdjacentHTML("beforeend", messageElement)
