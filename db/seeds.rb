@@ -105,7 +105,7 @@ jimbo = User.new(
   training_style: "Both"
 )
 
-file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669936631/development/yhtjwc2g7mct4ugno86zidk4jrm3.jpg")
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670362468/jimbo_rv5b4c.jpg")
 jimbo.photo.attach(io: file, filename: "jim.png", content_type: "image/png")
 jimbo.save
 
