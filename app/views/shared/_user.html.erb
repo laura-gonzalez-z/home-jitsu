@@ -22,7 +22,7 @@
       <% if user_signed_in? %>
         <small class="text-end">
           <%# TODO %>
-          <%= rand(1..10) %> Km
+          <%="#{user.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km
         </small>
       <% end %>
     </div>

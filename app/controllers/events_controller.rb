@@ -5,7 +5,12 @@ class EventsController < ApplicationController
   def index
     @event = policy_scope(Event)
     # TODO: Just filter upcoming events
-    @events = Event.all
+    if params[:query].present?
+      sql_query = "address ILIKE :query"
+      @events = policy_scope(Event).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @events = policy_scope(Event)
+    end
     @markers = @events.geocoded.map do |event|
       {
         lat: event.latitude,

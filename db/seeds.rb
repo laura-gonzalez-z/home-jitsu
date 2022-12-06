@@ -1,11 +1,22 @@
 require "faker"
 require "open-uri"
 
-ADDRESS = ["2054 Claremont", "4300 de Maisonneuve", "5120 Earnscliffe", "2121 St-Mathieu",
-           "2255 St-Mathieu", "2125 St-Marc", "7205 d'Iberville", "2100 St-Marc", "5051 Clanranald",
-           "5015 Clanranald", "4454 Coolbrook", "5881 Monkland", "2250 Guy", "1680 Lincoln",
-           "6565 Kildare", "5755 Sir Walter Scott", "7460 Kingsley", "7461 Kingsley", "6950 Fielding",
-           "5501 Adalbert", "625 Milton", "3474 Hutchison", "3655 Papineau", "1111 Mistral", "1101 Rachel E"].freeze
+def get_mtl_addresses_from_json(quantity = nil, format = 'string')
+  require 'json'
+
+  filename = './mtl_addresses_complete.json'
+  path_to_file = File.join(File.dirname(__FILE__), filename)
+
+  error_message = "ERROR: cannot find #{filename}. Make sure it's in the same folder as seeds.rb"
+  raise error_message unless File.exist?(path_to_file)
+
+  addresses = JSON.parse(File.read(path_to_file))
+  return quantity ? addresses.sample(quantity) : addresses unless format == 'string'
+
+  addresses.map do |address|
+    "#{address['number']} #{address['street']}, #{address['city']}, #{address['place']}, #{address['country']}"
+  end
+end
 
 REVIEW_CONTENT = ["Amazing person, very nice and gentle", "Great partner to learn from, patient but ruthless",
                   "Cannot ask for a better partner", "S.A.V.A.G.E.", "Showed up late but very good partner",
@@ -105,7 +116,7 @@ jimbo = User.new(
   training_style: "Both"
 )
 
-file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669936631/development/yhtjwc2g7mct4ugno86zidk4jrm3.jpg")
+file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670362468/jimbo_rv5b4c.jpg")
 jimbo.photo.attach(io: file, filename: "jim.png", content_type: "image/png")
 jimbo.save
 

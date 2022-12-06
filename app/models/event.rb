@@ -13,4 +13,8 @@ class Event < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def distance_to(geolocation)
+    Geocoder::Calculations.distance_between(geolocation, [latitude, longitude])
+  end
 end
