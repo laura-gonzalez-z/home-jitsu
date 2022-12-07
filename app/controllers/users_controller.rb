@@ -52,4 +52,8 @@ class UsersController < ApplicationController
     user = [user1.id, user2.id].sort
     "private_#{user[0]}_#{user[1]}_"
   end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
+  end
 end

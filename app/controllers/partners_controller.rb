@@ -21,12 +21,14 @@ class PartnersController < ApplicationController
   def accept
     authorize @partner
     @partner.update(status: "accepted")
+    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
   def reject
     authorize @partner
     @partner.update(status: "rejected")
+    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
@@ -40,5 +42,9 @@ class PartnersController < ApplicationController
 
   def partner_params
     params.permit(:requestee_id, :requester_id)
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
   end
 end
