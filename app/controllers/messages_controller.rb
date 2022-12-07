@@ -31,7 +31,6 @@ class MessagesController < ApplicationController
       next if user.eql?(current_user)
 
       notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom)
-      pp notification
       notification.deliver(user)
     end
   end
