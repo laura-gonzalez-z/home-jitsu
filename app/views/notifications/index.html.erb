@@ -1,10 +1,10 @@
 <div class="container">
   <h1>Notification Center</h1>
   <% @notifications.each do |notification| %>
-    <% if notification.recipient == current_user %>
-    <li><%= pp notification.params %></li>
-    <% else %>
-    <p>Nothing new. Come back later!</p>
+    <% if notification.unread? %>
+      <% if notification.recipient == current_user || notification.params[:requester] %>
+      <li><%= pp notification.params %></li>
+      <% end %>
     <% end %>
   <% end %>
 </div>

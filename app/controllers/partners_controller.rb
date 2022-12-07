@@ -9,6 +9,7 @@ class PartnersController < ApplicationController
     @partner = Partner.new(partner_params)
     authorize @partner
     @partner.save
+    notify_recipient
     redirect_to user_path(:requestee_id)
   end
 
@@ -21,12 +22,14 @@ class PartnersController < ApplicationController
   def accept
     authorize @partner
     @partner.update(status: "accepted")
+    notify_requester
     redirect_to user_path(:requestee_id)
   end
 
   def reject
     authorize @partner
     @partner.update(status: "rejected")
+    notify_requester
     redirect_to user_path(:requestee_id)
   end
 
@@ -40,5 +43,19 @@ class PartnersController < ApplicationController
 
   def partner_params
     params.permit(:requestee_id, :requester_id)
+  end
+
+  def notify_recipient
+    recipient = User.find(@partner.requestee_id)
+    notification = PartnerNotification.with(recipient: @partner.requestee, status: @partner.status)
+    pp notification
+    notification.deliver(recipient)
+  end
+
+  def notify_requester
+    requester = User.find(@partner.requester_id)
+    notification = PartnerNotification.with(requester: @partner.requester, status: @partner.status)
+    pp notification
+    notification.deliver(requester)
   end
 end
