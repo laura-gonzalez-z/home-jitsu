@@ -50,7 +50,7 @@ class EventsController < ApplicationController
     @event.host = current_user
     @event.status = "Open"
     if @event.save
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       render :new, status: :unprocessable_entity
     end
