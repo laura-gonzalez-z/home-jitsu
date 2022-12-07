@@ -19,6 +19,7 @@ class ReviewsController < ApplicationController
     @review.user_id = @user.id
     authorize @review
     if @review.save
+      notify_recipient
       redirect_to user_path(@user)
     else
       render :new, :unprocessable_entity
@@ -33,5 +34,12 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:content, :rating)
+  end
+
+  def notify_recipient
+    recipient = User.find(@review.user_id)
+    notification = ReviewNotification.with(content: @review.content, rating: @review.rating)
+    pp notification
+    notification.deliver(recipient)
   end
 end
