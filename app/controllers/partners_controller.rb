@@ -9,7 +9,7 @@ class PartnersController < ApplicationController
     @partner = Partner.new(partner_params)
     authorize @partner
     @partner.save
-    notify_recipient
+    notify_recipient if @partner.status == "pending"
     redirect_to user_path(:requestee_id)
   end
 
@@ -55,7 +55,6 @@ class PartnersController < ApplicationController
   def notify_requester
     requester = User.find(@partner.requester_id)
     notification = PartnerNotification.with(requester: @partner.requester, status: @partner.status)
-    pp notification
     notification.deliver(requester)
   end
 end

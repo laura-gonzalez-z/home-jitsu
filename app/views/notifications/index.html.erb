@@ -2,9 +2,11 @@
   <h1>Notification Center</h1>
   <% @notifications.each do |notification| %>
     <% if notification.unread? %>
-      <% if notification.recipient == current_user || notification.params[:requester] %>
+      <% if notification.recipient == current_user || notification.params[:requester] == current_user %>
       <li><%= pp notification.params %></li>
       <% end %>
+    <% else %>
+    <p>Nothing new. Come back later!</p>
     <% end %>
   <% end %>
 </div>
