@@ -20,7 +20,6 @@ end
 
 ADDRESS = get_mtl_addresses_from_json(50)
 
-
 REVIEW_CONTENT = ["Amazing person, very nice and gentle", "Great partner to learn from, patient but ruthless",
                   "Cannot ask for a better partner", "S.A.V.A.G.E.", "Showed up late but very good partner",
                   "Learned new techniques and some BJJ etiquette, very informative partner"].freeze
@@ -39,7 +38,7 @@ ricky = User.new(
   last_name: "Tran",
   weight: 55,
   height: 173,
-  address: "418 Claremont",
+  address: ADDRESS.sample,
   gender: "Male",
   description: "Martial Arts Prodigy",
   years_of_experience: 0,
@@ -57,7 +56,7 @@ laura = User.new(
   last_name: "Gonzalez",
   weight: 55,
   height: 164,
-  address: "5333 Casgrain",
+  address: ADDRESS.sample,
   gender: "Female",
   belt: "Purple",
   years_of_experience: 6,
@@ -75,7 +74,7 @@ tsunami = User.new(
   last_name: "Abi",
   weight: 70,
   height: 175,
-  address: "5333 Casgrain",
+  address: ADDRESS.sample,
   gender: "Male",
   description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
   years_of_experience: 0,
@@ -93,7 +92,7 @@ jonathan = User.new(
   last_name: "Troupe",
   weight: 62,
   height: 180,
-  address: "4875 Dufferin",
+  address: ADDRESS.sample,
   gender: "Male",
   belt: "Black",
   years_of_experience: 10,
@@ -111,7 +110,7 @@ jimbo = User.new(
   last_name: "B.",
   weight: 65,
   height: 173,
-  address: "4875 Clearview",
+  address: ADDRESS.sample,
   gender: "Male",
   belt: "Blue",
   years_of_experience: 4,
@@ -474,6 +473,17 @@ event6 = Event.new(
 file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1670102563/event6_studio_aopjok.png")
 event6.photo.attach(io: file, filename: "event6.png", content_type: "image/png")
 event6.save
+
+closed_event1 = Event.new(
+  address: jonathan.address,
+  date: "Wed, 30 Nov 2022 18:00:00.000000000 EST -05:00",
+  status: "Closed",
+  host: jonathan,
+  description: "This already happened. Why are you looking? It was a good time but time to go home.",
+  title: "This has long past and gone"
+)
+
+closed_event1.save
 
 Guest.create!(
   event_id: Event.last.id,

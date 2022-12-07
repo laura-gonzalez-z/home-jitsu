@@ -7,6 +7,36 @@
     <% end %>
   </div>
 <% end %>
+<% if !@joined_events.empty? %>
+  <h2>Joined events</h2>
+  <div class="component-container">
+  <% @joined_events.each do |event| %>
+    <div class="card-box bg-white">
+      <div class="d-flex flex-column event-grid">
+        <div class="d-flex card-grid justify-content-between">
+          <div>
+            <div class="date"><small><%= event.event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
+            <p class="m-0"><strong><%= event.event.title %></strong></p>
+          </div>
+          <div>
+            <% if event.event.photo.key %>
+              <%= cl_image_tag event.event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
+            <% end %>
+          </div>
+        </div>
+        <div class="address">
+          <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= event.event.address %></small>
+        </div>
+        <% if event.event.guests.count > 0 %>
+          <div class="attendees">
+            <small class="text-primary"><%= event.event.guests.count %> attendees</small>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>
 <% if !@sorted[1].empty? %>
   <h2>Past events</h2>
   <div class="component-container past-events">
