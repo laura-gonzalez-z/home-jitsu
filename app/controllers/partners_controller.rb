@@ -48,7 +48,6 @@ class PartnersController < ApplicationController
   def notify_recipient
     recipient = User.find(@partner.requestee_id)
     notification = PartnerNotification.with(recipient: @partner.requestee, status: @partner.status)
-    pp notification
     notification.deliver(recipient)
   end
 
