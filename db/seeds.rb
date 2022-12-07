@@ -541,52 +541,148 @@ chat4 = Chatroom.create!(name: "private_#{laura.id}_#{tsunami.id}_")
 chat5 = Chatroom.create!(name: "private_#{laura.id}_#{jonathan.id}_")
 chat6 = Chatroom.create!(name: "private_#{tsunami.id}_#{jonathan.id}_")
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat1.id,
-    user_id: [ricky.id, laura.id].sample
-  )
-end
+Message.create!(
+  content: "Hey Ricky, I was wondering if you'd wanna train?",
+  chatroom_id: chat1.id,
+  user_id: laura.id
+)
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat2.id,
-    user_id: [ricky.id, tsunami.id].sample
-  )
-end
+Message.create!(
+  content: "Ya, of course, I'm kinda relieve because I thought everyone here had joke names.",
+  chatroom_id: chat1.id,
+  user_id: ricky.id
+)
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat3.id,
-    user_id: [ricky.id, jonathan.id].sample
-  )
-end
+Message.create!(
+  content: "Wanna meet up at my place?",
+  chatroom_id: chat1.id,
+  user_id: ricky.id
+)
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat4.id,
-    user_id: [laura.id, tsunami.id].sample
-  )
-end
+Message.create!(
+  content: "Hey Ricky, I really like your style, would you like to spar sometime?",
+  chatroom_id: chat2.id,
+  user_id: tsunami.id
+)
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat5.id,
-    user_id: [laura.id, jonathan.id].sample
-  )
-end
+Message.create!(
+  content: "Hey Tsunami, you seem pretty cool, ya, I'd be open to it, what kind of training do you do?",
+  chatroom_id: chat2.id,
+  user_id: ricky.id
+)
 
-5.times do
-  Message.create!(
-    content: Faker::Movies::StarWars.quote,
-    chatroom_id: chat6.id,
-    user_id: [tsunami.id, jonathan.id].sample
-  )
-end
+Message.create!(
+  content: "I do mostly ground work but I actually also do kendo so I thought it would be cool if we could do both...",
+  chatroom_id: chat2.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "But if we only do BJJ that would be fine too. It is the point of the app after all.",
+  chatroom_id: chat2.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "Ya, Kendo kinda came out of nowhere but I'd still like to train with you, are you able to host?",
+  chatroom_id: chat2.id,
+  user_id: ricky.id
+)
+
+Message.create!(
+  content: "Ya man, come meet me at my place whenever!",
+  chatroom_id: chat2.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "WASSSUUUUUP",
+  chatroom_id: chat3.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "WASSSUUUUUP",
+  chatroom_id: chat3.id,
+  user_id: ricky.id
+)
+
+Message.create!(
+  content: "hahahha",
+  chatroom_id: chat3.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "lmao",
+  chatroom_id: chat3.id,
+  user_id: ricky.id
+)
+
+Message.create!(
+  content: "You're such a joker jon",
+  chatroom_id: chat3.id,
+  user_id: ricky.id
+)
+
+Message.create!(
+  content: "Hey Laura, are you there?",
+  chatroom_id: chat4.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "Hey, glad you decided to join up!",
+  chatroom_id: chat5.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "Of course, thanks for telling me about Home-Jitsu :)",
+  chatroom_id: chat5.id,
+  user_id: laura.id
+)
+
+Message.create!(
+  content: "Hey, just a suggestion you should check out this guy called Jim, I think he'd be a good match.",
+  chatroom_id: chat5.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "Hey Touhami! I was wondering if you're around in Mtl to train???",
+  chatroom_id: chat6.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "Ya man, I live here, I'd love to train!",
+  chatroom_id: chat6.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "Cool, also before we figure that out I was wondering how to pronounce your name?",
+  chatroom_id: chat6.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "Just call me tsunami, it's what everyone that has trouble with that calls me haha.",
+  chatroom_id: chat6.id,
+  user_id: tsunami.id
+)
+
+Message.create!(
+  content: "Alright, sure thing Tsunami, would you be down to come over next tues to train?",
+  chatroom_id: chat6.id,
+  user_id: jonathan.id
+)
+
+Message.create!(
+  content: "Sounds like a plan.",
+  chatroom_id: chat6.id,
+  user_id: tsunami.id
+)
 
 p "Created real chatrooms and messages"
