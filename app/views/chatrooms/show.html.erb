@@ -1,5 +1,5 @@
 <% other_user = @chatroom.other_user(current_user) %>
-<%= render 'shared/back_bar', text: "#{other_user.first_name} #{other_user.last_name}", user: other_user %>
+<%= render 'shared/back_bar', text: "#{other_user.first_name} #{other_user.last_name}", user: other_user, link: my_messages_path %>
 <div class="chatroom"
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"

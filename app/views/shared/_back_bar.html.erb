@@ -1,8 +1,10 @@
 <div class="back-bar navbar navbar-lewagon">
   <div class="container">
     <div class="d-flex align-items-center justify-content-start">
-      <%= link_to :back do %>
-        <%= image_tag "icons/arrow-left.svg", alt: "go-back", class: "me-3 arrow" %>
+      <% if defined?(link) %>
+        <%= link_to link do %><%= image_tag "icons/arrow-left.svg", alt: "go-back", class: "me-3 arrow" %><% end %>
+      <% else %>
+        <%= link_to :back do %><%= image_tag "icons/arrow-left.svg", alt: "go-back", class: "me-3 arrow" %><% end %>
       <% end %>
       <% if defined?(user) %>
         <%= link_to user_path(user), :action => 'go' do %>
