@@ -15,9 +15,8 @@ class UsersController < ApplicationController
     set_partner
     @chatroom_name = get_name(@user, current_user)
     @single_chatroom = Chatroom.where(name: @chatroom_name).first
-    if @user.reviews.exists?
-      @average_rating = @user.reviews.average(:rating).round(2)
-    end
+    @average_rating = @user.reviews.average(:rating).round(2) if @user.reviews.exists?
+    set_notifications_to_read
   end
 
   def edit
