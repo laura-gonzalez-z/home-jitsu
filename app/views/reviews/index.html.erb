@@ -1,4 +1,4 @@
-<%= link_to "Back", user_path(@user),class: "btn btn-secondary" %>
+<%= render 'shared/back_bar' %>
 
 <h1><%= "#{@user.first_name} #{@user.last_name}’s reviews" %></h1>
 <% @reviews.each do |review| %>

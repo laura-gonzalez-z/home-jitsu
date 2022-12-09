@@ -26,3 +26,18 @@ body {
 .dropdown.search .dropdown-toggle:after {
   display: none;
 }
+.back-bar {
+  z-index: 15;
+  .container {
+    width: 100%;
+    a {
+      display: block;
+    }
+    .back-title {
+      color: $dark-grey;
+    }
+    .arrow {
+      width: 20px;
+    }
+  }
+}
