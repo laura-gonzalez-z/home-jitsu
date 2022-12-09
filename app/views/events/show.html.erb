@@ -57,17 +57,50 @@
     <div class="component-container">
       <% @join = true %>
       <% @guests.each do |guest| %>
-        <% user = User.find(guest.guest_id) %>
-        <%= render "shared/user", user: user %>
-        <% if user.id == current_user.id %>
-          <% @join = false %>
-          <%= link_to "Decided not to show?", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary" %>
+        <% if guest.status == "Accept" %>
+          <% user = User.find(guest.guest_id) %>
+          <%= render "shared/user", user: user %>
+          <% if user.id == current_user.id %>
+            <% @join = false %>
+            <%= link_to "Decided not to show?", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary" %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
   <% end %>
 
   <% if @event.host_id == current_user.id %>
+    <h2>Users that want to join your event</h2>
+    <div class="component-container">
+      <% @guests.each do |guest| %>
+        <% user = User.find(guest.guest_id) %>
+        <% if guest.status == "Reject" %>
+          <div class="card-box bg-white">
+            <div class="d-flex card-grid">
+              <% if user.photo.key %>
+                <%= cl_image_tag user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
+              <% else %>
+                <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar" %>
+              <% end %>
+              <div class="flex-grow-1">
+                <p class="m-0"><strong><%= user.first_name %> <%= user.last_name %></strong></p>
+                <small>
+                <% if user.years_of_experience > 0 %>
+                  <%=user.years_of_experience%> years of experience
+                <% else %>
+                  New to BJJ
+                <% end %>
+                </small>
+              </div>
+              <div>
+                <%= button_to "Accept",  {:controller => "guests", :action => "accept", :event_id => @event.id, :guest_id => guest.id  },  {:method=>:patch, class: "btn btn-primary d-block w-100"} %>
+                <%= button_to "Reject",  {:controller => "guests", :action => "reject", :event_id => @event.id, :guest_id => guest.id },  {:method=>:patch, class: "btn btn-secondary d-block w-100"} %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
     <div class="d-flex button-block my-3">
       <%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary d-block w-100" %>
       <%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary d-block w-100" %>
