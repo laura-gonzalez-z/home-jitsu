@@ -9,6 +9,7 @@ class PartnersController < ApplicationController
     @partner = Partner.new(partner_params)
     authorize @partner
     @partner.save
+    notify_recipient if @partner.status == "pending"
     redirect_to user_path(:requestee_id)
   end
 
@@ -21,6 +22,8 @@ class PartnersController < ApplicationController
   def accept
     authorize @partner
     @partner.update(status: "accepted")
+    notify_requester
+    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
@@ -40,5 +43,23 @@ class PartnersController < ApplicationController
 
   def partner_params
     params.permit(:requestee_id, :requester_id)
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
+  end
+
+  def notify_recipient
+    requestee = User.find(@partner.requestee_id)
+    notification = PartnerNotification.with(requestee: @partner.requestee, status: @partner.status,
+                                            requester: @partner.requester, type: "partner")
+    notification.deliver(requestee)
+  end
+
+  def notify_requester
+    recipient = User.find(@partner.requester_id)
+    notification = PartnerNotification.with(recipient: @partner.requester, status: @partner.status,
+                                            requestee: @partner.requestee, type: "accept")
+    notification.deliver(recipient)
   end
 end

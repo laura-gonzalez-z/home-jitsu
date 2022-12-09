@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
     @review = policy_scope(Review)
     @reviews_all = Review.all
     @reviews = @reviews_all.select { |review| review.user_id == @user.id.to_i }
+    set_notifications_to_read
   end
 
   def new
@@ -19,6 +20,7 @@ class ReviewsController < ApplicationController
     @review.user_id = @user.id
     authorize @review
     if @review.save
+      notify_recipient
       redirect_to user_path(@user)
     else
       render :new, :unprocessable_entity
@@ -33,5 +35,16 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:content, :rating)
+  end
+
+  def notify_recipient
+    recipient = User.find(@review.user_id)
+    notification = ReviewNotification.with(content: @review.content, rating: @review.rating,
+                                           writer: @review.writer, type: "review")
+    notification.deliver(recipient)
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
   end
 end

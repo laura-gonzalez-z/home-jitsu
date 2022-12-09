@@ -1,5 +1,6 @@
 class GuestsController < ApplicationController
-  before_action :set_event, only: %i[create]
+  before_action :set_event, only: %i[create accept reject]
+  before_action :set_guest, only: %i[accept reject]
 
   def create
     @guest = Guest.new
@@ -23,9 +24,25 @@ class GuestsController < ApplicationController
     end
   end
 
+  def accept
+    authorize @guest
+    @guest.update(status: "Accept")
+    redirect_to event_path(@event)
+  end
+
+  def reject
+    authorize @guest
+    @guest.update(status: "Reject")
+    redirect_to event_path(@event)
+  end
+
   private
 
   def set_event
     @event = Event.find(params[:event_id])
+  end
+
+  def set_guest
+    @guest = Guest.find(params[:guest_id])
   end
 end

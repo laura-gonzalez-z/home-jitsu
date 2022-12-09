@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Notification Center</h1>
+  <% if @notifications.where(recipient: current_user).unread.empty? %>
+    <p>Nothing new. Come back later!</p>
+  <% else %>
+    <% @notifications.each do |notification| %>
+      <% if notification.recipient == current_user || notification.params[:requester] == current_user %>
+        <% if notification.unread? %>
+          <% if notification.params[:type] == "review" %>
+            <li><%=link_to "#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review.", user_reviews_path(notification.recipient) %></li>
+          <% elsif notification.params[:type] == "accept"%>
+            <li><%=link_to "#{notification.params[:requestee].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
+          <% elsif notification.params[:type] == "partner" %>
+            <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

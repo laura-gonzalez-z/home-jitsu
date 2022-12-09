@@ -1,0 +1,21 @@
+<div class="back-bar navbar navbar-lewagon">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-start">
+      <%= link_to "javascript:history.back()" do %>
+        <%= image_tag "icons/arrow-left.svg", alt: "go-back", class: "me-3 arrow" %>
+      <% end %>
+      <% if defined?(user) %>
+        <%= link_to user_path(user), :action => 'go' do %>
+          <% if user.photo.key %>
+            <%= cl_image_tag user.photo.key, crop: :thumb, class: "rounded-circle avatar me-2" %>
+          <% else %>
+            <%= image_tag "avatar.svg", alt: "user", width: 30, class: "avatar me-2" %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if defined?(text) %>
+        <h2 class="m-0 back-title"><%= text %></h2>
+      <% end %>
+    </div>
+  </div>
+</div>

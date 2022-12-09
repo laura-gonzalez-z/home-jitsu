@@ -3,11 +3,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[edit update destroy show]
 
   def index
-    @event = policy_scope(Event)
     # TODO: Just filter upcoming events
     if params[:query].present?
-      sql_query = "address ILIKE :query"
-      @events = policy_scope(Event).where(sql_query, query: "%#{params[:query]}%")
+      geocoded_search_results = Geocoder.search(params[:query])
+      top_result = geocoded_search_results.first
+      @events = policy_scope(Event).near(top_result.address, 5)
     else
       @events = policy_scope(Event)
     end
@@ -34,6 +34,7 @@ class EventsController < ApplicationController
 
   def my_events
     authorize @user
+    @joined_events = Guest.select { |guest| guest.guest_id == current_user.id }
     @events = Event.select { |event| event.host_id == current_user.id }
     upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
     @sorted = [[*upcoming], [*past.reverse]]

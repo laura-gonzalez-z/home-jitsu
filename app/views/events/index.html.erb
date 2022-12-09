@@ -11,10 +11,13 @@
     <% end %>
   </div>
   <div id='map' style="width: 100%; height: 200px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-   <% @events.sort_by {|event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }.each do |event| %>
-    <%= render "shared/event", event: event %>
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+  <% @events.sort_by {|event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }.each do |event| %>
+    <% if event.date.future? %>
+      <%= render "shared/event", event: event %>
+    <% end %>
   <% end %>
 </div>
