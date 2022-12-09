@@ -7,11 +7,11 @@
       <% if notification.recipient == current_user || notification.params[:requester] == current_user %>
         <% if notification.unread? %>
           <% if notification.params[:type] == "review" %>
-            <li><%="#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review." %></li>
-          <% elsif notification.params[:type] == "accept/reject"%>
-            <li><%="#{notification.params[:requestee].first_name} #{notification.params[:status]} your partner request."%></li>
+            <li><%=link_to "#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review.", user_reviews_path(notification.recipient) %></li>
+          <% elsif notification.params[:type] == "accept"%>
+            <li><%=link_to "#{notification.params[:requestee].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
           <% elsif notification.params[:type] == "partner" %>
-            <li><%="#{notification.params[:requester].first_name} invited you to be their partner."%></li>
+            <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
           <% end %>
         <% end %>
       <% end %>

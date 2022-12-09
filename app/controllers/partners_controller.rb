@@ -30,8 +30,6 @@ class PartnersController < ApplicationController
   def reject
     authorize @partner
     @partner.update(status: "rejected")
-    notify_requester
-    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
@@ -61,7 +59,7 @@ class PartnersController < ApplicationController
   def notify_requester
     recipient = User.find(@partner.requester_id)
     notification = PartnerNotification.with(recipient: @partner.requester, status: @partner.status,
-                                            requestee: @partner.requestee, type: "accept/reject")
+                                            requestee: @partner.requestee, type: "accept")
     notification.deliver(recipient)
   end
 end
