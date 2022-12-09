@@ -38,7 +38,8 @@ class ReviewsController < ApplicationController
 
   def notify_recipient
     recipient = User.find(@review.user_id)
-    notification = ReviewNotification.with(content: @review.content, rating: @review.rating)
+    notification = ReviewNotification.with(content: @review.content, rating: @review.rating,
+                                           writer: @review.writer, type: "review")
     notification.deliver(recipient)
   end
 end
