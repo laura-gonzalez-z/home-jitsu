@@ -5,8 +5,14 @@
         <%= link_to "Home", root_path, class: "home" %>
         <%= link_to "Partners", partners_path, class: "partners" %>
         <%= link_to "Events", my_events_path, class: "events" %>
-        <%= link_to "Messages", my_messages_path, class: "messages" %>
-        <%= link_to "Notifications", notifications_path, class: "notifications" %>
+        <% if current_user.notifications.unread.empty? %>
+          <%= link_to "Messages", my_messages_path, class: "messages" %>
+          <%= link_to "Notifications", notifications_path, class: "notifications" %>
+        <% else %>
+          <% types = current_user.notifications.unread.map do |notification| %>
+            <% notification.params[:type] %>
+          <% end %>
+        <% end %>
       <% else %>
         <%= link_to "Home", root_path, class: "home mx-auto" %>
       <% end %>
