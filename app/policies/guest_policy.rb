@@ -7,6 +7,14 @@ class GuestPolicy < ApplicationPolicy
     true
   end
 
+  def accept?
+    true
+  end
+
+  def reject?
+    true
+  end
+
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
