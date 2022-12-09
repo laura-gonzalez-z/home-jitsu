@@ -20,7 +20,6 @@ class PartnersController < ApplicationController
   end
 
   def accept
-    raise
     authorize @partner
     @partner.update(status: "accepted")
     notify_requester
@@ -29,7 +28,6 @@ class PartnersController < ApplicationController
   end
 
   def reject
-    raise
     authorize @partner
     @partner.update(status: "rejected")
     redirect_to user_path(:requestee_id)
