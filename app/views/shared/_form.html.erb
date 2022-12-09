@@ -9,6 +9,7 @@
               autofocus: true,
               input_html: { autocomplete: "last_name" }%>
   <%= field.input :address,
+              hint: "This won't be public! Just make sure it's a real address or you will miss a lot of our features",
               required: true,
               input_html: { autocomplete: "address" } %>
   <%= field.input :gender, collection: User::GENDERS,
