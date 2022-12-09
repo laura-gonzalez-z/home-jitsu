@@ -383,7 +383,7 @@ event1.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [jimbo.id, jonathan.id, ricky.id].sample,
-  status: Guest::STATUS.sample
+  status: "Accept"
 )
 
 event2 = Event.new(
@@ -402,7 +402,7 @@ event2.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [jimbo.id, tsunami.id, jonathan.id].sample,
-  status: Guest::STATUS.sample
+  status: "Accept"
 )
 
 event3 = Event.new(
@@ -421,7 +421,7 @@ event3.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [tsunami.id, jimbo.id, ricky.id].sample,
-  status: Guest::STATUS.sample
+  status: "Pending"
 )
 
 event4 = Event.new(
@@ -440,7 +440,7 @@ event4.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [claire.id, hugh.id, kaylee.id].sample,
-  status: Guest::STATUS.sample
+  status: "Accept"
 )
 
 event5 = Event.new(
@@ -459,7 +459,7 @@ event5.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [claire.id, hugh.id, tiffany.id].sample,
-  status: Guest::STATUS.sample
+  status: "Accept"
 )
 
 event6 = Event.new(
@@ -478,7 +478,7 @@ event6.save
 Guest.create!(
   event_id: Event.last.id,
   guest_id: [claire.id, hugh.id, kaylee.id].sample,
-  status: Guest::STATUS.sample
+  status: "Accept"
 )
 
 p "Created events with 1 semi-random guest each"
