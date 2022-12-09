@@ -23,6 +23,7 @@ class PartnersController < ApplicationController
     authorize @partner
     @partner.update(status: "accepted")
     notify_requester
+    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
@@ -30,6 +31,7 @@ class PartnersController < ApplicationController
     authorize @partner
     @partner.update(status: "rejected")
     notify_requester
+    set_notifications_to_read
     redirect_to user_path(:requestee_id)
   end
 
@@ -45,15 +47,19 @@ class PartnersController < ApplicationController
     params.permit(:requestee_id, :requester_id)
   end
 
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
+  end
+
   def notify_recipient
     recipient = User.find(@partner.requestee_id)
-    notification = PartnerNotification.with(recipient: @partner.requestee, status: @partner.status)
+    notification = PartnerNotification.with(recipient: @partner.requestee, status: @partner.status, requester: @partner.requester)
     notification.deliver(recipient)
   end
 
   def notify_requester
-    requester = User.find(@partner.requester_id)
-    notification = PartnerNotification.with(requester: @partner.requester, status: @partner.status)
-    notification.deliver(requester)
+    recipient = User.find(@partner.requester_id)
+    notification = PartnerNotification.with(recipient: @partner.requester, status: @partner.status, requestee: @partner.requestee)
+    notification.deliver(recipient)
   end
 end
