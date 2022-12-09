@@ -5,8 +5,9 @@ class EventsController < ApplicationController
   def index
     # TODO: Just filter upcoming events
     if params[:query].present?
-      sql_query = "address ILIKE :query"
-      @events = policy_scope(Event).where(sql_query, query: "%#{params[:query]}%")
+      geocoded_search_results = Geocoder.search(params[:query])
+      top_result = geocoded_search_results.first
+      @events = policy_scope(Event).near(top_result.address, 5)
     else
       @events = policy_scope(Event)
     end

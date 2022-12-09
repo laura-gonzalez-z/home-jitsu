@@ -3,8 +3,9 @@ class UsersController < ApplicationController
 
   def index
     if params[:query].present?
-      sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
-      @users = policy_scope(User).where(sql_query, query: "%#{params[:query]}%")
+      geocoded_search_results = Geocoder.search(params[:query])
+      top_result = geocoded_search_results.first
+      @users = policy_scope(User).near(top_result.address, 5)
     else
       @users = policy_scope(User)
     end
