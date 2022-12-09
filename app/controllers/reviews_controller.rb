@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
     @review = policy_scope(Review)
     @reviews_all = Review.all
     @reviews = @reviews_all.select { |review| review.user_id == @user.id.to_i }
+    set_notifications_to_read
   end
 
   def new
@@ -41,5 +42,9 @@ class ReviewsController < ApplicationController
     notification = ReviewNotification.with(content: @review.content, rating: @review.rating,
                                            writer: @review.writer, type: "review")
     notification.deliver(recipient)
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
   end
 end
