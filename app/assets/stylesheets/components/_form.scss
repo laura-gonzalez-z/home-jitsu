@@ -25,11 +25,13 @@ form.button_to {
   position: absolute;
   right: 5px;
   top: 5px;
-  z-index: 10;
-  padding: 5px;
+  z-index: 8;
+  padding: 4px;
   background: $light-purple;
   border-radius: 15px;
-  line-height: 20px;
+  line-height: 22px;
+  width: 30px;
+  text-align: center;
 }
 .bg-light-grey {
   background: $light-grey;
