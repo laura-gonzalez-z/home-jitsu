@@ -36,6 +36,10 @@ class GuestsController < ApplicationController
     redirect_to event_path(@event)
   end
 
+  def invite
+
+  end
+
   private
 
   def set_event

@@ -59,7 +59,7 @@
       <% @guests.each do |guest| %>
         <% if guest.status == "Accept" %>
           <% user = User.find(guest.guest_id) %>
-          <%= render "shared/user", user: user %>
+          <%= render "shared/user", user: user, event: @event %>
           <% if user.id == current_user.id %>
             <% @join = false %>
             <%= link_to "Decided not to show?", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary" %>

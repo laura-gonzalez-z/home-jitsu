@@ -5,6 +5,12 @@ class PartnersController < ApplicationController
     @partners = policy_scope(Partner)
   end
 
+  def invite_partners_list
+    @user = User.find(current_user.id)
+    authorize @user
+    @partners = Partner.select { |partner| partner.requester_id == current_user.id || partner.requestee_id == current_user.id }
+  end
+
   def create
     @partner = Partner.new(partner_params)
     authorize @partner
