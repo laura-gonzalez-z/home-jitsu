@@ -1,6 +1,6 @@
 <div class="component-container">
   <% current_user.friends.each do |friend| %>
-    <div class="card-box bg-white">
+    <%= link_to user_path(friend), :action => 'go', class: "card-box bg-white" do %>
       <div class="d-flex card-grid">
         <% if friend.photo.key %>
           <%= cl_image_tag friend.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
@@ -18,9 +18,6 @@
           </small>
         </div>
         <div>
-          <% if friend.reviews.exists? %>
-            <%= render "shared/stars", average_rating: friend.reviews.average(:rating).round(2) %>
-          <% end %>
           <% if !@guests_ids.include?(friend.id) %>
             <%= button_to "Invite",  {:controller => "guests", :action => "invite", :event_id => @event.id, :guest_id => friend.id },  {:method=>:post, class: "btn btn-primary d-block w-100"} %>
           <% else %>
@@ -28,6 +25,6 @@
           <% end %>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
