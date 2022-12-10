@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
+  get "loading", to: "pages#loading"
+
   get "my_messages", to: "chatrooms#my_messages"
 
   get "my_events", to: "events#my_events"

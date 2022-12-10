@@ -23,6 +23,7 @@
                     autofocus: true,
                     input_html: { autocomplete: "last_name" }%>
         <%= f.input :address,
+                    hint: "This won't be public! Just make sure it's a real address or you will miss a lot of our features",
                     required: true,
                     input_html: { autocomplete: "address" } %>
         <%= f.input :gender, collection: User::GENDERS,
@@ -51,7 +52,7 @@
                   input_html: { autocomplete: "upload an avatar"} %>
 
         <%= f.input :password,
-                    hint: "leave it blank if you don't want to change it",
+                    hint: "Leave it blank if you don't want to change it",
                     required: false,
                     input_html: { autocomplete: "new-password" } %>
         <%= f.input :password_confirmation,

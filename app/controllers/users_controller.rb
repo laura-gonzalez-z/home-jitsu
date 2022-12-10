@@ -3,10 +3,17 @@ class UsersController < ApplicationController
 
   def index
     if params[:query].present?
-      sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
-      @users = policy_scope(User).where(sql_query, query: "%#{params[:query]}%")
+      geocoded_search_results = Geocoder.search(params[:query])
+      top_result = geocoded_search_results.first
+      @users = policy_scope(User).near(top_result.address, 5)
+      @users_sorted = @users
     else
-      @users = policy_scope(User)
+      @users = policy_scope(User).where.not(latitude: nil)
+      if current_user.latitude.nil?
+        @users_sorted = @users
+      else
+        @users_sorted = @users.sort_by { |user| user.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+      end
     end
   end
 

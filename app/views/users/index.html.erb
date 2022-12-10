@@ -5,12 +5,12 @@
       <%= text_field_tag :query,
         params[:query],
         class: "form-control search-icon",
-        placeholder: "Find by name"
+        placeholder: "Close to this address"
       %>
       <a href="#" class="purple-circle-button"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
     <% end %>
   </div>
-  <% @users.sort_by {|user| user.distance_to([current_user.latitude, current_user.longitude]).round(1) }.each do |user| %>
+  <% @users_sorted.each do |user| %>
     <% if user != current_user %>
       <%= render "shared/user", user: user %>
     <% end %>
