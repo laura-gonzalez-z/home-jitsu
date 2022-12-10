@@ -63,16 +63,17 @@ class GuestsController < ApplicationController
   end
 
   def notify_host
-    host = User.find(@guest.event.host)
+    host = @guest.event.host
     notification = GuestNotification.with(type: "join", host: host,
-                                          recipient: @guest.guest, status: @guest.status)
+                                          recipient: @guest.guest, status: @guest.status, event: @guest.event)
+    pp notification
     notification.deliver(host)
   end
 
   def notify_recipient
     guest = @guest.guest
     notification = GuestNotification.with(type: "invite", host: @guest.event.host,
-                                          recipient: guest, status: @guest.status)
+                                          recipient: guest, status: @guest.status, event: @guest.event)
     notification.deliver(guest)
   end
 end
