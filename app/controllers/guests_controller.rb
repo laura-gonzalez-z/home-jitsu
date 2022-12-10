@@ -42,7 +42,10 @@ class GuestsController < ApplicationController
 
   def accept
     authorize @guest
+    previous_status = @guest.status
     @guest.update(status: "Accept")
+    notify_guest_accept if previous_status == "Pending"
+    notify_host_accept if previous_status == "Invited"
     redirect_to event_path(@event)
   end
 
@@ -66,14 +69,42 @@ class GuestsController < ApplicationController
     host = @guest.event.host
     notification = GuestNotification.with(type: "join", host: host,
                                           recipient: @guest.guest, status: @guest.status, event: @guest.event)
-    pp notification
     notification.deliver(host)
   end
 
   def notify_recipient
     guest = @guest.guest
-    notification = GuestNotification.with(type: "invite", host: @guest.event.host,
-                                          recipient: guest, status: @guest.status, event: @guest.event)
+  # notification = GuestNotification.with(type: "invite", host: @guest.event.host,
+  #                                        recipient: guest, status: @guest.status, event: @guest.event)
+
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.event.host.first_name} invited you to their event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
     notification.deliver(guest)
+    raise
+  end
+
+  def notify_guest_accept
+    host = @guest.event.host
+    notification = GuestNotification.with(type: "host-accept-join", host: host,
+                                          recipient: @guest.guest, status: @guest.status, event: @guest.event)
+    notification.deliver(guest)
+  end
+
+  def notify_host_accept
+    guest = @guest.guest
+    notification = GuestNotification.with(type: "guest-accept-invite", host: @guest.event.host,
+                                          recipient: guest, status: @guest.status, event: @guest.event)
+
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{notification.params[:recipient].first_name} accepted the invite to your event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
+    notification.deliver(host)
   end
 end

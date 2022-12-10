@@ -1,21 +1,30 @@
 <div class="container">
   <h1>Notification Center</h1>
-  <% if @notifications.where(recipient: current_user).unread.empty? %>
+  <% if current_user.notifications.unread.empty? %>
     <p>Nothing new. Come back later!</p>
   <% else %>
-    <% @notifications.each do |notification| %>
-      <% if notification.recipient == current_user || notification.params[:requester] == current_user || notification.params[:host] == current_user %>
+    <% current_user.notifications.each do |notification| %>
+      <% if notification.params[:type] == "event" %>
+        <li><%=link_to "#{notification.params[:message]}", event_path(notification.params[:link_to]) %></li>
+      <% end %>
+      <% if false %>
+        <% if notification.params[:type] == "review" %>
+          <li><%=link_to "#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review.", user_reviews_path(notification.recipient) %></li>
+        <% elsif notification.params[:type] == "partner" %>
+          <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
+        <% elsif notification.params[:type] == "invite" %>
+          <li><%=link_to "#{notification.params[:host].first_name} invited you to their event.", event_path(notification.params[:event])%></li>
+        <% elsif notification.params[:type] == "host-accept-join" %>
+          <li><%=link_to "#{notification.params[:host].first_name} accepted your request to join this event.", event_path(notification.params[:event])%></li>
+        <% end %>
+      <% elsif notification.params[:requester] == current_user || notification.params[:host] == current_user %>
         <% if notification.unread? %>
-          <% if notification.params[:type] == "review" %>
-            <li><%=link_to "#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review.", user_reviews_path(notification.recipient) %></li>
-          <% elsif notification.params[:type] == "accept"%>
-            <li><%=link_to "#{notification.params[:requestee].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
-          <% elsif notification.params[:type] == "partner" %>
-            <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
+          <% if notification.params[:type] == "accept"%>
+            <li><%=link_to "#{notification.params[:recipient].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
           <% elsif notification.params[:type] == "join" %>
-            <li><%="#{notification.params[:recipient].first_name} would like to join your event."%></li>
-          <% elsif notification.params[:type] == "invite" %>
-            <li><%=link_to "#{notification.params[:host].first_name} invited you to their event.", event_path(notification.params[:event])%></li>
+            <li><%=link_to "#{notification.params[:recipient].first_name} would like to join your event.", event_path(notification.params[:event])%></li>
+          <% elsif notification.params[:type] == "guest-accept-invite" %>
+            <li><%=link_to "#{notification.params[:recipient].first_name} accepted the invite to your event.", event_path(notification.params[:event])%></li>
           <% end %>
         <% end %>
       <% end %>

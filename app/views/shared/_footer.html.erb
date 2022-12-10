@@ -12,10 +12,10 @@
             <% types = current_user.notifications.unread.map do |notification| %>
               <% notification.params[:type] %>
             <% end %>
-            <% if types.include?("message") && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite")) %>
+            <% if types.include?("message") && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite") || types.include?("accept-join") || types.include?("accept-invite")) %>
               <%= link_to "Messages", my_messages_path, class: "messages new" %>
               <%= link_to "Notifications", notifications_path, class: "notifications new" %>
-            <% elsif types.include?("message") == false && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite"))  %>
+            <% elsif types.include?("message") == false && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite") || types.include?("accept-join") || types.include?("accept-invite"))  %>
               <%= link_to "Messages", my_messages_path, class: "messages" %>
               <%= link_to "Notifications", notifications_path, class: "notifications new" %>
             <% else %>

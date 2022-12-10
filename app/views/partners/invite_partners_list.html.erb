@@ -1,6 +1,5 @@
 <div class="component-container">
   <% current_user.friends.each do |friend| %>
-    <%= link_to user_path(friend), :action => 'go', class: "card-box bg-white" do %>
       <div class="d-flex card-grid">
         <% if friend.photo.key %>
           <%= cl_image_tag friend.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
