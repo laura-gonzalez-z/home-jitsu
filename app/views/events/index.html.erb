@@ -1,7 +1,7 @@
 <div class="component-container">
   <div class="form-box bg-light-grey">
     <%# TODO: Logic for search and advanced search %>
-    <%= form_with url: events_path, method: :get, class: "d-flex" do %>
+   <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control search-icon",
@@ -10,6 +10,34 @@
       <a href="#" class="purple-circle-button"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
     <% end %>
   </div>
+
+  <div id="advanced-search">
+    <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control search-icon",
+        placeholder: "Close to this address"
+      %>
+
+       <%= text_field_tag :name,
+          params[:name],
+          class: "form-control search-icon",
+          placeholder: "enter name"
+        %>
+
+    <%= datetime_field_tag "date",
+        params[:date],
+        class: "form-control search-icon",
+        placeholder: "enter date"
+        %>
+      <%= form.submit "search" %>
+    <% end %>
+  </div>
+
+
+
+
+
   <div id='map' style="width: 100%; height: 200px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
