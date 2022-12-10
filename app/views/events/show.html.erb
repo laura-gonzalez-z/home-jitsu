@@ -53,7 +53,7 @@
   </div>
 
   <% if !@event.guests.empty? %>
-    <% count = @event.guests.where(status: "Accept").or(@event.guests.where(status: "Pending")).or(@event.guests.where(status: "Invited")).count %>
+    <% count = @event.guests.where(status: "Accept").or(@event.guests.where(status: "Pending")).count %>
     <h2><%= pluralize( count, 'Attendee') %></h2>
     <div class="component-container">
       <% @join = true %>
