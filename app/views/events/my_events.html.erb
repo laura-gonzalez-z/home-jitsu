@@ -41,7 +41,7 @@
   <h2>Joined events</h2>
   <div class="component-container">
   <% @joined_events.each do |event| %>
-    <%= link_to event_path(event), :action => 'go', class: "card-box bg-white" do %>
+    <%= link_to event_path(event.event), :action => 'go', class: "card-box bg-white" do %>
       <div class="d-flex flex-column event-grid">
         <div class="d-flex card-grid justify-content-between">
           <div>

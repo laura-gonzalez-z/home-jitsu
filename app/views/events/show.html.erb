@@ -53,8 +53,7 @@
   </div>
 
   <% if !@event.guests.empty? %>
-    <% count = @event.guests.where(status: "Accept").count %>
-    <h2><%= pluralize( count, 'Attendee') %></h2>
+    <h2><%= pluralize( @confirmed_guests.count, 'Attendee') %></h2>
     <div class="component-container">
       <% @confirmed_guests.each do |guest| %>
         <% if guest.status == "Accept" %>

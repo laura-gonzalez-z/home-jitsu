@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     authorize @event
     @confirmed_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Accept" }
     @pending_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Pending" }
-    @include_guest = []
+    @include_guest = [@event.host_id]
     @confirmed_guests.each { |guest| @include_guest << guest.guest_id }
     @pending_guests.each { |guest| @include_guest << guest.guest_id }
     @markers = [
