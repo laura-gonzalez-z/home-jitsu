@@ -4,33 +4,32 @@ class EventsController < ApplicationController
 
   def index
     # TODO: Just filter upcoming events
-    @events = policy_scope(Event)
+    @events = Event.all
+    policy_scope(@events)
 
 
     if params[:query].present?
       geocoded_search_results = Geocoder.search(params[:query])
       top_result = geocoded_search_results.first
-      @events = policy_scope(@events).near(top_result.address, 5)
-      @events_sorted = @events
-    else
-      @events = policy_scope(@events).where.not(latitude: nil)
-      if current_user.latitude.nil?
-        @events_sorted = @events
+      unless top_result.nil?
+        @events = @events.near(top_result.address, 5)
       else
-        @events_sorted = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+        @events = []
+      end
+    else
+      @events = @events.where.not(latitude: nil)
+      unless current_user.latitude.nil?
+        @events = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
       end
     end
 
-    if params[:name].present? && params[:date].present?
-      @date = DateTime.parse(params[:date]).to_i + 18_000
-      @events = policy_scope(@events).select { |event| event.host.first_name == params[:name] && event.date.to_i == @date }
+    if params[:name].present?
+      @events = @events.select { |event| event.host.first_name == params[:name] }
+    end
 
-    elsif params[:name].present?
-      @events = policy_scope(@events).select { |event| event.host.first_name == params[:name] }
-
-    elsif params[:date].present?
-      @date = DateTime.parse(params[:date]).to_i + 18_000
-      @events = policy_scope(@events).select { |event| event.date.to_i == @date }
+    if params[:date].present?
+      date = DateTime.parse(params[:date]).to_i + 18_000
+      @events = @events.select { |event| date <= event.date.to_i && event.date.to_i <= (date + 60 * 60 * 24) }
     end
 
     @markers = @events.map do |event|

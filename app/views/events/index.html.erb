@@ -25,7 +25,7 @@
           placeholder: "enter name"
         %>
 
-    <%= datetime_field_tag "date",
+    <%= date_field_tag "date",
         params[:date],
         class: "form-control search-icon",
         placeholder: "enter date"
@@ -39,7 +39,7 @@
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-  <% @events_sorted.each do |event| %>
+  <% @events.each do |event| %>
     <% if event.date.future? %>
       <%= render "shared/event", event: event %>
     <% end %>
