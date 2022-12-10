@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     @read = notifications.read
   end
 
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
+
   private
 
   def skip_pundit?
