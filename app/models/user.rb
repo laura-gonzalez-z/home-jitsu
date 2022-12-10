@@ -51,4 +51,12 @@ class User < ApplicationRecord
   end
   has_many :messages
   has_many :notifications, as: :recipient, dependent: :destroy
+
+  def unread_notifications
+    notifications.unread.select { |notification| notification.params[:type] != 'message' }
+  end
+
+  def unread_messages
+    notifications.unread.select { |notification| notification.params[:type] == 'message' }
+  end
 end

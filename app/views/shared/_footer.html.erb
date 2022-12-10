@@ -5,24 +5,8 @@
         <%= link_to "Home", root_path, class: "home" %>
         <%= link_to "Partners", partners_path, class: "partners" %>
         <%= link_to "Events", my_events_path, class: "events" %>
-        <% if current_user.notifications.unread.empty? %>
-          <%= link_to "Messages", my_messages_path, class: "messages" %>
-          <%= link_to "Notifications", notifications_path, class: "notifications" %>
-        <% else %>
-            <% types = current_user.notifications.unread.map do |notification| %>
-              <% notification.params[:type] %>
-            <% end %>
-            <% if types.include?("message") && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite") || types.include?("accept-join") || types.include?("accept-invite")) %>
-              <%= link_to "Messages", my_messages_path, class: "messages new" %>
-              <%= link_to "Notifications", notifications_path, class: "notifications new" %>
-            <% elsif types.include?("message") == false && (types.include?("review") || types.include?("accept") || types.include?("partner") || types.include?("join") || types.include?("invite") || types.include?("accept-join") || types.include?("accept-invite"))  %>
-              <%= link_to "Messages", my_messages_path, class: "messages" %>
-              <%= link_to "Notifications", notifications_path, class: "notifications new" %>
-            <% else %>
-              <%= link_to "Messages", my_messages_path, class: "messages new" %>
-              <%= link_to "Notifications", notifications_path, class: "notifications" %>
-            <% end %>
-        <% end %>
+        <%= link_to "Messages", my_messages_path, class: "messages #{'new' unless current_user.unread_messages.empty?}" %>
+        <%= link_to "Notifications", notifications_path, class: "notifications #{'new' unless current_user.unread_notifications.empty?}" %>
       <% else %>
         <%= link_to "Home", root_path, class: "home mx-auto" %>
       <% end %>

@@ -74,9 +74,6 @@ class GuestsController < ApplicationController
 
   def notify_recipient
     guest = @guest.guest
-  # notification = GuestNotification.with(type: "invite", host: @guest.event.host,
-  #                                        recipient: guest, status: @guest.status, event: @guest.event)
-
     notification = GuestNotification.with(
       type: "event",
       message: "#{@guest.event.host.first_name} invited you to their event.",
@@ -84,7 +81,6 @@ class GuestsController < ApplicationController
       link_to: @guest.event
     )
     notification.deliver(guest)
-    raise
   end
 
   def notify_guest_accept
