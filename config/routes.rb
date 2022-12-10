@@ -33,5 +33,5 @@ Rails.application.routes.draw do
   patch "/guests/:id/accept", to: "guests#accept", as: :accept_guest
   patch "/guests/:id/reject", to: "guests#reject", as: :reject_guest
 
-  post "/guests", to: "guests#invite", as: :invite
+  post "/guests/invite_link", to: "guests#invite", as: :invite
 end

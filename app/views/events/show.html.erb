@@ -69,12 +69,12 @@
     </div>
   <% end %>
 
-  <% if @event.host_id == current_user.id %>
+  <% if @event.host_id == current_user.id && @event.date.future? %>
     <h2>Users that want to join your event</h2>
     <div class="component-container">
       <% @guests.each do |guest| %>
         <% user = User.find(guest.guest_id) %>
-        <% if guest.status == "Reject" %>
+        <% if guest.status == "Pending" %>
           <div class="card-box bg-white">
             <div class="d-flex card-grid">
               <% if user.photo.key %>
@@ -103,10 +103,11 @@
     </div>
     <div class="d-flex button-block my-3">
       <%= link_to "Edit this event", edit_event_path(@event), class: "btn btn-primary d-block w-100" %>
+      <%= link_to "Invite more people to this event", invite_partners_path(@event), class: "btn btn-primary d-block w-100" %>
       <%= link_to "Delete", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary d-block w-100" %>
     </div>
   <% else %>
-    <% if @join %>
+    <% if @join && @event.date.future? %>
       <%= button_to "Join event", {:controller => "guests", :action => "create", :guest_id => current_user.id, :event_id => @event.id} , {:method=>:post, class: "btn btn-primary d-block w-100 my-3"} %>
     <% end %>
   <% end %>
