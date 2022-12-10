@@ -71,7 +71,7 @@
     </div>
   <% end %>
 
-  <% if @event.host_id == current_user.id && @event.date.future? %>
+  <% if @event.host_id == current_user.id && @event.date.future? && !@pending_guests.empty? %>
     <h2>Users that want to join your event</h2>
     <div class="component-container">
       <% @pending_guests.each do |guest| %>
