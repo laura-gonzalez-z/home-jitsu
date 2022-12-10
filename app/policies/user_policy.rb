@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def invite_partners_list?
+    true
+  end
+
   def my_events?
     true
   end

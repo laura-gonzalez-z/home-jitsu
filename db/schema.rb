@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_003742) do
   create_table "guests", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "guest_id"
-    t.string "status", default: "pending"
+    t.string "status", default: "Pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_guests_on_event_id"

@@ -298,6 +298,34 @@ Review.create!(
 )
 
 Review.create!(
+  content: "Known her for years, amazing at BJJ",
+  user_id: laura.id,
+  writer_id: jonathan.id,
+  rating: 5
+)
+
+Review.create!(
+  content: "Nice.",
+  user_id: jonathan.id,
+  writer_id: jimbo.id,
+  rating: 4
+)
+
+Review.create!(
+  content: "Well well well, what can I say? He's pretty good, beat me a few times. That's for sure. Nice host.",
+  user_id: tsunami.id,
+  writer_id: ricky.id,
+  rating: 5
+)
+
+Review.create!(
+  content: "10/10, would lose to Ricky again.",
+  user_id: ricky.id,
+  writer_id: kaylee.id,
+  rating: 4
+)
+
+Review.create!(
   content: "Why not! Love Montreal and BJJ.",
   user_id: jimbo.id,
   writer_id: tsunami.id,

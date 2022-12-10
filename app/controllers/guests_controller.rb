@@ -14,6 +14,19 @@ class GuestsController < ApplicationController
     end
   end
 
+  def invite
+    @guest = Guest.new
+    @guest.event_id = params[:event_id]
+    @guest.guest_id = params[:guest_id]
+    @guest.status = "Invited"
+    authorize @guest
+    if @guest.save
+      redirect_to invite_partners_path(current_user)
+    else
+      render invite_partners_path(current_user), :unprocessable_entity
+    end
+  end
+
   def destroy
     @guest = Guest.find(params[:id])
     authorize @guest
