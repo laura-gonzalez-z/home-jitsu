@@ -6,11 +6,25 @@ class GuestsController < ApplicationController
     @guest = Guest.new
     @guest.event_id = @event.id
     @guest.guest_id = current_user.id
+    @guest.status = "Pending"
     authorize @guest
     if @guest.save
       redirect_to event_path(@event)
     else
       render event_path(@event), :unprocessable_entity
+    end
+  end
+
+  def invite
+    @guest = Guest.new
+    @guest.event_id = params[:event_id]
+    @guest.guest_id = params[:guest_id]
+    @guest.status = "Invited"
+    authorize @guest
+    if @guest.save
+      redirect_to invite_partners_path(current_user)
+    else
+      render invite_partners_path(current_user), :unprocessable_entity
     end
   end
 

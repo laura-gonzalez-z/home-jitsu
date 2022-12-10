@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
     users_in_room.each do |user|
       next if user.eql?(current_user)
 
-      notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom)
+      notification = MessageNotification.with(message: @message.content, chatroom: @message.chatroom, type: "message")
       notification.deliver(user)
     end
   end

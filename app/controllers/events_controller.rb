@@ -11,6 +11,14 @@ class EventsController < ApplicationController
       geocoded_search_results = Geocoder.search(params[:query])
       top_result = geocoded_search_results.first
       @events = policy_scope(@events).near(top_result.address, 5)
+      @events_sorted = @events
+    else
+      @events = policy_scope(@events).where.not(latitude: nil)
+      if current_user.latitude.nil?
+        @events_sorted = @events
+      else
+        @events_sorted = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+      end
     end
 
     if params[:name].present? && params[:date].present?
@@ -48,7 +56,8 @@ class EventsController < ApplicationController
 
   def my_events
     authorize @user
-    @joined_events = Guest.select { |guest| guest.guest_id == current_user.id }
+    @joined_events = Guest.select { |guest| guest.guest_id == current_user.id && guest.status == "Accept" }
+    @invited_events = Guest.select { |guest| guest.guest_id == current_user.id && guest.status == "Invited" }
     @events = Event.select { |event| event.host_id == current_user.id }
     upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
     @sorted = [[*upcoming], [*past.reverse]]

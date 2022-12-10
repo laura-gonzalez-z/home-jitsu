@@ -3,6 +3,10 @@ class GuestPolicy < ApplicationPolicy
     true
   end
 
+  def invite?
+    true
+  end
+
   def destroy?
     true
   end
