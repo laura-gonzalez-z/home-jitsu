@@ -16,7 +16,7 @@
     </div>
     <% if event.guests.count > 0 %>
       <div class="attendees">
-        <small class="text-primary"><%= event.guests.count %> attendees</small>
+        <small class="text-primary"><%= pluralize(event.guests.count, "attendee" )%></small>
       </div>
     <% end %>
   </div>
