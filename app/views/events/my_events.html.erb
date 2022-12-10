@@ -29,7 +29,7 @@
         </div>
         <% if event.event.guests.count > 0 %>
           <div class="attendees">
-            <small class="text-primary"><%= pluralize(event.guests.count, "attendees" )%></small>
+            <small class="text-primary"><%= pluralize(event.event.guests.count, "attendee" )%></small>
           </div>
         <% end %>
       </div>
@@ -59,7 +59,7 @@
         </div>
         <% if event.event.guests.count > 0 %>
           <div class="attendees">
-            <small class="text-primary"><%= pluralize(event.guests.count, "attendees" )%></small>
+            <small class="text-primary"><%= pluralize(event.event.guests.count, "attendee" )%></small>
           </div>
         <% end %>
       </div>
