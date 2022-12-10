@@ -57,13 +57,16 @@
     <div class="component-container">
       <% @join = true %>
       <% @guests.each do |guest| %>
-        <% if guest.status == "Accept" %>
+        <% if guest.status == "Accept" || guest.status == "Pending" %>
           <% user = User.find(guest.guest_id) %>
           <%= render "shared/user", user: user, event: @event %>
           <% if user.id == current_user.id %>
             <% @join = false %>
             <%= link_to "Decided not to show?", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary" %>
           <% end %>
+        <% elsif guest.status == "Invited" && guest.guest_id == current_user.id %>
+          <%= button_to "You're gonna show up to this event!",  {:controller => "guests", :action => "accept", :event_id => @event.id, :guest_id => guest.id  },  {:method=>:patch, class: "btn btn-primary d-block w-100"} %>
+          <%= button_to "You can't make it? Let the host know.",  {:controller => "guests", :action => "reject", :event_id => @event.id, :guest_id => guest.id },  {:method=>:patch, class: "btn btn-secondary d-block w-100"} %>
         <% end %>
       <% end %>
     </div>

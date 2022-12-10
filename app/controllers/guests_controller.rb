@@ -6,6 +6,7 @@ class GuestsController < ApplicationController
     @guest = Guest.new
     @guest.event_id = @event.id
     @guest.guest_id = current_user.id
+    @guest.status = "Pending"
     authorize @guest
     if @guest.save
       redirect_to event_path(@event)

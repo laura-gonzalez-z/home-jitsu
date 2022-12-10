@@ -41,6 +41,7 @@ class EventsController < ApplicationController
   def my_events
     authorize @user
     @joined_events = Guest.select { |guest| guest.guest_id == current_user.id }
+    @invited_events = Guest.select { |guest| guest.guest_id == current_user.id && guest.status == "Invited" }
     @events = Event.select { |event| event.host_id == current_user.id }
     upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
     @sorted = [[*upcoming], [*past.reverse]]

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :events
 
-  resources :guests, only: %i[create]
+  resources :guests, only: %i[create destroy]
 
   resources :partners, only: %i[index create destroy]
 
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get "my_messages", to: "chatrooms#my_messages"
 
   get "my_events", to: "events#my_events"
+
+  get "my_invites", to: "events#my_invites"
 
   get "notifications", to: "notifications#index"
 
