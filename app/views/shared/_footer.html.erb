@@ -15,7 +15,7 @@
             <% if types.include?("message") && types.include?("review") || types.include?("accept") || types.include?("partner") %>
               <%= link_to "Messages", my_messages_path, class: "messages new" %>
               <%= link_to "Notifications", notifications_path, class: "notifications new" %>
-            <% elsif types.include?("message") == false && types.include?("review") || types.include?("accept") || types.include?("partner") %>
+            <% elsif types.include?("message") == false && (types.include?("review") || types.include?("accept") || types.include?("partner")) %>
               <%= link_to "Messages", my_messages_path, class: "messages" %>
               <%= link_to "Notifications", notifications_path, class: "notifications new" %>
             <% else %>
