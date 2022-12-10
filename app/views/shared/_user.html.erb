@@ -19,7 +19,7 @@
       <% if user.reviews.exists? %>
         <%= render "shared/stars", average_rating: user.reviews.average(:rating).round(2) %>
       <% end %>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && !current_user.latitude.nil? && !user.latitude.nil? %>
         <small class="text-end">
           <%# TODO %>
           <%="#{user.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km

@@ -5,10 +5,17 @@ class EventsController < ApplicationController
   def index
     # TODO: Just filter upcoming events
     if params[:query].present?
-      sql_query = "address ILIKE :query"
-      @events = policy_scope(Event).where(sql_query, query: "%#{params[:query]}%")
+      geocoded_search_results = Geocoder.search(params[:query])
+      top_result = geocoded_search_results.first
+      @events = policy_scope(Event).near(top_result.address, 5)
+      @events_sorted = @events
     else
-      @events = policy_scope(Event)
+      @events = policy_scope(Event).where.not(latitude: nil)
+      if current_user.latitude.nil?
+        @events_sorted = @events
+      else
+        @events_sorted = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+      end
     end
     @markers = @events.geocoded.map do |event|
       {
