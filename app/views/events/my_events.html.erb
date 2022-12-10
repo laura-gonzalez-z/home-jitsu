@@ -10,26 +10,26 @@
 <% if !@invited_events.empty? %>
   <h2>Invited events</h2>
   <div class="component-container">
-  <% @invited_events.each do |event| %>
-    <%= link_to event_path(event), :action => 'go', class: "card-box bg-white" do %>
+  <% @invited_events.each do |guest| %>
+    <%= link_to event_path(guest.event.id), :action => 'go', class: "card-box bg-white" do %>
       <div class="d-flex flex-column event-grid">
         <div class="d-flex card-grid justify-content-between">
           <div>
-            <div class="date"><small><%= event.event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
-            <p class="m-0"><strong><%= event.event.title %></strong></p>
+            <div class="date"><small><%= guest.event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
+            <p class="m-0"><strong><%= guest.event.title %></strong></p>
           </div>
           <div>
-            <% if event.event.photo.key %>
-              <%= cl_image_tag event.event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
+            <% if guest.event.photo.key %>
+              <%= cl_image_tag guest.event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
             <% end %>
           </div>
         </div>
         <div class="address">
-          <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= event.event.address %></small>
+          <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= guest.event.address %></small>
         </div>
-        <% if event.event.guests.count > 0 %>
+        <% if guest.event.guests.count > 0 %>
           <div class="attendees">
-            <small class="text-primary"><%= pluralize(event.event.guests.count, "attendee" )%></small>
+            <small class="text-primary"><%= pluralize(guest.event.guests.count, "attendee" )%></small>
           </div>
         <% end %>
       </div>
@@ -40,26 +40,26 @@
 <% if !@joined_events.empty? %>
   <h2>Joined events</h2>
   <div class="component-container">
-  <% @joined_events.each do |event| %>
-    <%= link_to event_path(event), :action => 'go', class: "card-box bg-white" do %>
+  <% @joined_events.each do |guest| %>
+    <%= link_to event_path(guest), :action => 'go', class: "card-box bg-white" do %>
       <div class="d-flex flex-column event-grid">
         <div class="d-flex card-grid justify-content-between">
           <div>
-            <div class="date"><small><%= event.event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
-            <p class="m-0"><strong><%= event.event.title %></strong></p>
+            <div class="date"><small><%= guest.event.date.strftime("%a, %b %e. %l:%M %p") %></small></div>
+            <p class="m-0"><strong><%= guest.event.title %></strong></p>
           </div>
           <div>
-            <% if event.event.photo.key %>
-              <%= cl_image_tag event.event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
+            <% if guest.event.photo.key %>
+              <%= cl_image_tag guest.event.photo.key, crop: :thumb, class: "img-event ms-2", width: 125 %>
             <% end %>
           </div>
         </div>
         <div class="address">
-          <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= event.event.address %></small>
+          <small><%= image_tag "icons/map-pin.svg", alt: "here", width: 14 %> <%= guest.event.address %></small>
         </div>
-        <% if event.event.guests.count > 0 %>
+        <% if guest.event.guests.count > 0 %>
           <div class="attendees">
-            <small class="text-primary"><%= pluralize(event.event.guests.count, "attendee" )%></small>
+            <small class="text-primary"><%= pluralize(guest.event.guests.count, "attendee" )%></small>
           </div>
         <% end %>
       </div>

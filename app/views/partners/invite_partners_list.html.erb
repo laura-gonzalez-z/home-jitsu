@@ -1,5 +1,6 @@
 <div class="component-container">
   <% current_user.friends.each do |friend| %>
+    <div class="card-box bg-white">
       <div class="d-flex card-grid">
         <% if friend.photo.key %>
           <%= cl_image_tag friend.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
@@ -24,6 +25,6 @@
           <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
