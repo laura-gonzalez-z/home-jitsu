@@ -12,6 +12,10 @@
             <li><%=link_to "#{notification.params[:requestee].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
           <% elsif notification.params[:type] == "partner" %>
             <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
+          <% elsif notification.params[:type] == "join" %>
+            <li><%=link_to "#{notification.params[:guest].first_name} would like to join your event."%></li>
+          <% elsif notification.params[:type] == "invite" %>
+            <li><%=link_to "#{notification.params[:host].first_name} invited you to their event.", user_path(notification.params[:requester])%></li>
           <% end %>
         <% end %>
       <% end %>

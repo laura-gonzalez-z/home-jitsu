@@ -8,6 +8,7 @@ class GuestsController < ApplicationController
     @guest.guest_id = current_user.id
     authorize @guest
     if @guest.save
+      notify_host if @guest.status == "Pending"
       redirect_to event_path(@event)
     else
       render event_path(@event), :unprocessable_entity
@@ -21,6 +22,7 @@ class GuestsController < ApplicationController
     @guest.status = "Invited"
     authorize @guest
     if @guest.save
+      notify_recipient
       redirect_to invite_partners_path(current_user)
     else
       render invite_partners_path(current_user), :unprocessable_entity
@@ -57,5 +59,19 @@ class GuestsController < ApplicationController
 
   def set_guest
     @guest = Guest.find(params[:guest_id])
+  end
+
+  def notify_host
+    host = User.find(@guest.event.host)
+    notification = GuestNotification.with(type: "join", host: host,
+                                          recipient: @guest.guest, status: @guest.status)
+    notification.deliver(host)
+  end
+
+  def notify_recipient
+    guest = @guest.guest
+    notification = GuestNotification.with(type: "invite", host: @guest.event.host,
+                                          recipient: guest, status: @guest.status)
+    notification.deliver(guest)
   end
 end
