@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   root to: "pages#home"
+  get "loading", to: "pages#loading"
   get "my_messages", to: "chatrooms#my_messages"
   patch "/partners/:id/accept", to: "partners#accept", as: :accept
   patch "/partners/:id/reject", to: "partners#reject", as: :reject

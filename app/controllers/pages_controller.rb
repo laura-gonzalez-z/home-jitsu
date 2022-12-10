@@ -20,4 +20,7 @@ class PagesController < ApplicationController
     upcoming, past = @events.sort_by(&:date).partition{ |a| a.date.future? }
     @sorted = [[*upcoming], [*past.reverse]]
   end
+
+  def loading
+  end
 end
