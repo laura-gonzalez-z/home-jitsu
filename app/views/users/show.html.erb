@@ -41,7 +41,14 @@
           Gi / No-gi
         <% end %>
       </p>
-      <%# TODO: Add distance %>
+      <% unless @user.id == current_user.id %>
+        <% if !current_user.latitude.nil? && !@user.latitude.nil? %>
+          <p>
+            <strong>Distance:</strong>
+            <%="#{@user.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km
+          </p>
+        <% end %>
+      <% end %>
     </div>
 
     <p class="text-secondary mt-3"><%= @user.description %></p>
