@@ -1,7 +1,8 @@
 <div class="back-bar navbar navbar-lewagon">
   <div class="container">
     <div class="d-flex align-items-center justify-content-start">
-      <%= link_to "javascript:history.back()" do %>
+      <% def_link = defined?(link) ? link : "javascript:history.back()" %>
+      <%= link_to def_link do %>
         <%= image_tag "icons/arrow-left.svg", alt: "go-back", class: "me-3 arrow" %>
       <% end %>
       <% if defined?(user) %>

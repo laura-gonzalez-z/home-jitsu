@@ -1,4 +1,8 @@
-<%= render 'shared/back_bar' %>
+<% if @user.id == current_user.id %>
+  <%= render 'shared/back_bar', link: :back %>
+<% else %>
+  <%= render 'shared/back_bar' %>
+<% end %>
 <div class="form-box mb-0">
   <div class="text-center">
     <% if @user.photo.key %>
