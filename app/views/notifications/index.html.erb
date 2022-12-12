@@ -8,26 +8,8 @@
         <li><%=link_to "#{notification.params[:message]}", event_path(notification.params[:link_to]) %></li>
       <% elsif notification.params[:type] == "review" %>
         <li><%=link_to "#{notification.params[:message]}", user_reviews_path(notification.params[:link_to]) %></li>
-      <% end %>
-
-      <% if false %>
-        <% elsif notification.params[:type] == "partner" %>
-          <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
-        <% elsif notification.params[:type] == "invite" %>
-          <li><%=link_to "#{notification.params[:host].first_name} invited you to their event.", event_path(notification.params[:event])%></li>
-        <% elsif notification.params[:type] == "host-accept-join" %>
-          <li><%=link_to "#{notification.params[:host].first_name} accepted your request to join this event.", event_path(notification.params[:event])%></li>
-        <% end %>
-      <% elsif notification.params[:requester] == current_user || notification.params[:host] == current_user %>
-        <% if notification.unread? %>
-          <% if notification.params[:type] == "accept"%>
-            <li><%=link_to "#{notification.params[:recipient].first_name} accepted your partner request.", user_path(notification.params[:requestee]) %></li>
-          <% elsif notification.params[:type] == "join" %>
-            <li><%=link_to "#{notification.params[:recipient].first_name} would like to join your event.", event_path(notification.params[:event])%></li>
-          <% elsif notification.params[:type] == "guest-accept-invite" %>
-            <li><%=link_to "#{notification.params[:recipient].first_name} accepted the invite to your event.", event_path(notification.params[:event])%></li>
-          <% end %>
-        <% end %>
+      <% elsif notification.params[:type] == "user" %>
+        <li><%=link_to "#{notification.params[:message]}", user_path(notification.params[:link_to]) %></li>
       <% end %>
     <% end %>
   <% end %>

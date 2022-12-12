@@ -61,15 +61,23 @@ class PartnersController < ApplicationController
 
   def notify_recipient
     recipient = User.find(@partner.requestee_id)
-    notification = PartnerNotification.with(recipient: @partner.requestee, status: @partner.status,
-                                            requester: @partner.requester, type: "partner")
+    notification = PartnerNotification.with(
+      type: "user",
+      message: "#{@partner.requester.first_name} invited you to be their partner.",
+      recipient: @partner.requestee,
+      link_to: @partner.requester
+    )
     notification.deliver(recipient)
   end
 
   def notify_requester
     requester = User.find(@partner.requester_id)
-    notification = PartnerNotification.with(requester: @partner.requester, status: @partner.status,
-                                            requestee: @partner.requestee, type: "accept")
+    notification = PartnerNotification.with(
+      type: "user",
+      message: "#{@partner.requestee.first_name} accepted your partner request.",
+      recipient: @partner.requestee,
+      link_to: @partner.requestee
+    )
     notification.deliver(requester)
   end
 end

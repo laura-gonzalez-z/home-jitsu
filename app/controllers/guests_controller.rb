@@ -67,8 +67,12 @@ class GuestsController < ApplicationController
 
   def notify_host
     host = @guest.event.host
-    notification = GuestNotification.with(type: "join", host: host,
-                                          recipient: @guest.guest, status: @guest.status, event: @guest.event)
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.guest.first_name} would like to join your event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
     notification.deliver(host)
   end
 
@@ -84,20 +88,21 @@ class GuestsController < ApplicationController
   end
 
   def notify_guest_accept
-    host = @guest.event.host
-    notification = GuestNotification.with(type: "host-accept-join", host: host,
-                                          recipient: @guest.guest, status: @guest.status, event: @guest.event)
+    guest = @guest.guest
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.event.host.first_name} accepted your request to join this event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
     notification.deliver(guest)
   end
 
   def notify_host_accept
-    guest = @guest.guest
-    notification = GuestNotification.with(type: "guest-accept-invite", host: @guest.event.host,
-                                          recipient: guest, status: @guest.status, event: @guest.event)
-
+    host = @guest.event.host
     notification = GuestNotification.with(
       type: "event",
-      message: "#{notification.params[:recipient].first_name} accepted the invite to your event.",
+      message: "#{@guest.guest.first_name} accepted the invite to your event.",
       recipient: @guest.guest,
       link_to: @guest.event
     )
