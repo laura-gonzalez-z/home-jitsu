@@ -29,7 +29,7 @@ class EventsController < ApplicationController
 
     if params[:date].present?
       date = DateTime.parse(params[:date]).to_i + 18_000
-      @events = @events.select { |event| date <= event.date.to_i && event.date.to_i <= (date + 60 * 60 * 24) }
+      @events = @events.select { |event| date <= event.date.to_i && event.date.to_i <= (date + (60 * 60 * 24)) }
     end
 
     @markers = @events.map do |event|
