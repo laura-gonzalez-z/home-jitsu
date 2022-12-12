@@ -6,10 +6,11 @@
     <% current_user.unread_notifications.each do |notification| %>
       <% if notification.params[:type] == "event" %>
         <li><%=link_to "#{notification.params[:message]}", event_path(notification.params[:link_to]) %></li>
+      <% elsif notification.params[:type] == "review" %>
+        <li><%=link_to "#{notification.params[:message]}", user_reviews_path(notification.params[:link_to]) %></li>
       <% end %>
+
       <% if false %>
-        <% if notification.params[:type] == "review" %>
-          <li><%=link_to "#{notification.params[:writer].first_name} left you a #{notification.params[:rating]}-star review.", user_reviews_path(notification.recipient) %></li>
         <% elsif notification.params[:type] == "partner" %>
           <li><%=link_to "#{notification.params[:requester].first_name} invited you to be their partner.", user_path(notification.params[:requester])%></li>
         <% elsif notification.params[:type] == "invite" %>
