@@ -21,7 +21,7 @@
           <% if !@guests_ids.include?(friend.id) %>
             <%= button_to "Invite",  {:controller => "guests", :action => "invite", :event_id => @event.id, :guest_id => friend.id },  {:method=>:post, class: "btn btn-primary d-block w-100"} %>
           <% else %>
-            <%="#{friend.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km
+            <small class="text-end"><%="#{friend.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km</small>
           <% end %>
         </div>
       </div>

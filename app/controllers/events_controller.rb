@@ -45,9 +45,14 @@ class EventsController < ApplicationController
     authorize @event
     @confirmed_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Accept" }
     @pending_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Pending" }
+    @invited_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Invited" }
     @include_guest = [@event.host_id]
     @confirmed_guests.each { |guest| @include_guest << guest.guest_id }
     @pending_guests.each { |guest| @include_guest << guest.guest_id }
+    @invited_guests.each { |guest| @include_guest << guest.guest_id }
+    @confirmed_guests_ids = @confirmed_guests.map { |guest| guest.guest_id }
+    @pending_guests_ids = @pending_guests.map { |guest| guest.guest_id }
+    @invited_guests_ids = @invited_guests.map { |guest| guest.guest_id }
     @markers = [
       {
         lat: @event.latitude,
