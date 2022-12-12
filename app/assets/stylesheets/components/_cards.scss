@@ -25,9 +25,18 @@
 }
 .button-block {
   gap: 10px;
+  align-content: stretch;
+  form.button_to {
+    display: flex;
+  }
+  .btn.w-100 {
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .btn.d-block, .btn.d-inline-block {
-  padding: 10px 15px;
+  padding: 10px 10px;
   line-height: 20px;
   border: none;
 }
