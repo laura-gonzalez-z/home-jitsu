@@ -57,9 +57,10 @@ class EventsController < ApplicationController
       {
         lat: @event.latitude,
         lng: @event.longitude,
-        info_window: render_to_string(partial: "info_window", locals: {event: @event})
+        info_window: render_to_string(partial: "info_window", locals: { event: @event })
       }
     ]
+    set_notifications_to_read
   end
 
   def my_events
@@ -119,5 +120,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:date, :title, :address, :description, :photo)
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
   end
 end
