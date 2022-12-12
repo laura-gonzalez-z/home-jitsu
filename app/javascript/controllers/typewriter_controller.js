@@ -12,7 +12,7 @@ export default class extends Controller {
     const peopleArray = ['- Bruce Lee', '- Renzo Gracie', '- John Danaher'];
 
     const typingDelay = 100;
-    const erasingDelay = 100;
+    const erasingDelay = 50;
     const newTextDelay = 5000; // Delay between current and next text
 
     let charIndex = 0;
