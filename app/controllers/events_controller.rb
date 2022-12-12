@@ -4,20 +4,35 @@ class EventsController < ApplicationController
 
   def index
     # TODO: Just filter upcoming events
+    @events = Event.all
+    policy_scope(@events)
+
+
     if params[:query].present?
       geocoded_search_results = Geocoder.search(params[:query])
       top_result = geocoded_search_results.first
-      @events = policy_scope(Event).near(top_result.address, 5)
-      @events_sorted = @events
-    else
-      @events = policy_scope(Event).where.not(latitude: nil)
-      if current_user.latitude.nil?
-        @events_sorted = @events
+      unless top_result.nil?
+        @events = @events.near(top_result.address, 5)
       else
-        @events_sorted = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+        @events = []
+      end
+    else
+      @events = @events.where.not(latitude: nil)
+      unless current_user.latitude.nil?
+        @events = @events.sort_by { |event| event.distance_to([current_user.latitude, current_user.longitude]).round(1) }
       end
     end
-    @markers = @events.geocoded.map do |event|
+
+    if params[:name].present?
+      @events = @events.select { |event| event.host.first_name == params[:name] }
+    end
+
+    if params[:date].present?
+      date = DateTime.parse(params[:date]).to_i + 18_000
+      @events = @events.select { |event| date <= event.date.to_i && event.date.to_i <= (date + (60 * 60 * 24)) }
+    end
+
+    @markers = @events.map do |event|
       {
         lat: event.latitude,
         lng: event.longitude,
@@ -28,7 +43,16 @@ class EventsController < ApplicationController
 
   def show
     authorize @event
-    @guests = Guest.select { |guest| guest.event_id == @event.id }
+    @confirmed_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Accept" }
+    @pending_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Pending" }
+    @invited_guests = Guest.select { |guest| guest.event_id == @event.id && guest.status == "Invited" }
+    @include_guest = [@event.host_id]
+    @confirmed_guests.each { |guest| @include_guest << guest.guest_id }
+    @pending_guests.each { |guest| @include_guest << guest.guest_id }
+    @invited_guests.each { |guest| @include_guest << guest.guest_id }
+    @confirmed_guests_ids = @confirmed_guests.map { |guest| guest.guest_id }
+    @pending_guests_ids = @pending_guests.map { |guest| guest.guest_id }
+    @invited_guests_ids = @invited_guests.map { |guest| guest.guest_id }
     @markers = [
       {
         lat: @event.latitude,

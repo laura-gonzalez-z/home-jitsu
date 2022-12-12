@@ -42,7 +42,10 @@ class GuestsController < ApplicationController
 
   def accept
     authorize @guest
+    previous_status = @guest.status
     @guest.update(status: "Accept")
+    notify_guest_accept if previous_status == "Pending"
+    notify_host_accept if previous_status == "Invited"
     set_notifications_to_read
     redirect_to event_path(@event)
   end
@@ -69,16 +72,45 @@ class GuestsController < ApplicationController
 
   def notify_host
     host = @guest.event.host
-    notification = GuestNotification.with(type: "join", host: host,
-                                          recipient: @guest.guest, status: @guest.status, event: @guest.event)
-    pp notification
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.guest.first_name} would like to join your event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
     notification.deliver(host)
   end
 
   def notify_recipient
     guest = @guest.guest
-    notification = GuestNotification.with(type: "invite", host: @guest.event.host,
-                                          recipient: guest, status: @guest.status, event: @guest.event)
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.event.host.first_name} invited you to their event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
     notification.deliver(guest)
+  end
+
+  def notify_guest_accept
+    guest = @guest.guest
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.event.host.first_name} accepted your request to join this event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
+    notification.deliver(guest)
+  end
+
+  def notify_host_accept
+    host = @guest.event.host
+    notification = GuestNotification.with(
+      type: "event",
+      message: "#{@guest.guest.first_name} accepted the invite to your event.",
+      recipient: @guest.guest,
+      link_to: @guest.event
+    )
+    notification.deliver(host)
   end
 end
