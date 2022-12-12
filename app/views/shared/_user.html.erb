@@ -6,7 +6,12 @@
       <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar" %>
     <% end %>
     <div class="flex-grow-1">
-      <p class="m-0"><strong><%= user.first_name %> <%= user.last_name %></strong></p>
+      <p class="m-0">
+        <strong><%= user.first_name %> <%= user.last_name %></strong>
+        <% if user.belt != "None" %>
+          <%= image_tag "belts/#{user.belt.downcase}-belt.svg", alt: "belt", width: 20, class: "belt" %>
+        <% end %>
+      </p>
       <small>
         <% if user.years_of_experience > 0 %>
           <%=user.years_of_experience%> years of experience

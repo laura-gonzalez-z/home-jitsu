@@ -28,11 +28,16 @@
           </small>
         </div>
         <div>
-          <% if host.years_of_experience > 0 %>
-            <%=host.years_of_experience%> y
-          <% else %>
-            New!
+          <% if host.belt != "None" %>
+            <%= image_tag "belts/#{host.belt.downcase}-belt.svg", alt: "belt", width: 20, class: "belt" %>
           <% end %>
+          <small>
+            <% if host.years_of_experience > 0 %>
+              <%=host.years_of_experience%> y
+            <% else %>
+              New!
+            <% end %>
+          </small>
         </div>
       </div>
     <% end %>
@@ -70,24 +75,28 @@
         <% if guest.status == "Pending" %>
           <div class="card-box bg-white">
             <div class="d-flex card-grid">
-              <% if user.photo.key %>
-                <%= cl_image_tag user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
-              <% else %>
-                <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar" %>
+              <%= link_to user_path(user), :action => 'go' do %>
+                <% if user.photo.key %>
+                  <%= cl_image_tag user.photo.key, crop: :thumb, class: "rounded-circle avatar" %>
+                <% else %>
+                  <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar" %>
+                <% end %>
               <% end %>
               <div class="flex-grow-1">
-                <p class="m-0"><strong><%= user.first_name %> <%= user.last_name %></strong></p>
+                <p class="m-0">
+                  <strong><%= link_to user_path(user), :action => 'go' do %><%= user.first_name %> <%= user.last_name %><% end %></strong>
+                </p>
                 <small>
-                <% if user.years_of_experience > 0 %>
-                  <%=user.years_of_experience%> years of experience
-                <% else %>
-                  New to BJJ
-                <% end %>
+                  <% if user.years_of_experience > 0 %>
+                    <%=user.years_of_experience%> years of experience
+                  <% else %>
+                    New to BJJ
+                  <% end %>
                 </small>
               </div>
-              <div>
-                <%= button_to "Accept",  {:controller => "guests", :action => "accept", :event_id => @event.id, :guest_id => guest.id  },  {:method=>:patch, class: "btn btn-primary d-block w-100"} %>
-                <%= button_to "Reject",  {:controller => "guests", :action => "reject", :event_id => @event.id, :guest_id => guest.id },  {:method=>:patch, class: "btn btn-secondary d-block w-100"} %>
+              <div class="d-flex align-items-center">
+                <%= button_to raw("<i class='fa-solid fa-check'></i>"),  {:controller => "guests", :action => "accept", :event_id => @event.id, :guest_id => guest.id  },  {:method=>:patch, class: "btn btn-xs btn-primary d-block w-100"} %>
+                <%= button_to raw("<i class='fa-solid fa-xmark'></i>"),  {:controller => "guests", :action => "reject", :event_id => @event.id, :guest_id => guest.id },  {:method=>:patch, class: "btn btn-xs btn-secondary d-block w-100 ms-1"} %>
               </div>
             </div>
           </div>
