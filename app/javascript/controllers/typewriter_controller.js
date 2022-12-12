@@ -13,7 +13,7 @@ export default class extends Controller {
 
     const typingDelay = 100;
     const erasingDelay = 50;
-    const newTextDelay = 5000; // Delay between current and next text
+    const newTextDelay = 3000; // Delay between current and next text
 
     let charIndex = 0;
     let textArrayIndex = 0;
