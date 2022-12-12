@@ -98,13 +98,13 @@
     <% if !@include_guest.include?(current_user.id) && @event.date.future? %>
       <%= button_to "Join event", {:controller => "guests", :action => "create", :guest_id => current_user.id, :event_id => @event.id} , {:method=>:post, class: "btn btn-primary d-block w-100 my-3"} %>
     <% elsif @invited_guests_ids.include?(current_user.id) %>
-    <% guest = Guest.where(guest_id: current_user.id, event_id: @event.id) %>
+    <% guest = Guest.where(guest_id: current_user.id, event_id: @event.id).first %>
       <div class="d-flex button-block my-3">
         <%= button_to "I'm going",  {:controller => "guests", :action => "accept", :event_id => @event.id, :guest_id => guest.id  },  {:method=>:patch, class: "btn btn-primary d-block w-100"} %>
         <%= button_to "Can't make it",  {:controller => "guests", :action => "reject", :event_id => @event.id, :guest_id => guest.id },  {:method=>:patch, class: "btn btn-secondary d-block w-100"} %>
       </div>
     <% elsif @pending_guests_ids.include?(current_user.id) || @confirmed_guests_ids.include?(current_user.id) %>
-    <% guest = Guest.where(guest_id: current_user.id, event_id: @event.id) %>
+    <% guest = Guest.where(guest_id: current_user.id, event_id: @event.id).first %>
       <%= link_to "Decided not to show", guest_path(guest), data: { turbo_method: :delete, turbo_confirm: "Are you sure you won't show up?" }, class: "btn btn-primary d-block w-100 my-3" %>
     <% end %>
   <% end %>
