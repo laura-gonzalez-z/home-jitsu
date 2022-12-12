@@ -43,6 +43,7 @@ class GuestsController < ApplicationController
   def accept
     authorize @guest
     @guest.update(status: "Accept")
+    set_notifications_to_read
     redirect_to event_path(@event)
   end
 
@@ -60,6 +61,10 @@ class GuestsController < ApplicationController
 
   def set_guest
     @guest = Guest.find(params[:guest_id])
+  end
+
+  def set_notifications_to_read
+    current_user.notifications.mark_as_read!
   end
 
   def notify_host
