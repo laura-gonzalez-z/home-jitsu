@@ -52,3 +52,16 @@
     }
   }
 }
+.attendee-list {
+  h2 {
+    margin-top: 10px;
+  }
+  .hide-attendees {
+    > * {
+      display: none;
+    }
+    > .card-box:nth-child(1), > .card-box:nth-child(2) {
+      display: block;
+    }
+  }
+}

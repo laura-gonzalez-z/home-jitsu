@@ -58,12 +58,17 @@
   </div>
 
   <% if !@confirmed_guests.empty? %>
-    <h2><%= pluralize( @confirmed_guests.count, 'Attendee') %></h2>
-    <div class="component-container">
-      <% @confirmed_guests.each do |guest| %>
-        <% user = User.find(guest.guest_id) %>
-        <%= render "shared/user", user: user %>
-      <% end %>
+    <div class="attendee-list" data-controller="attendee-list">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2><%= pluralize( @confirmed_guests.count, 'Attendee') %></h2>
+        <a href="#" class="fw-bold" data-attendee-list-target="link">See all</a>
+      </div>
+      <div class="component-container" data-attendee-list-target="list">
+        <% @confirmed_guests.each do |guest| %>
+          <% user = User.find(guest.guest_id) %>
+          <%= render "shared/user", user: user %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
