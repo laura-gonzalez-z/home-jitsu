@@ -1,14 +1,35 @@
-<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-<div class="form-inputs">
-  <%= simple_form_for([@user, @review]) do |f| %>
-    <%= f.input :content,
-              as: :text,
-              required: true,
-              autofocus: true,
-              input_html: { autocomplete: "Let us know what you think of #{@user.first_name}" }%>
-    <%= f.input :rating,
-              required: true,
-              input_html: { autocomplete: "Leave them a rating from 1-5" }%>
-    <%= f.submit %>
-  <% end %>
+<%= render 'shared/back_bar' %>
+<div class="form-box mb-0">
+  <div class="text-center">
+    <% if @user.photo.key %>
+      <%= cl_image_tag @user.photo.key, crop: :thumb, class: "rounded-circle avatar-large" %>
+    <% else %>
+      <%= image_tag "avatar.svg", alt: "user", width: 40, class: "avatar-large" %>
+    <% end %>
+  </div>
 </div>
+<div class="component-container">
+  <div class="form-box bg-white new-review">
+    <h1 class="mt-0">Leave a review for <%= "#{@user.first_name}" %></h1>
+    <div class="form-inputs">
+      <%= simple_form_for([@user, @review], data: {turbo: false}) do |f| %>
+        <%= f.input :rating,
+                  as: :select,
+                  required: true,
+                  collection: (1..5),
+                  label: false,
+                  prompt: "What's your rating",
+                  input_html: { autocomplete: "Leave them a rating from 1-5", data: {controller: "star-rating", options: {"tooltip":false}} }%>
+        <%= f.input :content,
+                  as: :text,
+                  required: true,
+                  label: false,
+                  autofocus: true,
+                  placeholder: 'Content *',
+                  input_html: { autocomplete: "Let us know what you think of #{@user.first_name}" }%>
+        <%= f.submit "Submit review", class: "btn btn-primary d-block w-100" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<p class="text-center"><%= link_to "See more reviews", user_reviews_path(@user), class: "text-primary fw-bold" %></p>
