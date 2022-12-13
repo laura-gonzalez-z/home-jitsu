@@ -21,9 +21,10 @@ class ReviewsController < ApplicationController
     authorize @review
     if @review.save
       notify_recipient
-      redirect_to user_path(@user)
+      redirect_to user_reviews_path(@user)
     else
-      render :new, :unprocessable_entity
+      flash[:alert] = "Something went wrong."
+      render :new
     end
   end
 

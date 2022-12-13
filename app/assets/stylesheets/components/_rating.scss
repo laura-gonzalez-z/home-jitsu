@@ -21,3 +21,11 @@
     left: 0;
   }
 }
+.new_review .review_rating {
+  margin: 20px 0!important;
+}
+
+:root {
+  --gl-star-empty: url('icons/star-empty.svg');
+  --gl-star-full: url('icons/star-full.svg');
+}
