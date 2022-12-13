@@ -3,51 +3,78 @@
   <%= field.input :first_name,
               required: true,
               autofocus: true,
+              label: false,
+              placeholder: "First name *",
               input_html: { autocomplete: "first_name" }%>
   <%= field.input :last_name,
               required: true,
               autofocus: true,
+              label: false,
+              placeholder: "Last name *",
               input_html: { autocomplete: "last_name" }%>
   <%= field.input :address,
               hint: "This won't be public! Just make sure it's a real address or you will miss a lot of our features",
               required: true,
+              label: false,
+              placeholder: "Address *",
               input_html: { autocomplete: "address" } %>
   <%= field.input :gender, collection: User::GENDERS,
               required: true,
+              label: false,
+              prompt: "Gender *",
               input_html: { autocomplete: "gender" } %>
   <%= field.input :weight,
               required: true,
+              label: false,
+              placeholder: "Weight *",
               input_html: { autocomplete: "weight" } %>
   <%= field.input :height,
               required: true,
+              label: false,
+              placeholder: "Height *",
               input_html: { autocomplete: "height" } %>
   <%= field.input :belt, collection: User::BELTS,
               required: false,
+              label: false,
+              prompt: "Belt",
               input_html: { autocomplete: "belt" } %>
   <%= field.input :years_of_experience,
               required: false,
+              label: false,
+              placeholder: "Years of experience *",
               input_html: { autocomplete: "years_of_experience" } %>
   <%= field.input :training_style, collection: User::TRAINING_STYLES,
               required: true,
+              label: false,
+              prompt: "Training style *",
               input_html: { autocomplete: "training_style" } %>
   <%= field.input :description,
+              as: :text,
               required: false,
+              label: false,
+              placeholder: "Description",
               input_html: { autocomplete: "description" } %>
   <%= field.input :email,
               required: true,
               autofocus: true,
+              label: false,
+              placeholder: "Email *",
               input_html: { autocomplete: "email" }%>
   <%= field.input :password,
               required: true,
+              label: false,
+              placeholder: "Password *",
               hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
               input_html: { autocomplete: "new-password" } %>
   <%= field.input :password_confirmation,
               required: true,
+              label: false,
+              placeholder: "Password confirmation *",
               input_html: { autocomplete: "new-password" } %>
   <%= field.input :photo, as: :file,
               required: false,
               input_html: { autocomplete: "upload an avatar"} %>
 </div>
 <div class="form-actions">
-  <%= field.button :submit, @message %>
+  <%= field.button :submit, @message, class: "btn btn-primary d-block w-100" %>
 </div>
