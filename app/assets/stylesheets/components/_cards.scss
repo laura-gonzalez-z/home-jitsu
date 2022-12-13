@@ -9,6 +9,15 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    strong {
+      vertical-align: middle;
+    }
+    a {
+      color: $dark-grey;
+      &:hover {
+        color: $main-purple;
+      }
+    }
   }
 }
 .form-box {
@@ -53,4 +62,9 @@
     border-radius: 50%;
     margin: 8px 0 0 auto;
   }
+}
+.btn.btn-xs {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 7px 9px;
 }

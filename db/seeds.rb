@@ -60,7 +60,7 @@ laura = User.new(
   gender: "Female",
   belt: "Purple",
   years_of_experience: 6,
-  description: "BJJ expert that will strangle you",
+  description: "Give me the chance and I will strangle you!",
   training_style: "Both"
 )
 file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766489/laura-gonzalez_eggbxn.jpg")
@@ -76,9 +76,9 @@ tsunami = User.new(
   height: 175,
   address: ADDRESS.sample,
   gender: "Male",
-  description: "Not a BJJ expert but give him a stick and he will Kendo you to the ground",
+  description: "Not a BJJ expert but give me a stick and I will Kendo you to the ground",
   years_of_experience: 0,
-  belt: "None",
+  belt: "White",
   training_style: "Gi"
 )
 file = URI.open("https://res.cloudinary.com/dr82gggzf/image/upload/v1669766492/touhami_fkztx4.jpg")
@@ -114,7 +114,7 @@ jimbo = User.new(
   gender: "Male",
   belt: "Blue",
   years_of_experience: 4,
-  description: "I love BJJ, want to share my knowledge and learn new things!",
+  description: "I'm a Judo green belt too. I love BJJ, want to share my knowledge and keep learning new things!",
   training_style: "Both"
 )
 
@@ -326,7 +326,7 @@ Review.create!(
 )
 
 Review.create!(
-  content: "Why not! Love Montreal and BJJ.",
+  content: "Why not! He loves Montreal and BJJ.",
   user_id: jimbo.id,
   writer_id: tsunami.id,
   rating: 5
@@ -350,7 +350,7 @@ Review.create!(
   content: REVIEW_CONTENT.sample,
   user_id: ben.id,
   writer_id: ricky.id,
-  rating: 1
+  rating: 2
 )
 
 Review.create!(
