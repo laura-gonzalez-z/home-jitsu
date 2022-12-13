@@ -9,7 +9,7 @@ export default class extends Controller {
     const listAttendees = this.listTarget;
     const count = listAttendees.childElementCount;
 
-    if (count <= 3) {
+    if (count <= 2) {
       linkAttendees.style.display = 'none';
     } else {
       listAttendees.classList.add('hide-attendees');
