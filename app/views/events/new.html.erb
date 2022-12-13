@@ -1,10 +1,17 @@
-<%= simple_form_for(@event) do |f| %>
-  <p>Date </p>
-  <%= f.date_field :date, as: :datetime, html5: true, min: DateTime.now %>
-  <%= f.input :title, required: false %>
-  <%= f.input :address,
-              hint: "If it's not a real address it won't show in the search!" %>
-  <%= f.input :description, required: false %>
-  <%= f.input :photo, as: :file, label: "Photo (optional)" %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/back_bar' %>
+<h1>Create an event</h1>
+<div class="component-container">
+  <div class="form-box bg-white">
+    <%= simple_form_for(@event) do |f| %>
+      <label class="form-label" for="event_date">Date *</label>
+      <%= f.datetime_field :date, as: :datetime, html5: true, min: DateTime.now, class: "form-control mb-3" %>
+      <%= f.input :title, required: true %>
+      <%= f.input :address,
+                  required: true,
+                  hint: "If it's not a real address it won't show in the search!" %>
+      <%= f.input :description, required: true %>
+      <%= f.input :photo, as: :file, label: "Photo (optional)" %>
+      <%= f.submit class: "btn btn-primary d-block w-100" %>
+    <% end %>
+  </div>
+</div>
