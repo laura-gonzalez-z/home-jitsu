@@ -24,6 +24,9 @@
 .new_review .review_rating {
   margin: 20px 0!important;
 }
+.new_review textarea {
+  height: 120px;
+}
 
 :root {
   --gl-star-empty: url('icons/star-empty.svg');
