@@ -1,6 +1,17 @@
 <h1>My partners</h1>
 <div class="component-container">
   <% current_user.friends.each do |friend| %>
-    <%= render "shared/user", user: friend %>
+    <% if Partner.where(requester_id: current_user.id, requestee_id: friend.id).first %>
+      <% partner_combo_1 = Partner.where(requester_id: current_user.id, requestee_id: friend.id).first %>
+      <% if partner_combo_1.status == "accepted" %>
+        <%= render "shared/user", user: friend %>
+      <% end %>
+    <% end %>
+    <% if Partner.where(requester_id: friend.id, requestee_id: current_user.id).first %>
+      <% partner_combo_2 = Partner.where(requester_id: friend.id, requestee_id: current_user.id).first %>
+      <% if partner_combo_2.status == "accepted" %>
+        <%= render "shared/user", user: friend %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
