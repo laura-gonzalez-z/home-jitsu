@@ -524,49 +524,34 @@ p "Created events with 1 semi-random guest each"
 p "Destroying partner lists"
 Partner.destroy_all
 
-2.times do
-  Partner.create!(
-    requestee_id: jonathan.id,
-    requester_id: User.all.ids.sample
-  )
-  Partner.create!(
-    requester_id: jonathan.id,
-    requestee_id: User.all.ids.sample
-  )
-end
+Partner.create!(
+  requester_id: ricky.id,
+  requestee_id: jon.id,
+  status: "accepted"
+)
 
-2.times do
-  Partner.create!(
-    requestee_id: ricky.id,
-    requester_id: User.all.ids.sample
-  )
-  Partner.create!(
-    requester_id: ricky.id,
-    requestee_id: User.all.ids.sample
-  )
-end
+Partner.create!(
+  requestee_id: laura.id,
+  requester_id: jonathan.id,
+  status: "accepted"
+)
 
-2.times do
-  Partner.create!(
-    requestee_id: laura.id,
-    requester_id: User.all.ids.sample
-  )
-  Partner.create!(
-    requester_id: laura.id,
-    requestee_id: User.all.ids.sample
-  )
-end
+Partner.create!(
+  requestee_id: laura.id,
+  requester_id: tsunami.id,
+  status: "accepted"
+)
 
-2.times do
-  Partner.create!(
-    requestee_id: tsunami.id,
-    requester_id: User.all.ids.sample
-  )
-  Partner.create!(
-    requester_id: tsunami.id,
-    requestee_id: User.all.ids.sample
-  )
-end
+Partner.create!(
+  requestee_id: tsunami.id,
+  requester_id: ricky.id,
+  status: "accepted"
+)
+Partner.create!(
+  requester_id: tsunami.id,
+  requestee_id: jon.id,
+  status: "accepted"
+)
 
 p "Created partner lists for the four team members"
 
@@ -578,24 +563,6 @@ chat3 = Chatroom.create!(name: "private_#{ricky.id}_#{jonathan.id}_")
 chat4 = Chatroom.create!(name: "private_#{laura.id}_#{tsunami.id}_")
 chat5 = Chatroom.create!(name: "private_#{laura.id}_#{jonathan.id}_")
 chat6 = Chatroom.create!(name: "private_#{tsunami.id}_#{jonathan.id}_")
-
-Message.create!(
-  content: "Hey Ricky, I was wondering if you'd wanna train?",
-  chatroom_id: chat1.id,
-  user_id: laura.id
-)
-
-Message.create!(
-  content: "Ya, of course, I'm kinda relieve because I thought everyone here had joke names.",
-  chatroom_id: chat1.id,
-  user_id: ricky.id
-)
-
-Message.create!(
-  content: "Wanna meet up at my place?",
-  chatroom_id: chat1.id,
-  user_id: ricky.id
-)
 
 Message.create!(
   content: "Hey Ricky, I really like your style, would you like to spar sometime?",
