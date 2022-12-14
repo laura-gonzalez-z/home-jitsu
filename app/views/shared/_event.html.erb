@@ -16,8 +16,10 @@
     </div>
     <% if event.guests.count > 0 %>
       <div class="attendees">
-        <% count = Guest.where(event_id: event.id, status: "Accept").count%>
-        <small class="text-primary"><%= pluralize(count, "attendee" )%></small>
+        <% count_array = Guest.where(event_id: event.id, status: "Accept")%>
+        <% if !count_array.empty? %>
+          <small class="text-primary"><%= pluralize(count_array.count, "attendee" )%></small>
+        <% end %>
       </div>
     <% end %>
   </div>
