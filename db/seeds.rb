@@ -526,7 +526,7 @@ Partner.destroy_all
 
 Partner.create!(
   requester_id: ricky.id,
-  requestee_id: jon.id,
+  requestee_id: jonathan.id,
   status: "accepted"
 )
 
@@ -549,7 +549,7 @@ Partner.create!(
 )
 Partner.create!(
   requester_id: tsunami.id,
-  requestee_id: jon.id,
+  requestee_id: jonathan.id,
   status: "accepted"
 )
 
@@ -557,7 +557,6 @@ p "Created partner lists for the four team members"
 
 p "Creating real chatrooms and messages"
 
-chat1 = Chatroom.create!(name: "private_#{ricky.id}_#{laura.id}_")
 chat2 = Chatroom.create!(name: "private_#{ricky.id}_#{tsunami.id}_")
 chat3 = Chatroom.create!(name: "private_#{ricky.id}_#{jonathan.id}_")
 chat4 = Chatroom.create!(name: "private_#{laura.id}_#{tsunami.id}_")
