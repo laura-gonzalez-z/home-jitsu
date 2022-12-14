@@ -7,7 +7,7 @@
   <% else %>
     <% current_user.unread_notifications.each do |notification| %>
       <% if notification.params[:type] == "event" %>
-        <%= link_to event_path(notification.params[:link_to]), :action => 'go', class: "card-box bg-white" do %>
+        <%= link_to event_path(notification.params[:link_to], :notification_id => notification.id) , :action => 'go', class: "card-box bg-white" do %>
           <div class="d-flex card-grid">
             <%= image_tag "icons/calendar.svg", alt: "user", width: 30, class: "Calendar" %>
             <div class="flex-grow-1">
@@ -17,7 +17,7 @@
           </div>
         <% end %>
       <% elsif notification.params[:type] == "review" %>
-        <%= link_to user_reviews_path(notification.params[:link_to]), :action => 'go', class: "card-box bg-white" do %>
+        <%= link_to user_reviews_path(notification.params[:link_to], :notification_id => notification.id), :action => 'go', class: "card-box bg-white" do %>
           <div class="d-flex card-grid">
             <%= image_tag "icons/users.svg", alt: "user", width: 30, class: "Users" %>
             <div class="flex-grow-1">
@@ -27,7 +27,7 @@
           </div>
         <% end %>
       <% elsif notification.params[:type] == "user" %>
-        <%= link_to user_path(notification.params[:link_to]), :action => 'go', class: "card-box bg-white" do %>
+        <%= link_to user_path(notification.params[:link_to], :notification_id => notification.id), :action => 'go', class: "card-box bg-white" do %>
           <div class="d-flex card-grid">
             <%= image_tag "icons/users.svg", alt: "user", width: 30, class: "Users" %>
             <div class="flex-grow-1">

@@ -60,7 +60,7 @@ class EventsController < ApplicationController
         info_window: render_to_string(partial: "info_window", locals: { event: @event })
       }
     ]
-    set_notifications_to_read
+    mark_notification_as_read(params[:notification_id])
   end
 
   def my_events
@@ -120,9 +120,5 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:date, :title, :address, :description, :photo)
-  end
-
-  def set_notifications_to_read
-    current_user.notifications.mark_as_read!
   end
 end
