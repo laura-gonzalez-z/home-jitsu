@@ -46,7 +46,7 @@ class GuestsController < ApplicationController
     @guest.update(status: "Accept")
     notify_guest_accept if previous_status == "Pending"
     notify_host_accept if previous_status == "Invited"
-    set_notifications_to_read
+    mark_notification_as_read(params[:notification_id])
     redirect_to event_path(@event)
   end
 
@@ -64,10 +64,6 @@ class GuestsController < ApplicationController
 
   def set_guest
     @guest = Guest.find(params[:guest_id])
-  end
-
-  def set_notifications_to_read
-    current_user.notifications.mark_as_read!
   end
 
   def notify_host

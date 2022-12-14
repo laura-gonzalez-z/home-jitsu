@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     { host: ENV["DOMAIN"] || "localhost:3000" }
   end
 
+  def mark_notification_as_read(notification)
+    Notification.find(notification).mark_as_read! if notification
+  end
+
   private
 
   def skip_pundit?
