@@ -1,4 +1,4 @@
-<div class="component-container">
+<div class="component-container" data-controller="advanced-search">
   <div class="form-box bg-light-grey">
     <%# TODO: Logic for search and advanced search %>
    <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
@@ -7,31 +7,40 @@
         class: "form-control search-icon",
         placeholder: "Close to this address"
       %>
-      <a href="#" class="purple-circle-button"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
+      <a href="#" class="purple-circle-button" data-advanced-search-target="toggler"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
     <% end %>
   </div>
 
-  <div id="advanced-search">
-    <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control search-icon",
-        placeholder: "Close to this address"
-      %>
+  <div id="advanced-search" data-advanced-search-target="search">
+    <%= render 'shared/back_bar', link: "#" %>
+    <div class="container">
+      <h2>Find an event</h2>
+      <div class="component-container">
+        <div class="form-box bg-white new-review">
+          <%= form_with url: events_path, method: :get do |form| %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control mb-3",
+              placeholder: "Close to this address"
+            %>
 
-       <%= text_field_tag :name,
-          params[:name],
-          class: "form-control search-icon",
-          placeholder: "enter name"
-        %>
+            <%= text_field_tag :name,
+              params[:name],
+              class: "form-control mb-3",
+              placeholder: "Host name"
+            %>
 
-    <%= date_field_tag "date",
-        params[:date],
-        class: "form-control search-icon",
-        placeholder: "enter date"
-        %>
-      <%= form.submit "search" %>
-    <% end %>
+            <%= date_field_tag "date",
+              params[:date],
+              class: "form-control",
+              placeholder: "Date"
+            %>
+            <div class="form-text mb-3">Specific date for the event</div>
+            <%= form.submit "Search for events", class: "btn btn-primary d-block w-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id='map' style="width: 100%; height: 200px;"
