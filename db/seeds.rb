@@ -114,7 +114,7 @@ jimbo = User.new(
   gender: "Male",
   belt: "Blue",
   years_of_experience: 4,
-  description: "I'm a Judo green belt too. I love BJJ, want to share my knowledge and keep learning new things!",
+  description: "I'm a nice guy, you'll leave our spar intact. Mostly.",
   training_style: "Both"
 )
 
