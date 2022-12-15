@@ -110,7 +110,7 @@ jimbo = User.new(
   last_name: "B.",
   weight: 65,
   height: 173,
-  address: "5525 Casgrain",
+  address: "5080 Rue Saint-Ambroise",
   gender: "Male",
   belt: "Blue",
   years_of_experience: 4,
