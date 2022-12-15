@@ -2,18 +2,46 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
 
   def index
+    @users = User.all
+    policy_scope(@users)
+
     if params[:query].present?
       geocoded_search_results = Geocoder.search(params[:query])
       top_result = geocoded_search_results.first
-      @users = policy_scope(User).near(top_result.address, 5)
-      @users_sorted = @users
-    else
-      @users = policy_scope(User).where.not(latitude: nil)
-      if current_user.latitude.nil?
-        @users_sorted = @users
+      unless top_result.nil?
+        @users = @users.near(top_result.address, 5)
       else
-        @users_sorted = @users.sort_by { |user| user.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+        @users = []
       end
+    else
+      @users = @users.where.not(latitude: nil)
+      unless current_user.latitude.nil?
+        @users = @users.sort_by { |user| user.distance_to([current_user.latitude, current_user.longitude]).round(1) }
+      end
+    end
+
+    if params[:name].present?
+      @users = @users.select { |user| user.first_name.downcase == params[:name].downcase || user.last_name.downcase == params[:name].downcase }
+    end
+
+    if params[:minweight].present?
+      @users = @users.select { |user| user.weight >= params[:minweight].to_i }
+    end
+
+    if params[:maxweight].present?
+      @users = @users.select { |user| user.weight <= params[:maxweight].to_i }
+    end
+
+    if params[:minheight].present?
+      @users = @users.select { |user| user.height >= params[:minheight].to_i }
+    end
+
+    if params[:maxheight].present?
+      @users = @users.select { |user| user.height <= params[:maxheight].to_i }
+    end
+
+    if params[:belt].present?
+      @users = @users.select { |user| user.belt == params[:belt] }
     end
   end
 

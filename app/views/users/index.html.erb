@@ -1,4 +1,4 @@
-<div class="component-container">
+<div class="component-container" data-controller="advanced-search">
   <div class="form-box bg-light-grey">
     <%# TODO: Logic for search and advanced search %>
     <%= form_with url: users_path, method: :get, class: "d-flex" do |form| %>
@@ -7,11 +7,78 @@
         class: "form-control search-icon",
         placeholder: "Close to this address"
       %>
-      <a href="#" class="purple-circle-button"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
+      <a href="#" class="purple-circle-button" data-advanced-search-target="toggler"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
     <% end %>
   </div>
 
-  <% @users_sorted.each do |user| %>
+  <div id="advanced-search" data-advanced-search-target="search">
+    <%= render 'shared/back_bar', link: "#" %>
+    <div class="container">
+      <h2>Find a partner</h2>
+      <div class="component-container">
+        <div class="form-box bg-white new-review">
+          <%= form_with url: users_path, method: :get do |form| %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control mb-3",
+              placeholder: "Close to this address"
+            %>
+
+            <%= text_field_tag :name,
+              params[:name],
+              class: "form-control mb-3",
+              placeholder: "Name"
+            %>
+
+            <div class="row">
+              <div class="col">
+                <%= text_field_tag :minweight,
+                  params[:minweight],
+                  class: "form-control",
+                  placeholder: "Min. Weight"
+                %>
+              </div>
+              <div class="col">
+                <%= text_field_tag :maxweight,
+                  params[:maxweight],
+                  class: "form-control",
+                  placeholder: "Max. Weight"
+                %>
+              </div>
+            </div>
+            <div class="form-text mb-3">Weight in Kg</div>
+
+            <div class="row">
+              <div class="col">
+                <%= text_field_tag :minheight,
+                  params[:minheight],
+                  class: "form-control",
+                  placeholder: "Min. Height"
+                %>
+              </div>
+              <div class="col">
+                <%= text_field_tag :maxheight,
+                  params[:maxheight],
+                  class: "form-control",
+                  placeholder: "Max. Height"
+                %>
+              </div>
+            </div>
+            <div class="form-text mb-3">Height in cm</div>
+
+            <%= select_tag :belt,
+              options_for_select(User::BELTS),
+              class: "form-select mb-3",
+              prompt: "Belt"
+            %>
+            <%= form.submit "Search for partners", class: "btn btn-primary d-block w-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% @users.each do |user| %>
     <% if user != current_user %>
       <%= render "shared/user", user: user %>
     <% end %>
