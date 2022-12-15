@@ -1,4 +1,5 @@
 <div class="component-container">
+  <h2 class="text-center">Which of your partners is perfect for your event?</h2>
   <% current_user.friends.each do |friend| %>
     <div class="card-box bg-white">
       <div class="d-flex card-grid">
@@ -28,7 +29,7 @@
           <% if !@guests_ids.include?(friend.id) %>
             <%= button_to "Invite",  {:controller => "guests", :action => "invite", :event_id => @event.id, :guest_id => friend.id },  {:method=>:post, class: "btn btn-xs btn-primary d-block w-100"} %>
           <% else %>
-            <small class="text-end"><%="#{friend.distance_to([current_user.latitude, current_user.longitude]).round(1)}"%> Km</small>
+            <small>Invited</small>
           <% end %>
         </div>
       </div>

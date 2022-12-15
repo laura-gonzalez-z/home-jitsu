@@ -1,5 +1,5 @@
 <% if @user.id == current_user.id %>
-  <%= render 'shared/back_bar', link: :back %>
+  <%= render 'shared/back_bar', link: root_path %>
 <% else %>
   <%= render 'shared/back_bar' %>
 <% end %>
