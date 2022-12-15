@@ -29,7 +29,7 @@
           <% if !@guests_ids.include?(friend.id) %>
             <%= button_to "Invite",  {:controller => "guests", :action => "invite", :event_id => @event.id, :guest_id => friend.id },  {:method=>:post, class: "btn btn-xs btn-primary d-block w-100"} %>
           <% else %>
-            <div class="btn-secondary d-block w-100">Invited</div>
+            <small>Invited</small>
           <% end %>
         </div>
       </div>
