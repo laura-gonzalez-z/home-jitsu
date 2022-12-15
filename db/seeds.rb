@@ -114,7 +114,7 @@ jimbo = User.new(
   gender: "Male",
   belt: "Blue",
   years_of_experience: 4,
-  description: "I'm a nice guy, you'll leave our spar intact. Mostly.",
+  description: "I'm a Judo green belt too. I love BJJ, want to share my knowledge and keep learning new things!",
   training_style: "Both"
 )
 
@@ -291,7 +291,7 @@ Review.create!(
 )
 
 Review.create!(
-  content: "Nice guy! to the next time.",
+  content: "Nice guy! I left the spar intact. Mostly.",
   user_id: jimbo.id,
   writer_id: jonathan.id,
   rating: 5
@@ -399,7 +399,7 @@ event1 = Event.new(
   date: "Sun, 28 Dec 2022 20:00:00.000000000 EST -05:00",
   status: "Open",
   host: tsunami,
-  description: "Bring your mat, I destroyed mine with the power of my suplex.",
+  description: "Bring your mats, I destroyed mine with the power of my suplex.",
   title: "Evening BJJ at touhami's."
 )
 
@@ -409,7 +409,19 @@ event1.save
 
 Guest.create!(
   event_id: Event.last.id,
-  guest_id: [jimbo.id, jonathan.id, ricky.id].sample,
+  guest_id: jimbo.id,
+  status: "Accept"
+)
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: ricky.id,
+  status: "Accept"
+)
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: jonathan.id,
   status: "Accept"
 )
 
@@ -428,7 +440,13 @@ event2.save
 
 Guest.create!(
   event_id: Event.last.id,
-  guest_id: [jimbo.id, tsunami.id, jonathan.id].sample,
+  guest_id: tsunami.id,
+  status: "Accept"
+)
+
+Guest.create!(
+  event_id: Event.last.id,
+  guest_id: jimbo.id,
   status: "Accept"
 )
 
