@@ -43,6 +43,22 @@ class UsersController < ApplicationController
     if params[:belt].present?
       @users = @users.select { |user| user.belt == params[:belt] }
     end
+
+    if params[:training_style].present?
+      @users = @users.select { |user| user.training_style == params[:training_style] }
+    end
+
+    if params[:minyears].present?
+      @users = @users.select { |user| user.years_of_experience >= params[:minyears].to_i }
+    end
+
+    if params[:maxyears].present?
+      @users = @users.select { |user| user.years_of_experience <= params[:maxyears].to_i }
+    end
+
+    if params[:gender].present?
+      @users = @users.select { |user| user.gender == params[:gender] }
+    end
   end
 
   def show

@@ -5,7 +5,7 @@
       <%= text_field_tag :query,
         params[:query],
         class: "form-control search-icon",
-        placeholder: "Close to this address"
+        placeholder: "Find partners close to this address"
       %>
       <a href="#" class="purple-circle-button" data-advanced-search-target="toggler"><%= image_tag "icons/sliders.svg", alt: "Advanced search", width: 20 %></a>
     <% end %>
@@ -34,43 +34,77 @@
               <div class="col">
                 <%= text_field_tag :minweight,
                   params[:minweight],
-                  class: "form-control",
-                  placeholder: "Min. Weight"
+                  class: "form-control mb-3",
+                  placeholder: "Min. Weight (kg)"
                 %>
               </div>
               <div class="col">
                 <%= text_field_tag :maxweight,
                   params[:maxweight],
-                  class: "form-control",
-                  placeholder: "Max. Weight"
+                  class: "form-control mb-3",
+                  placeholder: "Max. Weight (kg)"
                 %>
               </div>
             </div>
-            <div class="form-text mb-3">Weight in Kg</div>
 
             <div class="row">
               <div class="col">
                 <%= text_field_tag :minheight,
                   params[:minheight],
-                  class: "form-control",
-                  placeholder: "Min. Height"
+                  class: "form-control mb-3",
+                  placeholder: "Min. Height (cm)"
                 %>
               </div>
               <div class="col">
                 <%= text_field_tag :maxheight,
                   params[:maxheight],
-                  class: "form-control",
-                  placeholder: "Max. Height"
+                  class: "form-control mb-3",
+                  placeholder: "Max. Height (cm)"
                 %>
               </div>
             </div>
-            <div class="form-text mb-3">Height in cm</div>
 
-            <%= select_tag :belt,
-              options_for_select(User::BELTS),
+            <div class="row">
+              <div class="col">
+                <%= select_tag :belt,
+                  options_for_select(User::BELTS, params[:belt]),
+                  class: "form-select mb-3",
+                  prompt: "Belt"
+                %>
+              </div>
+              <div class="col">
+                <%= select_tag :training_style,
+                  options_for_select(User::TRAINING_STYLES, params[:training_style]),
+                  class: "form-select mb-3",
+                  prompt: "Training style"
+                %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <%= text_field_tag :minyears,
+                  params[:minyears],
+                  class: "form-control",
+                  placeholder: "Min. Years"
+                %>
+              </div>
+              <div class="col">
+                <%= text_field_tag :maxyears,
+                  params[:maxyears],
+                  class: "form-control",
+                  placeholder: "Max. Years"
+                %>
+              </div>
+            </div>
+            <div class="form-text mb-3">Years of experience</div>
+
+            <%= select_tag :gender,
+              options_for_select(User::GENDERS, params[:gender]),
               class: "form-select mb-3",
-              prompt: "Belt"
+              prompt: "Gender"
             %>
+
             <%= form.submit "Search for partners", class: "btn btn-primary d-block w-100" %>
           <% end %>
         </div>
