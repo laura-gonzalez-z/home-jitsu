@@ -1,3 +1,10 @@
+<% if @sorted[0].empty? && @sorted[1].empty? && @joined_events.empty? %>
+  <div class="component-container mt-3">
+    <div class="form-box bg-white">
+      <p class="m-0">No events at the moment. You should join or create one!</p>
+    </div>
+  </div>
+<% end %>
 <%= link_to "Create an event", new_event_path, class: "btn btn-primary d-block my-3" %>
 <% if !@sorted[0].empty? %>
   <h2>Active events</h2>
