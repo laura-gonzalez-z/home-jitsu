@@ -3,10 +3,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[edit update destroy show]
 
   def index
-    # TODO: Just filter upcoming events
     @events = Event.all
     policy_scope(@events)
-
 
     if params[:query].present?
       geocoded_search_results = Geocoder.search(params[:query])
@@ -24,7 +22,7 @@ class EventsController < ApplicationController
     end
 
     if params[:name].present?
-      @events = @events.select { |event| event.host.first_name == params[:name] }
+      @events = @events.select { |event| event.host.first_name.downcase == params[:name].downcase || event.host.last_name.downcase == params[:name].downcase }
     end
 
     if params[:date].present?
