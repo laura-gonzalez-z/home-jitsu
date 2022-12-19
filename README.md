@@ -1,9 +1,9 @@
 Home-Jitsu
 ==========
 
-This is your one-stop shop to find brazilian jiu-jitsu enthusiasts to build a community, host open-mats and connect with new partners.
+> This is your one-stop shop to find brazilian jiu-jitsu enthusiasts to build a community, host open-mats and connect with new partners.
 
-PWA (Mobile oriented) built with Ruby on Rails
+PWA (Mobile oriented) built with Ruby on Rails.
 
 [Check it out here](https://www.homejitsu.com/)
 
