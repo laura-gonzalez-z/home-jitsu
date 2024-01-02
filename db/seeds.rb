@@ -396,7 +396,7 @@ Guest.destroy_all
 
 event1 = Event.new(
   address: "5160 Gatineau",
-  date: "Sun, 28 Dec 2022 20:00:00.000000000 EST -05:00",
+  date: "Sun, 28 Dec 2024 20:00:00.000000000 EST -05:00",
   status: "Open",
   host: tsunami,
   description: "Bring your mats, I destroyed mine with the power of my suplex.",
@@ -427,7 +427,7 @@ Guest.create!(
 
 event2 = Event.new(
   address: ricky.address,
-  date: "Sun, 18 Dec 2022 16:00:00.000000000 EST -05:00",
+  date: "Sun, 18 Dec 2024 16:00:00.000000000 EST -05:00",
   status: "Open",
   host: ricky,
   description: "Let's wrestle like it's the 70's baby!",
@@ -452,7 +452,7 @@ Guest.create!(
 
 event3 = Event.new(
   address: jonathan.address,
-  date: "Sun, 25 Dec 2022 10:00:00.000000000 EST -05:00",
+  date: "Sun, 25 Dec 2024 10:00:00.000000000 EST -05:00",
   status: "Open",
   host: jonathan,
   description: "No time to lose, let's gooooo!",
@@ -471,7 +471,7 @@ Guest.create!(
 
 event4 = Event.new(
   address: jimbo.address,
-  date: "Tue, 3 Jan 2023 18:00:00.000000000 EST -05:00",
+  date: "Tue, 3 Jan 2025 18:00:00.000000000 EST -05:00",
   status: "Open",
   host: jimbo,
   description: "You'll never forget this, and you'll never mention it.",
@@ -490,7 +490,7 @@ Guest.create!(
 
 event5 = Event.new(
   address: hugh.address,
-  date: "Sun, 1 Jan 2023 00:00:00.000000000 EST -05:00",
+  date: "Sun, 1 Jan 2025 00:00:00.000000000 EST -05:00",
   status: "Open",
   host: hugh,
   description: "Let's ring in the new years the right way.",
@@ -509,7 +509,7 @@ Guest.create!(
 
 event6 = Event.new(
   address: kaylee.address,
-  date: "Wed, 15 Feb 2023 18:00:00.000000000 EST -05:00",
+  date: "Wed, 15 Feb 2025 18:00:00.000000000 EST -05:00",
   status: "Open",
   host: kaylee,
   description: "Doens't get more plain then this one",
@@ -522,7 +522,7 @@ event6.save
 
 closed_event1 = Event.new(
   address: jonathan.address,
-  date: "Wed, 30 Nov 2022 18:00:00.000000000 EST -05:00",
+  date: "Wed, 30 Nov 2024 18:00:00.000000000 EST -05:00",
   status: "Closed",
   host: jonathan,
   description: "This already happened. Why are you looking? It was a good time but time to go home.",
